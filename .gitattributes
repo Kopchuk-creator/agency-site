@@ -1,0 +1,15 @@
+# Нормалізуємо переноси рядків: у репозиторії завжди LF.
+# Без цього файл, відредагований на Windows, показується в diff
+# як змінений цілком, навіть якщо правили один рядок.
+* text=auto eol=lf
+
+# Бінарні файли не чіпаємо
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
