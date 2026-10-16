@@ -76,7 +76,7 @@
 
   /* ---------- 4b. Каскадна поява карток у сітках ---------- */
   if (!reduceMotion) {
-    var stagger = ['.plans', '.proof-grid', '.team', '.band__grid', '.subs__grid'];
+    var stagger = ['.plans', '.proof-grid', '.team', '.subs__grid'];
 
     stagger.forEach(function (selector) {
       var grid = document.querySelector(selector);
@@ -211,46 +211,11 @@
     });
   });
 
-  /* ---------- 7. Легкий паралакс і курсор у Hero ---------- */
-  var heroBg = document.getElementById('heroBg');
-  var heroGlow = document.getElementById('heroGlow');
-  var heroMock = document.getElementById('heroMock');
-  var pointer = { x: 0, y: 0 };
-  var scrollY = 0;
-  var rafPending = false;
-
-  function applyHeroTransform() {
-    rafPending = false;
-    if (heroBg) heroBg.style.transform = 'translate3d(' + (pointer.x * 14) + 'px,' + (scrollY * 0.12 + pointer.y * 10) + 'px,0)';
-    if (heroGlow) heroGlow.style.transform = 'translate3d(' + (pointer.x * -26) + 'px,' + (scrollY * 0.2 + pointer.y * -16) + 'px,0)';
-    if (heroMock) heroMock.style.transform = 'translate3d(' + (pointer.x * -6) + 'px,' + (pointer.y * -5) + 'px,0)';
-  }
-
-  function requestHeroFrame() {
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(applyHeroTransform);
-  }
-
-  var onScroll = function () {
+  /* ---------- 7. Скрол: хедер і віджет «Передзвонимо» ---------- */
+  window.addEventListener('scroll', function () {
     onScrollHeader();
-    if (!reduceMotion && window.innerWidth > 900) {
-      scrollY = Math.min(window.scrollY, 700);
-      requestHeroFrame();
-    }
     toggleCallback();
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    window.addEventListener('mousemove', function (e) {
-      if (window.scrollY > 800) return; // працюємо тільки в зоні Hero
-      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
-      requestHeroFrame();
-    }, { passive: true });
-  }
+  }, { passive: true });
 
   /* ---------- 8. Віджет «Передзвонимо» ---------- */
   var callback = document.getElementById('callback');

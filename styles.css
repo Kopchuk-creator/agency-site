@@ -100,7 +100,6 @@ body {
 
 /* Грід-елементи за замовчуванням мають min-width:auto і можуть розпирати
    колонку довгим вмістом. Гасимо це в усіх сіткових блоках сайту. */
-.hero__grid > *,
 .compare > *,
 .cta__grid > *,
 .faq-layout > *,
@@ -703,101 +702,132 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .mobile-menu__foot { margin-top: var(--s-6); display: grid; gap: var(--s-3); }
 
 /* ==========================================================================
-   SCREEN 1 — HERO
+   SCREEN 1 — HERO (mobile-first)
    ========================================================================== */
 .hero {
-  position: relative;
-  padding-block: clamp(48px, 7vw, 96px) clamp(56px, 8vw, 112px);
-  overflow: hidden;
+  padding-block: var(--s-8) var(--s-7);
+  background: var(--bg-soft);
 }
 
-.hero__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
-  gap: clamp(32px, 4vw, 64px);
-  align-items: center;
+.hero__eyebrow {
+  margin-bottom: var(--s-3);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-ink);
 }
 
-.hero__badges {
+.hero__title {
+  max-width: 16ch;
+  font-size: clamp(32px, 8vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 640;
+  text-wrap: balance;
+}
+
+.hero__text {
+  max-width: 52ch;
+  margin-top: var(--s-4);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.hero__actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-  margin-bottom: var(--s-5);
-}
-
-.hero .h1 { margin-bottom: var(--s-5); }
-
-.hero .h1 em {
-  font-style: normal;
-  color: var(--accent);
-  position: relative;
-  white-space: nowrap;
-}
-
-/* Hand-drawn-ish underline that draws in */
-.hero .h1 em::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0.02em;
-  height: 5px;
-  background: var(--accent);
-  opacity: 0.16;
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: draw 900ms 500ms var(--ease) forwards;
-}
-
-@keyframes draw { to { transform: scaleX(1); } }
-
-.hero__cta {
-  display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--s-3);
-  margin-block: var(--s-6) var(--s-5);
+  margin-top: var(--s-6);
 }
 
-.hero__note {
+.hero__facts {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-7);
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.hero__facts strong {
+  display: block;
+  font-size: 20px;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   SCREEN 2 — NICHES (mobile-first)
+   ========================================================================== */
+.niches__grid {
+  display: grid;
+  gap: var(--s-4);
+  padding: 0;
+  list-style: none;
+}
+
+.niche-card {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14.5px;
-  color: var(--ink-3);
+  flex-direction: column;
+  padding: var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
-/* Decorative background field */
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgba(10, 10, 10, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(10, 10, 10, 0.045) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(120% 90% at 70% 20%, #000 0%, transparent 72%);
-  -webkit-mask-image: radial-gradient(120% 90% at 70% 20%, #000 0%, transparent 72%);
-  will-change: transform;
+.niche-card__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
-.hero__glow {
-  position: absolute;
-  z-index: -1;
-  width: 620px;
-  height: 620px;
-  right: -180px;
-  top: -220px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 102, 255, 0.13), transparent 65%);
-  pointer-events: none;
-  will-change: transform;
+.niche-card__text {
+  margin-top: var(--s-2);
+  line-height: 1.5;
+  color: var(--ink-2);
 }
 
-/* --- Hero visual: audit report mock --- */
-/* Контекст позиціонування для .float-card: без нього картка прив'язується
-   до всієї секції .hero і вилітає за лівий край екрана. */
-.hero__visual { position: relative; }
+.niche-card__price {
+  margin-top: auto;            /* притискає ціну до низу картки */
+  padding-top: var(--s-5);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.niche-card__price span {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+.niche-card__link {
+  margin-top: var(--s-4);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent-ink);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .niche-card:hover { border-color: var(--line-strong); box-shadow: var(--e-2); }
+  .niche-card__link:hover { text-decoration: underline; }
+}
+
+/* Планшет */
+@media (min-width: 600px) {
+  .hero__actions { flex-direction: row; }
+  .hero__facts   { grid-template-columns: repeat(3, 1fr); }
+  .niches__grid  { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Десктоп */
+@media (min-width: 1024px) {
+  .hero { padding-block: var(--s-10) var(--s-9); }
+  .niches__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
 
 .mock {
   position: relative;
@@ -1208,32 +1238,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 @keyframes progress { to { transform: scaleX(1); } }
 
 
-/* Бейдж-«наліпка» на куті вікна браузера.
-   Знизу він перекривав картки послуг у вітрині, тож винесений угору. */
-.float-card {
-  position: absolute;
-  right: -24px;
-  top: -20px;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 13px 17px;
-  border-radius: var(--r-md);
-  background: var(--ink);
-  color: #fff;
-  box-shadow: var(--e-3);
-  animation: float 6s ease-in-out infinite;
-}
-
-.float-card b { font-size: 21px; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
-.float-card span { font-size: 12.5px; color: #a1a1a1; display: block; line-height: 1.35; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-9px); }
-}
-
 
 /* Курсор друку в адресному рядку */
 .mock__url b {
@@ -1253,237 +1257,11 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 @keyframes blink { 50% { opacity: 0; } }
 
-/* ---------- Смуга ключових цифр ---------- */
-.band {
-  background: var(--bg-dark);
-  color: #fff;
-  padding-block: clamp(40px, 5vw, 64px);
-}
-
-.band__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(20px, 3vw, 40px);
-}
-
-.band__item { position: relative; padding-left: var(--s-5); }
-
-.band__item::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 6px;
-  bottom: 6px;
-  width: 2px;
-  background: var(--line-dark);
-}
-
-.band__item:first-child::before { background: var(--accent); }
-
-.band__value {
-  font-size: clamp(38px, 5.2vw, 60px);
-  font-weight: 660;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
-.band__value span { color: var(--accent); }
-
-.band__label {
-  margin-top: 10px;
-  font-size: 14.5px;
-  line-height: 1.4;
-  color: var(--ink-on-dark-2);
-  max-width: 24ch;
-}
-
 /* ---------- Порядковий номер секції ---------- */
 .eyebrow__num {
   font-variant-numeric: tabular-nums;
   color: var(--accent);
   font-weight: 620;
-}
-
-/* ---------- Logo marquee ---------- */
-.marquee {
-  border-block: 1px solid var(--line);
-  padding-block: var(--s-5);
-  overflow: hidden;
-  background: var(--bg);
-}
-
-.marquee__label {
-  text-align: center;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: var(--s-4);
-}
-
-.marquee__viewport {
-  --marquee-gap: clamp(40px, 6vw, 80px);
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-
-.marquee__track {
-  display: flex;
-  width: max-content;
-  animation: slide 42s linear infinite;
-  will-change: transform;
-}
-
-/* Кожна група несе власний правий відступ, тож її ширина = 10 елементів
-   + 10 проміжків. Без цього -50% давав би зсув на пів-проміжку менше
-   і на кожному циклі стрічка смикалась. */
-.marquee__group {
-  display: flex;
-  gap: var(--marquee-gap);
-  padding-right: var(--marquee-gap);
-}
-
-/* Авторухомий вміст має бути зупиняльним — WCAG 2.2.2 */
-.marquee:hover .marquee__track,
-.marquee:focus-within .marquee__track { animation-play-state: paused; }
-
-@keyframes slide { to { transform: translateX(-50%); } }
-
-.marquee__item {
-  font-size: clamp(17px, 2vw, 22px);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #b8b8b8;
-  white-space: nowrap;
-  transition: color var(--dur) var(--ease);
-}
-.marquee__item:hover { color: var(--ink); }
-
-/* ==========================================================================
-   SCREEN 2 — NICHES
-   ========================================================================== */
-/* Карток рівно 10, тож кількість колонок має ділити 10 без залишку (5 → 2 → 1).
-   Інакше в останньому ряду лишаються порожні клітинки й видно сірий провал. */
-.niches {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-
-.niche__live,
-.niche__soon {
-  position: absolute;
-  top: var(--s-4);
-  right: var(--s-4);
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  height: 22px;
-  padding: 0 9px;
-  border-radius: 999px;
-  background: rgba(11, 138, 75, 0.1);
-  color: var(--ok);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-}
-
-.niche__live::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--ok);
-}
-
-/* Ніші, під які демо ще в роботі — сірий, а не зелений «живий» */
-.niche__soon {
-  background: var(--bg-soft);
-  color: var(--ink-3);
-  border: 1px solid var(--line);
-}
-
-.niche {
-  position: relative;
-  display: block;
-  background: var(--bg);
-  padding: var(--s-5);
-  min-height: 190px;
-  overflow: hidden;
-  transition: background-color var(--dur) var(--ease);
-}
-
-.niche:hover, .niche:focus-visible { background: var(--bg-soft); }
-
-.niche__ic {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  display: grid;
-  place-items: center;
-  margin-bottom: var(--s-4);
-  transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
-}
-
-.niche:hover .niche__ic { transform: translateY(-2px); background: var(--accent); color: #fff; }
-
-.niche__name { display: block; font-size: 17.5px; font-weight: 600; letter-spacing: -0.02em; }
-.niche__desc {
-  font-size: 14px;
-  color: var(--ink-2);
-  margin-top: 5px;
-  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
-}
-
-.niche__go {
-  position: absolute;
-  left: var(--s-5);
-  right: var(--s-5);
-  bottom: var(--s-5);
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 14.5px;
-  font-weight: 550;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
-}
-
-.niche:hover .niche__go,
-.niche:focus-visible .niche__go { opacity: 1; transform: none; }
-
-.niche:hover .niche__desc { opacity: 0; transform: translateY(-4px); }
-
-/* На дотикових екранах наведення не спрацьовує — показуємо CTA одразу
-   і знімаємо обрізання, щоб текст картки не ховався. */
-@media (hover: none) {
-  .niche {
-    min-height: 0;
-    overflow: visible;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .niche__go {
-    position: static;
-    opacity: 1;
-    transform: none;
-    margin-top: auto;
-    padding-top: var(--s-3);
-  }
-  .niche:hover .niche__desc { opacity: 1; transform: none; }
-  .niche__desc { margin-bottom: var(--s-2); }
 }
 
 /* ==========================================================================
@@ -2595,14 +2373,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* Підкреслення заголовка секції, що «дописується» при появі */
 .section__head .h2 { position: relative; }
 
-/* Стрілка в кнопках ніш підстрибує при наведенні на всю картку */
-.niche:hover .niche__go svg { animation: nudge 900ms var(--ease) infinite; }
-
-@keyframes nudge {
-  0%, 100% { transform: translateX(0); }
-  50%      { transform: translateX(4px); }
-}
-
 /* Іконка етапу процесу «дихає» на активній вкладці */
 .ts__tab[aria-selected="true"] .ts__day { animation: fadeUp 400ms var(--ease); }
 
@@ -2613,13 +2383,11 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 @media (max-width: 1080px) {
   :root { --container: 100%; }
 
-  .niches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .demos { grid-template-columns: 1fr; }
   .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .subs__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ts__tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
-  .band__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .nav__link { padding-inline: 10px; font-size: 15px; }
   .header__trust { display: none; }
@@ -2645,12 +2413,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .nav { display: none; }
   .header__aside > .btn { display: none; }
   .burger { display: flex; }
-
-  /* Головне на мобільному — заголовок, а не картинка.
-     Тому візуал іде ПІСЛЯ тексту, а не перед ним. */
-  .hero__grid { grid-template-columns: 1fr; gap: var(--s-7); }
-  .hero__visual { order: 0; }
-  .float-card { left: auto; right: 8px; top: -18px; }
 
   .compare { grid-template-columns: 1fr; }
   .faq-layout { grid-template-columns: 1fr; }
@@ -2705,16 +2467,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   }
 
   .btn--lg { min-height: 56px; font-size: 16px; }
-  .hero__cta { flex-direction: column; align-items: stretch; }
-  .hero__cta .btn { width: 100%; }
-  .hero__badges { gap: 6px; }
   .pill { font-size: 12.5px; height: 30px; padding-inline: 11px; }
-
-  .niches { grid-template-columns: 1fr; }
-  .niche { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-4); }
-  .niche__ic { margin-bottom: 0; flex: none; }
-  .niche__name { display: block; }
-  .niche__go { margin-top: 4px; font-size: 13.5px; }
 
   .plans { grid-template-columns: 1fr; }
   .subs__grid { grid-template-columns: 1fr; }
@@ -2728,14 +2481,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .member__photo { aspect-ratio: 16 / 10; }
   .field-row { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr; gap: var(--s-6); }
-  .band__grid { grid-template-columns: 1fr 1fr; gap: var(--s-5); }
-  .band__value { font-size: clamp(30px, 8.6vw, 38px); }
-  .band__label { font-size: 13px; }
-
-  .marquee__track { gap: 32px; }
-  .marquee__item { font-size: 16px; }
-
-  .float-card { display: none; }
   .guarantee-note { flex-direction: column; align-items: stretch; }
   .guarantee-note .btn { width: 100%; }
 
@@ -2784,21 +2529,10 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   }
 
   [data-reveal] { opacity: 1; transform: none; }
-  .hero .h1 em::after { transform: scaleX(1); }
-  /* Стрічка логотипів лишається рухомою навіть тут — це свідоме рішення
-     власника сайту. Замість зупинки вповільнюємо її вдвічі: рівний
-     горизонтальний зсув без масштабу й паралаксу — найм'якший вид руху.
-     Пауза при наведенні/фокусі (нижче) закриває вимогу WCAG 2.2.2. */
-  .marquee__track {
-    animation-name: slide !important;
-    animation-duration: 84s !important;
-    animation-timing-function: linear !important;
-    animation-iteration-count: infinite !important;
-  }
 }
 
 @media print {
-  .header, .callback, .mobile-bar, .marquee { display: none; }
+  .header, .callback, .mobile-bar { display: none; }
   body { font-size: 12pt; }
   .section { padding-block: 16pt; }
 }
