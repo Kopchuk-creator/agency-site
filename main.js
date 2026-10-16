@@ -74,38 +74,6 @@
     Array.prototype.forEach.call(revealEls, function (el) { revealObserver.observe(el); });
   }
 
-  /* ---------- 4b. Каскадна поява карток у сітках ---------- */
-  if (!reduceMotion) {
-    var stagger = ['.plans', '.proof-grid', '.team', '.subs__grid'];
-
-    stagger.forEach(function (selector) {
-      var grid = document.querySelector(selector);
-      if (!grid) return;
-
-      Array.prototype.forEach.call(grid.children, function (child, i) {
-        if (!child.hasAttribute('data-reveal')) child.setAttribute('data-reveal', '');
-        // Затримка на кожен наступний елемент — 60 мс, не більше 5 кроків,
-        // щоб останні картки не з'являлись помітно пізніше за решту.
-        child.style.setProperty('--d', Math.min(i, 5) * 60 + 'ms');
-        if ('IntersectionObserver' in window) revealObserver.observe(child);
-        else child.classList.add('is-in');
-      });
-    });
-  }
-
-  /* ---------- 4c. Підсвітка за курсором на картках ---------- */
-  if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    var glowCards = document.querySelectorAll('.plan, .tcard');
-
-    Array.prototype.forEach.call(glowCards, function (card) {
-      card.addEventListener('mousemove', function (e) {
-        var r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
-    });
-  }
-
   /* ---------- 5. Лічильники в кейсах ---------- */
   var counters = document.querySelectorAll('[data-count]');
 
@@ -175,41 +143,6 @@
       Array.prototype.forEach.call(counters, function (el) { countObserver.observe(el); });
     }
   }
-
-  /* ---------- 6. Таймлайн процесу (таби з клавіатурною навігацією) ---------- */
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.ts__tab'));
-  var panels = Array.prototype.slice.call(document.querySelectorAll('.ts__panel'));
-  var segs = Array.prototype.slice.call(document.querySelectorAll('.ts__seg'));
-
-  function selectTab(index, focus) {
-    tabs.forEach(function (tab, i) {
-      var active = i === index;
-      tab.setAttribute('aria-selected', String(active));
-      tab.setAttribute('tabindex', active ? '0' : '-1');
-    });
-    panels.forEach(function (panel, i) {
-      panel.setAttribute('data-active', String(i === index));
-    });
-    segs.forEach(function (seg, i) {
-      seg.classList.toggle('is-active', i <= index);
-    });
-    if (focus) tabs[index].focus();
-  }
-
-  tabs.forEach(function (tab, i) {
-    tab.addEventListener('click', function () { selectTab(i, false); });
-
-    tab.addEventListener('keydown', function (e) {
-      var next = null;
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % tabs.length;
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + tabs.length) % tabs.length;
-      if (e.key === 'Home') next = 0;
-      if (e.key === 'End') next = tabs.length - 1;
-      if (next === null) return;
-      e.preventDefault();
-      selectTab(next, true);
-    });
-  });
 
   /* ---------- 7. Скрол: хедер і віджет «Передзвонимо» ---------- */
   window.addEventListener('scroll', function () {

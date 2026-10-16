@@ -82,13 +82,8 @@
 
     <nav class="nav" aria-label="Головна навігація">
       <a class="nav__link" href="#nishi">Ніші</a>
-
-      <a class="nav__link" href="#proces">Процес</a>
-      <a class="nav__link" href="#garantiya">Гарантія</a>
-      <a class="nav__link" href="#taryfy">Тарифи</a>
       <a class="nav__link" href="#keysy">Роботи</a>
-      <a class="nav__link" href="#vidhuky">Відгуки</a>
-      <a class="nav__link" href="#komanda">Команда</a>
+      <a class="nav__link" href="#proces">Як працюємо</a>
       <a class="nav__link" href="#faq">FAQ</a>
     </nav>
 
@@ -109,12 +104,8 @@
      і меню обрізалось би до висоти хедера. -->
   <div class="mobile-menu" id="mobile-menu" data-open="false">
     <a class="mobile-menu__link" href="#nishi">Ніші <span aria-hidden="true">→</span></a>
-    <a class="mobile-menu__link" href="#proces">Процес <span aria-hidden="true">→</span></a>
-    <a class="mobile-menu__link" href="#garantiya">Гарантія <span aria-hidden="true">→</span></a>
-    <a class="mobile-menu__link" href="#taryfy">Тарифи <span aria-hidden="true">→</span></a>
     <a class="mobile-menu__link" href="#keysy">Роботи <span aria-hidden="true">→</span></a>
-    <a class="mobile-menu__link" href="#vidhuky">Відгуки <span aria-hidden="true">→</span></a>
-    <a class="mobile-menu__link" href="#komanda">Команда <span aria-hidden="true">→</span></a>
+    <a class="mobile-menu__link" href="#proces">Як працюємо <span aria-hidden="true">→</span></a>
     <a class="mobile-menu__link" href="#faq">FAQ <span aria-hidden="true">→</span></a>
     <div class="mobile-menu__foot">
       <a href="#audyt" class="btn btn--primary btn--block btn--lg">Безкоштовний аудит сайту</a>
@@ -330,528 +321,39 @@
   </div>
 </section>
 
-<!-- ═══════════════════════ ЕКРАН 4 — ПРОЦЕС ═══════════════════════ -->
-<section class="section section--dark" id="proces">
+<!-- ═══════════════════════ ЕКРАН 5 — ЯК ПРАЦЮЄМО ═══════════════════════ -->
+<section class="section section--dark" id="proces" aria-labelledby="steps-title">
   <div class="container">
-    <div class="section__head" data-reveal>
-      <span class="eyebrow"><span class="eyebrow__num">03</span> Наш процес</span>
-      <h2 class="h2">30 днів, розписаних по датах</h2>
-      <p class="lead">
-        Ви завжди знаєте, на якому етапі проєкт і що буде далі. Натисніть на етап — побачите,
-        що саме відбувається і що ви отримуєте на виході.
-      </p>
+    <div class="section__head">
+      <h2 class="h2" id="steps-title">Як працюємо</h2>
+      <p class="lead">Чотири кроки від заявки до першого онлайн-запису.</p>
     </div>
 
-    <div class="ts" data-reveal>
-      <div class="ts__rail" aria-hidden="true">
-        <span class="ts__seg is-active" data-seg="0"></span>
-        <span class="ts__seg" data-seg="1"></span>
-        <span class="ts__seg" data-seg="2"></span>
-        <span class="ts__seg" data-seg="3"></span>
-        <span class="ts__seg" data-seg="4"></span>
-        <span class="ts__seg" data-seg="5"></span>
-      </div>
-
-      <div class="ts__tabs" role="tablist" aria-label="Етапи роботи">
-        <button class="ts__tab" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true" tabindex="0">
-          <span class="ts__day">День 1–2</span>
-          <span class="ts__name">Бриф + аналіз конкурентів</span>
-        </button>
-        <button class="ts__tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false" tabindex="-1">
-          <span class="ts__day">День 3–5</span>
-          <span class="ts__name">Прототип і структура</span>
-        </button>
-        <button class="ts__tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1">
-          <span class="ts__day">День 6–15</span>
-          <span class="ts__name">Дизайн і затвердження</span>
-        </button>
-        <button class="ts__tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1">
-          <span class="ts__day">День 16–25</span>
-          <span class="ts__name">Розробка і наповнення</span>
-        </button>
-        <button class="ts__tab" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" tabindex="-1">
-          <span class="ts__day">День 26–30</span>
-          <span class="ts__name">Тестування і запуск</span>
-        </button>
-        <button class="ts__tab" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false" tabindex="-1">
-          <span class="ts__day">Далі 6 міс</span>
-          <span class="ts__name">Технічна гарантія</span>
-        </button>
-      </div>
-
-      <div class="ts__panels">
-        <div class="ts__panel" id="panel-0" role="tabpanel" aria-labelledby="tab-0" data-active="true" tabindex="0">
-          <div>
-            <h3 class="h3">Бриф + аналіз конкурентів</h3>
-            <p>
-              Годинна зустріч, де ми розбираємо ваш бізнес: хто клієнт, як він зараз до вас приходить,
-              скільки коштує заявка. Паралельно розбираємо 5–7 сайтів конкурентів у вашій ніші та регіоні —
-              що в них працює, а що ні.
-            </p>
-          </div>
-          <ul class="ts__out">
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Заповнений бриф із цілями в цифрах</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Таблиця аналізу конкурентів</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Погоджений список сторінок</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Договір і передоплата 50%</li>
-          </ul>
-        </div>
-
-        <div class="ts__panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1" data-active="false" tabindex="0">
-          <div>
-            <h3 class="h3">Прототип і структура</h3>
-            <p>
-              Збираємо чорно-білий прототип кожного екрана: що де стоїть, у якому порядку читається,
-              куди веде кожна кнопка. Це найдешевший момент, щоб щось змінити — тому змінюємо тут, а не в дизайні.
-            </p>
-          </div>
-          <ul class="ts__out">
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Клікабельний прототип у Figma</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Карта сайту і структура URL</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Сценарій: як відвідувач стає заявкою</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Технічне завдання на розробку</li>
-          </ul>
-        </div>
-
-        <div class="ts__panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" data-active="false" tabindex="0">
-          <div>
-            <h3 class="h3">Дизайн і затвердження</h3>
-            <p>
-              Малюємо головну сторінку, показуємо, вносимо правки. Після затвердження головної решта сторінок
-              робиться в тому ж стилі. Два раунди правок входять у вартість — на практиці вистачає одного.
-            </p>
-          </div>
-          <ul class="ts__out">
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Дизайн усіх сторінок: десктоп + мобільна</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>2 раунди правок у вартості</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Підбір і обробка зображень</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Письмове затвердження макетів</li>
-          </ul>
-        </div>
-
-        <div class="ts__panel" id="panel-3" role="tabpanel" aria-labelledby="tab-3" data-active="false" tabindex="0">
-          <div>
-            <h3 class="h3">Розробка і наповнення</h3>
-            <p>
-              Верстка, підключення форм, CRM, аналітики. Ви отримуєте доступ до тестової версії з першого дня
-              розробки і бачите прогрес щодня, а не «десь через два тижні покажемо».
-            </p>
-          </div>
-          <ul class="ts__out">
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Тестове посилання з першого дня</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Форми → CRM, Telegram, email</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>GA4, GTM, Meta Pixel</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Наповнення контентом</li>
-          </ul>
-        </div>
-
-        <div class="ts__panel" id="panel-4" role="tabpanel" aria-labelledby="tab-4" data-active="false" tabindex="0">
-          <div>
-            <h3 class="h3">Тестування і запуск</h3>
-            <p>
-              Перевіряємо на реальних телефонах, а не тільки в DevTools: iOS і Android, 4G, різні браузери.
-              Женемо PageSpeed до 95+. Після запуску — навчання: 40 хвилин відео, як самому міняти контент.
-            </p>
-          </div>
-          <ul class="ts__out">
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Тести на реальних пристроях</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>PageSpeed 95+ desktop / 90+ mobile</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Перенесення на ваш домен і хостинг</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Відеоінструкція + доступи вам на руки</li>
-          </ul>
-        </div>
-
-        <div class="ts__panel" id="panel-5" role="tabpanel" aria-labelledby="tab-5" data-active="false" tabindex="0">
-          <div>
-            <h3 class="h3">Наступні 6 місяців: технічна гарантія</h3>
-            <p>
-              Виправляємо будь-які технічні дефекти сайту за свій рахунок. Щось перестало працювати,
-              зламалась форма, поїхала верстка в новому браузері — пишете нам, ми чинимо. Безкоштовно, 180 днів.
-            </p>
-          </div>
-          <ul class="ts__out">
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Реакція на звернення — до 24 годин</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Прописано в договорі, не «на словах»</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Окремий канал у Telegram для звернень</li>
-            <li><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Що саме покриває — читайте нижче</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <ol class="steps">
+      <li class="step">
+        <h3 class="step__title">Знайомство</h3>
+        <p class="step__text">Розповідаєте про заклад: послуги, ціни, майстрів і графік. Підбираємо структуру під вашу нішу.</p>
+      </li>
+      <li class="step">
+        <h3 class="step__title">Дизайн</h3>
+        <p class="step__text">Показуємо дизайн головної сторінки, обговорюємо його і вносимо правки.</p>
+      </li>
+      <li class="step">
+        <h3 class="step__title">Розробка</h3>
+        <p class="step__text">Верстаємо сайт, підключаємо онлайн-запис і сповіщення в Telegram. Тестову версію ви бачите ще до запуску.</p>
+      </li>
+      <li class="step">
+        <h3 class="step__title">Запуск і підтримка</h3>
+        <p class="step__text">Публікуємо сайт на вашому домені. Далі щомісяця стежимо, щоб усе працювало.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
-<!-- ═══════════════════════ ЕКРАН 4.5 — ГАРАНТІЯ ═══════════════════════ -->
-<section class="section" id="garantiya">
-  <div class="container">
-    <div class="section__head" data-reveal>
-      <span class="eyebrow"><span class="eyebrow__num">04</span> Гарантія 6 місяців</span>
-      <h2 class="h2">Чесно про те, що входить, а що ні</h2>
-      <p class="lead">
-        Ринковий стандарт — 14–30 днів. У нас — 180 днів на технічну частину.
-        Але щоб не було непорозумінь, одразу розписуємо межі.
-      </p>
-    </div>
-
-    <div class="guarantee" data-reveal>
-      <div class="gcol">
-        <div class="gcol__head">
-          <svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.2-3 7.6-7.5 9-4.5-1.4-7.5-4.8-7.5-9V6z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg>
-          Гарантія покриває
-        </div>
-        <ul>
-          <li>
-            <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            Технічні дефекти сайту — щось перестало працювати, з'явились помилки
-          </li>
-          <li>
-            <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            Проблеми з відображенням у браузерах
-          </li>
-          <li>
-            <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            Проблеми з формами і прийомом заявок
-          </li>
-          <li>
-            <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            Проблеми з мобільною версією
-          </li>
-          <li>
-            <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-            Будь-які технічні проблеми, пов'язані з нашою розробкою
-          </li>
-        </ul>
-      </div>
-
-      <div class="gcol gcol--no">
-        <div class="gcol__head">
-          <svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>
-          Гарантія не покриває
-        </div>
-        <ul>
-          <li>
-            <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-            Правки текстів і контенту після здачі
-          </li>
-          <li>
-            <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-            Зміни дизайну і структури сторінок
-          </li>
-          <li>
-            <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-            Додавання нових функцій і сторінок
-          </li>
-          <li>
-            <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-            Проблеми з боку сторонніх сервісів — домен, хостинг клієнта, платіжні системи
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="guarantee-note" data-reveal>
-      <p>
-        <strong>Для правок, розширень і поточного обслуговування</strong> — є підписка від 2 000 ₴/міс.
-        Ви платите тільки за те, що реально потрібно, і не переплачуєте «про запас».
-      </p>
-      <a href="#taryfy" class="btn btn--dark">Подивитись підписки</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════ ЕКРАН 5 — ТАРИФИ ═══════════════════════ -->
-<section class="section section--soft" id="taryfy">
-  <div class="container">
-    <div class="section__head" data-reveal>
-      <span class="eyebrow"><span class="eyebrow__num">05</span> Тарифи</span>
-      <h2 class="h2">Ціни без «від» і «договірна»</h2>
-      <p class="lead">
-        Ви бачите вартість до того, як залишите номер телефону. Оплата 50/50: половина на старті,
-        половина після здачі. Технічна гарантія 6 місяців входить у кожен тариф.
-      </p>
-    </div>
-
-    <div class="plans" data-reveal>
-      <!-- Landing -->
-      <article class="plan">
-        <h3 class="plan__name">Landing page</h3>
-        <p class="plan__for">Одна сторінка під одну послугу або рекламну кампанію</p>
-        <div class="plan__price price">8 000 – 12 000 <small>₴</small></div>
-        <div class="plan__term">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          7–10 днів
-        </div>
-        <ul class="plan__list">
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Одна сторінка, 6–8 екранів</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Індивідуальний дизайн</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Мобільна версія</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Форма заявки + Telegram</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Базове SEO і аналітика</li>
-        </ul>
-        <div class="plan__foot">
-          <p class="plan__guarantee">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.2-3 7.6-7.5 9-4.5-1.4-7.5-4.8-7.5-9V6z"/></svg>
-            Технічна гарантія 6 місяців
-          </p>
-          <a href="#audyt" class="btn btn--ghost btn--block">Обговорити проєкт</a>
-        </div>
-      </article>
-
-      <!-- Вітрина -->
-      <article class="plan">
-        <h3 class="plan__name">Вітрина</h3>
-        <p class="plan__for">Багатосторінковий сайт-каталог послуг для локального бізнесу</p>
-        <div class="plan__price price">14 000 <small>₴</small></div>
-        <div class="plan__term">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          14–20 днів
-        </div>
-        <ul class="plan__list">
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>До 8 сторінок</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Каталог послуг з цінами</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Панель для самостійних правок</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>SEO під регіон і нішу</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Google Мій бізнес + карти</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Навчальне відео 40 хв</li>
-        </ul>
-        <div class="plan__foot">
-          <p class="plan__guarantee">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.2-3 7.6-7.5 9-4.5-1.4-7.5-4.8-7.5-9V6z"/></svg>
-            Технічна гарантія 6 місяців
-          </p>
-          <a href="#audyt" class="btn btn--ghost btn--block">Замовити</a>
-        </div>
-      </article>
-
-      <!-- Канал заявок -->
-      <article class="plan plan--best">
-        <span class="badge plan__badge">Рекомендовано</span>
-        <h3 class="plan__name">Канал заявок</h3>
-        <p class="plan__for">Сайт, спроєктований як система отримання клієнтів</p>
-        <div class="plan__price price">32 000 <small>₴</small></div>
-        <div class="plan__term">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          25–30 днів
-        </div>
-        <ul class="plan__list">
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Все з тарифу «Вітрина»</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>До 15 сторінок + сторінки під ніші</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Інтеграція з CRM</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Онлайн-запис / календар</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Блог під SEO</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Наскрізна аналітика заявок</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Місяць супроводу після запуску</li>
-        </ul>
-        <div class="plan__foot">
-          <p class="plan__guarantee">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.2-3 7.6-7.5 9-4.5-1.4-7.5-4.8-7.5-9V6z"/></svg>
-            Технічна гарантія 6 місяців
-          </p>
-          <a href="#audyt" class="btn btn--primary btn--block">Замовити</a>
-        </div>
-      </article>
-
-      <!-- Індивідуальний -->
-      <article class="plan">
-        <h3 class="plan__name">Індивідуальний проєкт</h3>
-        <p class="plan__for">Нестандартна логіка, інтеграції, кілька мов, каталоги</p>
-        <div class="plan__price price">від 50 000 <small>₴</small></div>
-        <div class="plan__term">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          Термін після оцінки
-        </div>
-        <ul class="plan__list">
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Проєктування під ваші процеси</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Інтеграції з вашими системами</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Багатомовність</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Особистий кабінет / каталог</li>
-          <li><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Виділена команда на проєкт</li>
-        </ul>
-        <div class="plan__foot">
-          <p class="plan__guarantee">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0b8a4b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v6c0 4.2-3 7.6-7.5 9-4.5-1.4-7.5-4.8-7.5-9V6z"/></svg>
-            Технічна гарантія 6 місяців
-          </p>
-          <a href="#audyt" class="btn btn--ghost btn--block">Обговорити проєкт</a>
-        </div>
-      </article>
-    </div>
-
-    <!-- Підписки -->
-    <div class="subs" data-reveal>
-      <div class="subs__head">
-        <h3 class="h3">Підписка на обслуговування</h3>
-        <p class="muted">
-          Гарантія покриває поломки. Підписка — розвиток: правки текстів, нові сторінки, оновлення цін,
-          контроль швидкості й позицій. Підключається за бажанням, скасувати можна в будь-який місяць.
-        </p>
-      </div>
-      <div class="subs__grid">
-        <div class="sub">
-          <p class="sub__name">Базова</p>
-          <p class="sub__price price">2 000 <small>₴/міс</small></p>
-          <p class="sub__desc">Хостинг, домен, бекапи, моніторинг доступності, до 2 годин правок.</p>
-        </div>
-        <div class="sub">
-          <p class="sub__name">Стандарт</p>
-          <p class="sub__price price">5 000 <small>₴/міс</small></p>
-          <p class="sub__desc">Все з базової + до 6 годин правок, оновлення контенту, щомісячний звіт.</p>
-        </div>
-        <div class="sub">
-          <p class="sub__name">Преміум</p>
-          <p class="sub__price price">8 000 – 10 000 <small>₴/міс</small></p>
-          <p class="sub__desc">Все зі стандарту + SEO-супровід, нові сторінки, A/B-тести форм.</p>
-        </div>
-        <div class="sub">
-          <p class="sub__name">Максимум</p>
-          <p class="sub__price price">15 000 – 20 000 <small>₴/міс</small></p>
-          <p class="sub__desc">Виділений розробник, пріоритетна черга, розвиток сайту за дорожньою картою.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════ ЕКРАН 7 — СОЦІАЛЬНІ ДОКАЗИ ═══════════════════════ -->
-<section class="section section--soft" id="vidhuky">
-  <div class="container">
-    <div class="section__head" data-reveal>
-      <span class="eyebrow"><span class="eyebrow__num">07</span> Відгуки</span>
-      <h2 class="h2">Що кажуть клієнти</h2>
-    </div>
-
-    <div class="proof-grid">
-      <figure class="tcard" data-reveal>
-        <div class="stars" aria-label="Оцінка 5 з 5">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-        </div>
-        <blockquote><p>«Перше, що зробили — показали план по днях. І жодного разу з нього не зійшли. Для мене це головне: я планував рекламу під дату запуску і не прогадав.»</p></blockquote>
-        <figcaption class="tperson">
-          <span><b>Ігор П.</b><span>Керівник, AutoPro</span></span>
-        </figcaption>
-      </figure>
-
-      <figure class="tcard" data-reveal>
-        <div class="stars" aria-label="Оцінка 5 з 5">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-        </div>
-        <blockquote><p>«Я не розбираюсь у сайтах, і мене жодного разу не змусили це робити. Пояснювали простими словами, показували варіанти, а не питали «як вам зробити».»</p></blockquote>
-        <figcaption class="tperson">
-          <span><b>Оксана М.</b><span>Власниця, Клініка Дент</span></span>
-        </figcaption>
-      </figure>
-
-      <figure class="tcard" data-reveal>
-        <div class="stars" aria-label="Оцінка 5 з 5">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-        </div>
-        <blockquote><p>«Через два місяці після запуску написала їм про баг у формі — виправили того ж дня і безкоштовно. Ось за це і платиш насправді.»</p></blockquote>
-        <figcaption class="tperson">
-          <span><b>Наталія К.</b><span>Керуюча, Studio Nora</span></span>
-        </figcaption>
-      </figure>
-
-      <div class="gcard" data-reveal>
-        <div class="gcard__left">
-          <span class="gcard__score num">5,0</span>
-          <div>
-            <div class="stars" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-            </div>
-            <p class="small muted" style="margin-top:5px">12 відгуків у Google · середня оцінка 5,0</p>
-          </div>
-        </div>
-        <a href="https://g.page/" class="btn btn--ghost" rel="noopener">Читати відгуки в Google</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════ ЕКРАН 8 — КОМАНДА ═══════════════════════ -->
-<section class="section" id="komanda">
-  <div class="container">
-    <div class="section__head" data-reveal>
-      <span class="eyebrow"><span class="eyebrow__num">08</span> Команда</span>
-      <h2 class="h2">Нас двоє — і ви спілкуєтесь з обома</h2>
-      <p class="lead">
-        Без менеджерів-посередників і «передам розробнику». Ви пишете тому, хто робить вашу задачу.
-      </p>
-    </div>
-
-    <div class="team">
-      <article class="member" data-reveal>
-        <div class="member__photo">
-          <!-- Замініть на професійне фото: <img src="img/team-1.webp" width="296" height="394" alt="…"> -->
-          Фото 3:4
-        </div>
-        <div>
-          <p class="member__role">Проєктування та розробка</p>
-          <h3 class="member__name">Максим Копчук</h3>
-          <p class="member__bio">
-            6 років у фронтенді, з них 3 — на комерційних проєктах для локального бізнесу.
-            Відповідає за архітектуру сайту, швидкість і інтеграції. Особисто веде розробку кожного проєкту.
-          </p>
-          <div class="socials">
-            <a href="https://linkedin.com/" aria-label="LinkedIn" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3-2 0-2.3 1.57-2.3 3.2V21H9z"/></svg>
-            </a>
-            <a href="https://instagram.com/" aria-label="Instagram" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            </a>
-            <a href="https://behance.net/" aria-label="Behance" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.2 6.5c1.9 0 3.3.9 3.3 2.7 0 1-.5 1.8-1.4 2.2 1.2.4 1.9 1.3 1.9 2.6 0 2.1-1.7 3-3.7 3H2V6.5zM4.7 11h3c.8 0 1.3-.4 1.3-1.1S8.5 8.8 7.7 8.8h-3zm0 4.7h3.2c.9 0 1.5-.4 1.5-1.3s-.6-1.3-1.5-1.3H4.7zM15 6.9h5.5v1.4H15zm6.9 7.7c0 .2 0 .5-.05.7h-5.6c.1 1.1.9 1.7 1.9 1.7.8 0 1.4-.3 1.7-.9h1.9c-.5 1.7-1.9 2.5-3.6 2.5-2.4 0-4-1.6-4-4s1.6-4.1 4-4.1c2.5 0 3.8 1.9 3.8 4.1zm-5.6-.7h3.6c-.15-1-.8-1.6-1.8-1.6-.9 0-1.6.5-1.8 1.6z"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <article class="member" data-reveal>
-        <div class="member__photo">
-          <!-- Замініть на професійне фото -->
-          Фото 3:4
-        </div>
-        <div>
-          <p class="member__role">Стратегія та комунікація з клієнтом</p>
-          <h3 class="member__name">Ім'я партнера</h3>
-          <p class="member__bio">
-            Відповідає за бриф, аналіз ніші, структуру сайту та тексти. Веде проєкт від першої зустрічі
-            до запуску і залишається на зв'язку весь гарантійний період.
-          </p>
-          <div class="socials">
-            <a href="https://linkedin.com/" aria-label="LinkedIn" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3-2 0-2.3 1.57-2.3 3.2V21H9z"/></svg>
-            </a>
-            <a href="https://instagram.com/" aria-label="Instagram" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════ ЕКРАН 9 — FAQ ═══════════════════════ -->
+<!-- ═══════════════════════ ЕКРАН 6 — FAQ ═══════════════════════ -->
 <section class="section section--soft" id="faq">
   <div class="container faq-layout">
     <div data-reveal>
-      <span class="eyebrow"><span class="eyebrow__num">09</span> Питання</span>
       <h2 class="h2" style="margin-block:16px">Найчастіші запитання</h2>
 
       <div class="faq-aside">
@@ -868,18 +370,11 @@
       <details open>
         <summary>Скільки коштує? <span class="faq__sign" aria-hidden="true"></span></summary>
         <div class="faq__a">
-          <p>Landing page — 8 000–12 000 ₴. «Вітрина» — 14 000 ₴. «Канал заявок» — 32 000 ₴. Індивідуальні проєкти — від 50 000 ₴.</p>
+          <p>Барбершопи й салони краси — 15 000 ₴ + підтримка 6 000 ₴/міс. Масаж і спа — 25 000 ₴ + 15 000 ₴/міс. Кав'ярні й ресторани — 40 000 ₴ + 20 000 ₴/міс.</p>
           <p>Ціна фіксується в договорі до старту робіт і не змінюється, якщо не змінюється обсяг задачі. Оплата 50/50: половина на старті, половина після здачі.</p>
         </div>
       </details>
 
-      <details>
-        <summary>Скільки займе час? <span class="faq__sign" aria-hidden="true"></span></summary>
-        <div class="faq__a">
-          <p>Landing — 7–10 днів, «Вітрина» — 14–20 днів, «Канал заявок» — 25–30 днів. Термін прописаний у договорі.</p>
-          <p>Найчастіша причина затримок — не розробка, а очікування контенту й погоджень від клієнта. Тому в брифі ми одразу домовляємось про дедлайни з вашого боку.</p>
-        </div>
-      </details>
 
       <details>
         <summary>А якщо мені не сподобається? <span class="faq__sign" aria-hidden="true"></span></summary>
@@ -893,7 +388,7 @@
         <summary>Що входить у 6-місячну гарантію і чого вона не покриває? <span class="faq__sign" aria-hidden="true"></span></summary>
         <div class="faq__a">
           <p><strong>Покриває:</strong> технічні дефекти сайту, проблеми з відображенням у браузерах, поломки форм і прийому заявок, проблеми з мобільною версією — усе, що пов'язано з нашою розробкою.</p>
-          <p><strong>Не покриває:</strong> правки текстів і контенту, зміни дизайну, додавання нових функцій і сторінок, проблеми з боку сторонніх сервісів (домен, хостинг, платіжки). Для цього є підписка від 2 000 ₴/міс.</p>
+          <p><strong>Не покриває:</strong> правки текстів і контенту, зміни дизайну, додавання нових функцій і сторінок, проблеми з боку сторонніх сервісів (домен, хостинг, платіжки). Для цього є щомісячна підтримка.</p>
         </div>
       </details>
 
@@ -921,13 +416,6 @@
         </div>
       </details>
 
-      <details>
-        <summary>А якщо через рік треба щось змінити? <span class="faq__sign" aria-hidden="true"></span></summary>
-        <div class="faq__a">
-          <p>Пишете нам — оцінюємо задачу і називаємо вартість. Дрібні правки для клієнтів на підписці входять у місячний пакет годин.</p>
-          <p>Для клієнтів без підписки працюємо погодинно, 600 ₴/год, з попередньою оцінкою обсягу. Сайт побудований так, щоб його міг доопрацювати будь-який розробник — ми не прив'язуємо вас до себе.</p>
-        </div>
-      </details>
 
       <details>
         <summary>Чому не варто робити самому на конструкторі? <span class="faq__sign" aria-hidden="true"></span></summary>
@@ -937,26 +425,19 @@
         </div>
       </details>
 
-      <details>
-        <summary>Ви робите інтернет-магазини? <span class="faq__sign" aria-hidden="true"></span></summary>
-        <div class="faq__a">
-          <p>Так, у форматі індивідуального проєкту від 50 000 ₴ — з каталогом, кошиком, оплатою і доставкою.</p>
-          <p>Але якщо у вас 20–50 товарів і немає складного обліку, часто вигідніше зробити сайт-вітрину із замовленням через форму або месенджер. Порадимо чесно, виходячи з вашої ситуації, а не з розміру чека.</p>
-        </div>
-      </details>
 
       <details>
         <summary>Чи можна оплатити частинами? <span class="faq__sign" aria-hidden="true"></span></summary>
         <div class="faq__a">
           <p>Стандартна схема — 50/50: половина на старті, половина після здачі й вашого прийняття роботи.</p>
-          <p>Для проєктів від 32 000 ₴ можливий розбив на три платежі: 40% на старті, 30% після затвердження дизайну, 30% після запуску. Працюємо як ФОП, за договором, із закривними документами.</p>
+          <p>Працюємо як ФОП, за договором, із закривними документами.</p>
         </div>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════ ЕКРАН 10 — ФІНАЛЬНИЙ CTA ═══════════════════════ -->
+<!-- ═══════════════════════ ЕКРАН 7 — ФІНАЛЬНИЙ CTA ═══════════════════════ -->
 <section class="section section--dark cta" id="audyt">
   <div class="container cta__grid">
     <div data-reveal>
@@ -1065,7 +546,7 @@
 
 </main>
 
-<!-- ═══════════════════════ ЕКРАН 11 — ФУТЕР ═══════════════════════ -->
+<!-- ═══════════════════════ ЕКРАН 8 — ФУТЕР ═══════════════════════ -->
 <footer class="footer">
   <div class="container">
     <div class="footer__grid">
@@ -1083,10 +564,9 @@
       <div class="footer__col">
         <h4>Послуги</h4>
         <ul>
-          <li><a href="#taryfy">Landing page</a></li>
-          <li><a href="#taryfy">Сайт-вітрина</a></li>
-          <li><a href="#taryfy">Канал заявок</a></li>
-          <li><a href="#taryfy">Підписка на обслуговування</a></li>
+          <li><a href="demo/">Демо онлайн-запису</a></li>
+          <li><a href="#keysy">Наші роботи</a></li>
+          <li><a href="#proces">Як працюємо</a></li>
           <li><a href="#audyt">Безкоштовний аудит</a></li>
         </ul>
       </div>
@@ -1094,11 +574,10 @@
       <div class="footer__col">
         <h4>Ніші</h4>
         <ul>
-          <li><a href="#audyt">Стоматології</a></li>
+          <li><a href="#nishi">Барбершопи</a></li>
           <li><a href="#nishi">Салони краси</a></li>
-          <li><a href="#audyt">Автосервіси</a></li>
-          <li><a href="#audyt">Юристи</a></li>
-          <li><a href="#nishi">Ресторани</a></li>
+          <li><a href="#nishi">Масаж і спа</a></li>
+          <li><a href="#nishi">Кав'ярні й ресторани</a></li>
         </ul>
       </div>
 

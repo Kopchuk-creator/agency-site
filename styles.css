@@ -102,11 +102,7 @@ body {
    колонку довгим вмістом. Гасимо це в усіх сіткових блоках сайту. */
 .cta__grid > *,
 .faq-layout > *,
-.ts__panel > *,
-.team > *,
-.member > *,
-.plans > *,
-.proof-grid > * { min-width: 0; }
+
 
 img, svg, video { max-width: 100%; display: block; }
 img { height: auto; }
@@ -134,7 +130,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 ::selection { background: var(--accent); color: #fff; }
 
 /* Tabular numbers everywhere numbers matter */
-.num, .price, .ts__day {
+.num, .price {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
 }
@@ -1070,415 +1066,59 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 /* ==========================================================================
-   SCREEN 4 — PROCESS TIMELINE
+   SCREEN 5 — STEPS (mobile-first)
    ========================================================================== */
-.ts { margin-top: clamp(32px, 4vw, 56px); }
-
-.ts__rail {
-  display: flex;
-  gap: 2px;
-  border-radius: 999px;
-  overflow: hidden;
-  background: var(--line-dark);
-  margin-bottom: var(--s-6);
-}
-
-.ts__seg {
-  flex: 1;
-  height: 6px;
-  background: #2a2a2a;
-  transition: background-color var(--dur) var(--ease);
-}
-
-.ts__seg.is-active { background: var(--accent); }
-
-.ts__tabs {
+/* <ol> сам по собі нумерований для скрінрідера, тому видимі номери
+   малюємо CSS-лічильником, а не дублюємо в HTML */
+.steps {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: var(--s-3);
+  gap: var(--s-4);
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
 }
 
-.ts__tab {
-  text-align: left;
-  padding: var(--s-4);
+.step {
+  counter-increment: step;
+  padding: var(--s-5);
   border: 1px solid var(--line-dark);
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   background: var(--bg-dark-2);
-  color: var(--ink-on-dark-2);
-  min-height: 108px;
-  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease),
-              color var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
 
-.ts__tab:hover { transform: translateY(-3px); border-color: #3d3d3d; }
-
-.ts__tab[aria-selected="true"] {
-  background: #fff;
-  color: var(--ink);
-  border-color: #fff;
-}
-
-.ts__day {
+.step::before {
+  content: counter(step, decimal-leading-zero);
+  content: counter(step, decimal-leading-zero) / "";
   display: block;
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  margin-bottom: var(--s-4);
+  font-size: 28px;
+  font-weight: 650;
+  line-height: 1;
   color: var(--accent);
-  margin-bottom: 9px;
+  font-variant-numeric: tabular-nums;
 }
 
-.ts__tab[aria-selected="true"] .ts__day { color: var(--accent); }
-.ts__name { font-size: 16px; font-weight: 580; letter-spacing: -0.015em; line-height: 1.25; }
-
-.ts__panels { margin-top: var(--s-5); }
-
-.ts__panel {
-  display: none;
-  border: 1px solid var(--line-dark);
-  border-radius: var(--r-lg);
-  padding: clamp(24px, 3vw, 40px);
-  background: var(--bg-dark-2);
-}
-
-.ts__panel[data-active="true"] {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  gap: clamp(24px, 4vw, 56px);
-  animation: panelIn var(--dur-lg) var(--ease);
-}
-
-@keyframes panelIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: none; }
-}
-
-.ts__panel h3 { margin-bottom: var(--s-3); }
-.ts__panel p { color: var(--ink-on-dark-2); }
-
-.ts__out { display: grid; gap: 2px; align-content: start; }
-
-.ts__out li {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding-block: 13px;
-  border-top: 1px solid var(--line-dark);
-  font-size: 15.5px;
-  color: #d4d4d4;
-}
-.ts__out li:first-child { border-top: 0; }
-.ts__out .ic { flex: none; margin-top: 2px; color: var(--accent); }
-
-/* ==========================================================================
-   SCREEN 4.5 — GUARANTEE
-   ========================================================================== */
-.guarantee {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-
-.gcol { background: var(--bg); padding: clamp(24px, 3vw, 40px); }
-.gcol--no { background: var(--bg-soft); }
-
-.gcol__head {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  margin-bottom: var(--s-5);
-  font-size: 17px;
-  font-weight: 620;
-  letter-spacing: -0.015em;
-}
-
-.gcol__head .ic { flex: none; }
-
-.gcol li {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding-block: 14px;
-  border-top: 1px solid var(--line);
-  font-size: 16px;
-  line-height: 1.45;
-}
-.gcol li:first-of-type { border-top: 0; }
-.gcol--no li { color: var(--ink-2); }
-.gcol .ic { flex: none; margin-top: 3px; }
-
-.guarantee-note {
-  margin-top: var(--s-5);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-4);
-  padding: var(--s-5);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--accent-soft);
-}
-
-.guarantee-note p { max-width: 62ch; font-size: 16px; }
-
-/* ==========================================================================
-   SCREEN 5 — PRICING
-   ========================================================================== */
-.plans {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--s-4);
-  align-items: start;
-}
-
-.plan {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: var(--s-5);
-  background: var(--bg);
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
-}
-
-.plan:hover { transform: translateY(-5px); box-shadow: var(--e-3); border-color: var(--line-strong); }
-
-.plan--best {
-  border-color: var(--ink);
-  border-width: 1.5px;
-  box-shadow: var(--e-2);
-}
-
-.plan--best:hover { border-color: var(--accent); }
-
-.plan__badge {
-  position: absolute;
-  top: -13px;
-  left: var(--s-5);
-}
-
-.plan__name { font-size: 17px; font-weight: 620; letter-spacing: -0.02em; }
-.plan__for { font-size: 14px; color: var(--ink-2); margin-top: 4px; min-height: 42px; }
-
-.plan__price {
-  margin-block: var(--s-4) var(--s-2);
-  font-size: clamp(28px, 3vw, 34px);
-  font-weight: 640;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
-}
-
-.plan__price small { font-size: 15px; font-weight: 500; color: var(--ink-2); letter-spacing: -0.01em; }
-
-.plan__term {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 13.5px;
-  color: var(--ink-2);
-  padding-bottom: var(--s-4);
-  border-bottom: 1px solid var(--line);
-  width: 100%;
-}
-
-.plan__list { display: grid; gap: 11px; padding-block: var(--s-4); font-size: 15px; }
-.plan__list li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.4; }
-.plan__list .ic { flex: none; margin-top: 3px; color: var(--accent); }
-
-.plan__foot { margin-top: auto; padding-top: var(--s-4); display: grid; gap: 10px; }
-
-.plan__guarantee {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--ink-2);
-}
-
-/* Subscriptions */
-.subs {
-  margin-top: clamp(40px, 5vw, 64px);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-
-.subs__head {
-  padding: clamp(24px, 3vw, 32px);
-  border-bottom: 1px solid var(--line);
-  background: var(--bg);
-}
-
-.subs__head p { margin-top: var(--s-2); max-width: 70ch; }
-
-.subs__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--line);
-}
-
-.sub {
-  background: var(--bg);
-  padding: var(--s-5);
-  transition: background-color var(--dur) var(--ease);
-}
-.sub:hover { background: var(--bg-soft); }
-
-.sub__name { font-size: 15px; font-weight: 600; }
-.sub__price { margin-top: 6px; font-size: 24px; font-weight: 640; letter-spacing: -0.035em; }
-.sub__price small { font-size: 14px; font-weight: 500; color: var(--ink-2); }
-.sub__desc { margin-top: 9px; font-size: 14px; color: var(--ink-2); line-height: 1.45; }
-
-/* ==========================================================================
-   SCREEN 7 — SOCIAL PROOF
-   ========================================================================== */
-.proof-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--s-4);
-}
-
-.tcard {
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: var(--s-5);
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-}
-
-.tcard:hover { transform: translateY(-4px); box-shadow: var(--e-2); }
-
-.stars { display: flex; gap: 3px; color: #f5a623; margin-bottom: var(--s-4); }
-
-.tcard p { font-size: 16px; line-height: 1.55; }
-
-/* Без аватарок підпис тримає ліва акцентна риска */
-.tperson {
-  margin-top: auto;
-  padding-top: var(--s-5);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.tperson > span {
-  padding-left: 13px;
-  border-left: 2px solid var(--accent);
-}
-
-.avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  flex: none;
-  display: grid;
-  place-items: center;
-  background: var(--ink);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 620;
+.step__title {
+  font-size: 20px;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
-.avatar--blue { background: var(--accent); }
-.avatar--gray { background: #4a4a4a; }
-
-.tperson b { display: block; font-size: 15px; font-weight: 600; }
-.tperson span { display: block; font-size: 13.5px; color: var(--ink-2); }
-
-.gcard {
-  grid-column: span 3;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-4);
-  padding: var(--s-5);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--bg-soft);
+.step__text {
+  margin-top: var(--s-2);
+  line-height: 1.5;
+  color: var(--ink-on-dark-2);
 }
 
-.gcard__left { display: flex; align-items: center; gap: var(--s-4); }
-
-.gcard__score {
-  font-size: 40px;
-  font-weight: 660;
-  letter-spacing: -0.045em;
-  line-height: 1;
+/* Планшет: 2 × 2 */
+@media (min-width: 600px) {
+  .steps { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ==========================================================================
-   SCREEN 8 — TEAM
-   ========================================================================== */
-.team {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(20px, 3vw, 40px);
+/* Десктоп: усі 4 кроки в ряд */
+@media (min-width: 1024px) {
+  .steps { grid-template-columns: repeat(4, 1fr); }
 }
-
-.member {
-  display: grid;
-  grid-template-columns: 148px minmax(0, 1fr);
-  gap: var(--s-5);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: var(--s-5);
-  background: var(--bg);
-  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-}
-
-.member:hover { border-color: var(--line-strong); box-shadow: var(--e-2); }
-
-.member__photo {
-  aspect-ratio: 3 / 4;
-  border-radius: var(--r-md);
-  background: linear-gradient(160deg, #ededed, #dcdcdc);
-  display: grid;
-  place-items: center;
-  color: #a6a6a6;
-  font-size: 12px;
-  text-align: center;
-  padding: 10px;
-  overflow: hidden;
-}
-
-.member__photo img { width: 100%; height: 100%; object-fit: cover; }
-
-.member__role {
-  font-size: 13px;
-  font-weight: 550;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.member__name { margin-top: 6px; font-size: 22px; font-weight: 620; letter-spacing: -0.03em; }
-.member__bio { margin-top: 10px; font-size: 15.5px; color: var(--ink-2); line-height: 1.5; }
-
-.socials { margin-top: var(--s-4); display: flex; gap: var(--s-2); }
-
-.socials a {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  display: grid;
-  place-items: center;
-  color: var(--ink-2);
-  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
-}
-
-.socials a:hover { color: var(--ink); border-color: var(--ink); background: var(--bg-soft); }
 
 /* ==========================================================================
    SCREEN 9 — FAQ
@@ -2094,33 +1734,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    МІКРОВЗАЄМОДІЇ
    ========================================================================== */
 
-/* М'яке світло за курсором на картках тарифів і кейсів.
-   Координати підставляє JS у --mx/--my. */
-.plan,
-.tcard {
-  position: relative;
-  isolation: isolate;
-}
-
-.plan::before,
-.tcard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity var(--dur-lg) var(--ease);
-  background: radial-gradient(
-    260px circle at var(--mx, 50%) var(--my, 0%),
-    rgba(0, 102, 255, 0.07),
-    transparent 68%
-  );
-}
-
-.plan:hover::before,
-.tcard:hover::before { opacity: 1; }
-
 /* Плавна поява відкритої відповіді FAQ */
 .faq details[open] .faq__a > p {
   animation: fadeUp 420ms var(--ease) backwards;
@@ -2131,8 +1744,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* Підкреслення заголовка секції, що «дописується» при появі */
 .section__head .h2 { position: relative; }
 
-/* Іконка етапу процесу «дихає» на активній вкладці */
-.ts__tab[aria-selected="true"] .ts__day { animation: fadeUp 400ms var(--ease); }
 
 /* ==========================================================================
    RESPONSIVE
@@ -2141,9 +1752,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 @media (max-width: 1080px) {
   :root { --container: 100%; }
 
-  .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .subs__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ts__tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
 
   .nav__link { padding-inline: 10px; font-size: 15px; }
@@ -2174,10 +1782,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .faq-layout { grid-template-columns: 1fr; }
   .faq-aside { position: static; margin-top: var(--s-5); }
   .cta__grid { grid-template-columns: 1fr; }
-  .team { grid-template-columns: 1fr; }
-  .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .gcard { grid-column: span 2; }
-  .ts__panel[data-active="true"] { grid-template-columns: 1fr; gap: var(--s-5); }
 
   /* Три колонки ніш на планшеті занадто тісні — переходимо на дві */
 
@@ -2188,7 +1792,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
   /* Тач-цілі ≥44px */
   .link { min-height: 44px; align-items: center; }
-  .socials a { width: 44px; height: 44px; }
   .footer__col a { min-height: 44px; }
   .footer__legal a { display: inline-flex; align-items: center; min-height: 44px; }
   .logo { min-height: 44px; }
@@ -2224,20 +1827,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
   .btn--lg { min-height: 56px; font-size: 16px; }
 
-  .plans { grid-template-columns: 1fr; }
-  .subs__grid { grid-template-columns: 1fr; }
-  .ts__tabs { grid-template-columns: 1fr 1fr; gap: var(--s-2); }
-  .ts__tab { min-height: 88px; padding: var(--s-3); }
-  .ts__name { font-size: 14.5px; }
-  .guarantee { grid-template-columns: 1fr; }
-  .proof-grid { grid-template-columns: 1fr; }
-  .gcard { grid-column: auto; flex-direction: column; align-items: flex-start; }
-  .member { grid-template-columns: 1fr; }
-  .member__photo { aspect-ratio: 16 / 10; }
   .field-row { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr; gap: var(--s-6); }
-  .guarantee-note { flex-direction: column; align-items: stretch; }
-  .guarantee-note .btn { width: 100%; }
 
   /* Макет аудиту: зменшуємо внутрішні розміри, щоб цифри не обрізались */
   .score { padding: var(--s-3); gap: var(--s-3); }
@@ -2254,7 +1845,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 @media (max-width: 380px) {
   :root { --gutter: 16px; }
   .h1 { font-size: 32px; }
-  .ts__tabs { grid-template-columns: 1fr; }
 }
 
 /* ══════════════ ЛАНДШАФТНА ОРІЄНТАЦІЯ ТЕЛЕФОНА ══════════════ */
