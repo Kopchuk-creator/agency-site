@@ -7,6 +7,15 @@
 <meta name="description" content="Як ми збираємо, використовуємо та зберігаємо персональні дані відвідувачів сайту.">
 <meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#ffffff">
+<script>
+  /* Тема — до першого малювання, щоб темна не «блимала» білим */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +36,10 @@
       Агенція
     </a>
     <div class="header__aside">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Увімкнути темну тему" title="Увімкнути темну тему">
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 1011 11z"/></svg>
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>
+      </button>
       <a href="../zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
     </div>
   </div>
@@ -173,5 +186,6 @@
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="../theme.js" defer></script>
 </body>
 </html>

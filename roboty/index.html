@@ -6,6 +6,15 @@
 <title>Роботи та ціни — сайти з онлайн-записом | Агенція</title>
 <meta name="description" content="Живі сайти для барбершопу, салону краси, спа і кафе та три пакети: 15 000, 25 000 і 40 000 ₴. Запуск від 5 днів.">
 <meta name="theme-color" content="#ffffff">
+<script>
+  /* Тема — до першого малювання, щоб темна не «блимала» білим */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
@@ -43,6 +52,10 @@
     </nav>
 
     <div class="header__aside">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Увімкнути темну тему" title="Увімкнути темну тему">
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 1011 11z"/></svg>
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>
+      </button>
       <a href="../zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
       <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" id="burger">
         <span></span><span></span><span></span>
@@ -153,14 +166,14 @@
     <!-- ===== Ціни ===== -->
     <section class="page-block" id="tsiny" aria-labelledby="prices-title">
       <h2 class="h2" id="prices-title">Ціни</h2>
-      <p class="lead page-block__lead">Три пакети під розмір закладу. Ціна і строк фіксуються в договорі.</p>
+      <p class="lead page-block__lead">Три пакети під розмір закладу. Це разова оплата за розробку сайту — ціна і строк фіксуються в договорі.</p>
 
       <ul class="packages">
         <li class="pack" id="paket-1">
           <p class="pack__for">Барбершопи</p>
           <h3 class="pack__title">Лендинг із записом</h3>
           <p class="pack__price">15&nbsp;000&nbsp;₴</p>
-          <p class="pack__meta">Запуск за 5 днів<br>Підтримка 6&nbsp;000&nbsp;₴/міс</p>
+          <p class="pack__meta">Запуск за 5 днів</p>
 
           <h4 class="pack__sub">Що входить</h4>
           <ul class="pack__list">
@@ -172,11 +185,6 @@
             <li>Публікація на вашому домені</li>
           </ul>
 
-          <h4 class="pack__sub">Підтримка</h4>
-          <ul class="pack__list">
-            <li>До 5 годин правок на місяць</li>
-            <li>Відповідь протягом доби</li>
-          </ul>
 
           <p class="pack__example">Приклад: <a href="#roboty">BRUTAL CUT</a></p>
           <a class="btn btn--primary btn--block pack__btn" href="../zapys/?paket=1#kontakty">
@@ -188,7 +196,7 @@
           <p class="pack__for">Масаж і спа</p>
           <h3 class="pack__title">Сайт закладу</h3>
           <p class="pack__price">25&nbsp;000&nbsp;₴</p>
-          <p class="pack__meta">Запуск за 10–12 днів<br>Підтримка 15&nbsp;000&nbsp;₴/міс</p>
+          <p class="pack__meta">Запуск за 10–12 днів</p>
 
           <h4 class="pack__sub">Що входить</h4>
           <ul class="pack__list">
@@ -199,12 +207,6 @@
             <li>SEO під ваше місто й нішу</li>
           </ul>
 
-          <h4 class="pack__sub">Підтримка</h4>
-          <ul class="pack__list">
-            <li>До 10 годин правок на місяць</li>
-            <li>Нові сторінки, акції, оновлення SEO</li>
-            <li>Відповідь протягом доби</li>
-          </ul>
 
           <p class="pack__example">Приклад: <a href="#roboty">Aura SPA</a></p>
           <a class="btn btn--primary btn--block pack__btn" href="../zapys/?paket=2#kontakty">
@@ -216,7 +218,7 @@
           <p class="pack__for">Ресторани, кав'ярні, салони</p>
           <h3 class="pack__title">Сайт із замовленнями</h3>
           <p class="pack__price">40&nbsp;000&nbsp;₴</p>
-          <p class="pack__meta">Запуск за 15 днів<br>Підтримка 20&nbsp;000&nbsp;₴/міс</p>
+          <p class="pack__meta">Запуск за 15 днів</p>
 
           <h4 class="pack__sub">Що входить</h4>
           <ul class="pack__list">
@@ -228,17 +230,61 @@
             <li>Друга мова за потреби</li>
           </ul>
 
-          <h4 class="pack__sub">Підтримка</h4>
-          <ul class="pack__list">
-            <li>До 15 годин правок на місяць</li>
-            <li>Оновлення меню чи каталогу</li>
-            <li>Відповідь протягом 4 робочих годин</li>
-          </ul>
 
           <p class="pack__example">Приклади: <a href="#roboty">Food&amp;Vibe</a>, <a href="#roboty">Lumière</a></p>
           <a class="btn btn--primary btn--block pack__btn" href="../zapys/?paket=3#kontakty">
             Замовити<span class="visually-hidden"> пакет «Сайт із замовленнями»</span>
           </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== Щомісячна підтримка: окремо від розробки ===== -->
+    <section class="page-block support" id="pidtrymka" aria-labelledby="support-title">
+      <h2 class="h2" id="support-title">Щомісячна підтримка</h2>
+      <p class="lead page-block__lead">Окрема послуга після запуску — не входить у вартість розробки і підключається лише за вашим бажанням. Відмовитися можна будь-коли, попередивши нас письмово.</p>
+
+      <div class="support__base">
+        <h3 class="support__base-title">У кожен пакет підтримки входить</h3>
+        <ul class="pack__list">
+          <li>Оренда сервера</li>
+          <li>Продовження домену</li>
+          <li>Безперебійна робота віджета запису</li>
+          <li>Внесення дрібних правок: ціни, послуги, фото, майстри</li>
+        </ul>
+      </div>
+
+      <ul class="support__plans">
+        <li class="support-plan">
+          <p class="pack__for">Для «Лендингу із записом»</p>
+          <h3 class="support-plan__title">Базова</h3>
+          <p class="support-plan__price">6&nbsp;000&nbsp;₴ <span>/ міс</span></p>
+          <ul class="pack__list">
+            <li>До 5 годин правок на місяць</li>
+            <li>Відповідь протягом доби</li>
+          </ul>
+        </li>
+
+        <li class="support-plan">
+          <p class="pack__for">Для «Сайту закладу»</p>
+          <h3 class="support-plan__title">Розширена</h3>
+          <p class="support-plan__price">15&nbsp;000&nbsp;₴ <span>/ міс</span></p>
+          <ul class="pack__list">
+            <li>До 10 годин правок на місяць</li>
+            <li>Нові сторінки, акції, оновлення SEO</li>
+            <li>Відповідь протягом доби</li>
+          </ul>
+        </li>
+
+        <li class="support-plan">
+          <p class="pack__for">Для «Сайту із замовленнями»</p>
+          <h3 class="support-plan__title">Пріоритетна</h3>
+          <p class="support-plan__price">20&nbsp;000&nbsp;₴ <span>/ міс</span></p>
+          <ul class="pack__list">
+            <li>До 15 годин правок на місяць</li>
+            <li>Оновлення меню чи каталогу</li>
+            <li>Відповідь протягом 4 робочих годин</li>
+          </ul>
         </li>
       </ul>
     </section>
@@ -300,5 +346,6 @@
 
 <script src="../main.js" defer></script>
 <script src="roboty.js" defer></script>
+<script src="../theme.js" defer></script>
 </body>
 </html>

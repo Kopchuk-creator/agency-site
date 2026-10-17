@@ -64,6 +64,7 @@
     '.pain', '.step',                       // «Знайомо?», «Як працюємо»
     '.faq-layout > *',
     '.filters', '.work', '.pack',           // «Роботи та ціни»
+    '.support__base', '.support-plan',      // щомісячна підтримка
     '.term', '.terms__more', '.case-cta',
     '.booking', '.owner',                   // «Запис і контакти»
     '.contacts__list', '.formcard',

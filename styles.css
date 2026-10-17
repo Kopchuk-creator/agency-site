@@ -5,8 +5,11 @@
 
 /* ---------- Tokens ---------- */
 :root {
+  color-scheme: light;     /* системні елементи (скролбар, автозаповнення) — світлі */
+
   /* Surfaces */
-  --bg: #ffffff;
+  --page: #ffffff;         /* фон сторінки */
+  --bg: #ffffff;           /* фон карток, полів, випадних списків */
   --bg-soft: #fafafa;
   --bg-dark: #0a0a0a;
   --bg-dark-2: #141414;
@@ -31,6 +34,23 @@
   --line: #e8e8e8;
   --line-strong: #d4d4d4;
   --line-input: #8a8a8a;   /* рамки полів і карток вибору: 3.4:1 на білому (WCAG 1.4.11) */
+
+  /* Службові кольори, які відрізняються між темами */
+  --on-ink: #ffffff;                         /* текст на елементах із фоном var(--ink) */
+  --accent-hover: #0052cc;                   /* фон синьої кнопки при наведенні */
+  --accent-text: #0066ff;                    /* синій текст і посилання на світлому фоні */
+  --header-bg: rgba(255, 255, 255, 0.82);
+  --mobile-bar-bg: rgba(255, 255, 255, 0.94);
+  --burger-hover: #f0f0f0;
+  --btn-dark-hover: #262626;
+  --focus-ring: rgba(0, 102, 255, 0.14);
+  --danger: #c02626;
+  --danger-ring: rgba(192, 38, 38, 0.14);
+  --ok-bg: #eaf7f0;
+  --ok-ink: #076b3a;
+  --err-bg: #fdecec;
+  --err-ink: #a51f1f;
+  --tg-bg: #e6ebee;                          /* фон «чату» в демо-сповіщенні */
 
   /* Шкала заголовків: мінімум — телефон, максимум — десктоп, між ними плавно.
      Кожен рівень помітно менший за попередній: 64 → 56 → 44 → 24 → 18 */
@@ -86,6 +106,56 @@
   --z-widget: 300;
 }
 
+/* ==========================================================================
+   ТЕМНА ТЕМА
+   Глибокі темно-сірі, не чистий чорний: текст читається м'якше.
+   Атрибут data-theme ставить скрипт у <head> ще до першого малювання.
+   ========================================================================== */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page: #121212;
+  --bg: #1c1c1c;               /* картки трохи світліші за сторінку — так «підняті» */
+  --bg-soft: #171717;
+  --bg-dark: #0c0c0c;          /* «Як працюємо» і футер лишаються найтемнішими */
+  --bg-dark-2: #1a1a1a;
+
+  --ink: #ececec;
+  --ink-2: #a8a8a8;            /* 7.8:1 на #121212 */
+  --ink-3: #8a8a8a;
+  --ink-on-dark: #ffffff;
+  --ink-on-dark-2: #a1a1a1;
+
+  --accent: #0066ff;           /* кнопки: білий текст 5.1:1 */
+  --accent-ink: #7fb0ff;       /* акцентний текст і посилання на темному */
+  --accent-text: #7fb0ff;
+  --accent-soft: #15233b;
+
+  --line: #2a2a2a;
+  --line-strong: #3a3a3a;
+  --line-input: #6e6e6e;       /* 3.4:1 на #1c1c1c */
+  --line-dark: #2a2a2a;
+
+  --e-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --e-2: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --e-3: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --e-accent: 0 8px 24px rgba(0, 102, 255, 0.3);
+
+  --on-ink: #121212;
+  --header-bg: rgba(18, 18, 18, 0.82);
+  --mobile-bar-bg: rgba(18, 18, 18, 0.94);
+  --burger-hover: #262626;
+  --btn-dark-hover: #d4d4d4;
+  --focus-ring: rgba(127, 176, 255, 0.28);
+  --danger: #ff7a7a;
+  --danger-ring: rgba(255, 122, 122, 0.2);
+  --ok-bg: #0f2a1d;
+  --ok-ink: #6fd69d;
+  --err-bg: #2d1414;
+  --err-ink: #ff8a8a;
+  --tg-bg: #0f1418;
+}
+
 /* ---------- Reset ---------- */
 *,
 *::before,
@@ -99,7 +169,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--page);
   color: var(--ink);
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 18px;
@@ -254,7 +324,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* ---------- Buttons ---------- */
 .btn {
   --btn-bg: var(--ink);
-  --btn-fg: #fff;
+  --btn-fg: var(--on-ink);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -291,11 +361,12 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .btn--primary {
   --btn-bg: var(--accent);
-  --btn-hover-bg: var(--accent-ink);
+  --btn-fg: #fff;                      /* синій фон — текст білий в обох темах */
+  --btn-hover-bg: var(--accent-hover);
   box-shadow: var(--e-accent);
 }
 
-.btn--dark { --btn-bg: var(--ink); --btn-hover-bg: #262626; }
+.btn--dark { --btn-bg: var(--ink); --btn-hover-bg: var(--btn-dark-hover); }
 
 .btn--ghost {
   --btn-bg: transparent;
@@ -352,7 +423,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 550;
   background-image: linear-gradient(currentColor, currentColor);
   background-size: 0% 1.5px;
@@ -430,7 +501,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--header-bg);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   border-bottom: 1px solid transparent;
@@ -461,7 +532,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   height: 28px;
   border-radius: 8px;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   display: grid;
   place-items: center;
   font-size: 14px;
@@ -538,7 +609,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   transition: transform 320ms var(--ease);
 }
 
-@media (hover: hover) { .burger:hover { background: #f0f0f0; } }
+@media (hover: hover) { .burger:hover { background: var(--burger-hover); } }
 .burger[aria-expanded="true"]::before { transform: none; }
 
 .burger span {
@@ -559,7 +630,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    перестає виглядати шаблонною. */
 .burger span:nth-child(2) { width: 13px; align-self: flex-end; }
 
-.burger[aria-expanded="true"] span { background: #fff; }
+.burger[aria-expanded="true"] span { background: var(--on-ink); }
 .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .burger[aria-expanded="true"] span:nth-child(2) { width: 19px; opacity: 0; transform: scaleX(0.2); }
 .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -723,9 +794,9 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   height: 28px;
   border-bottom: 1px solid var(--line);
   background:
-    radial-gradient(circle, #d4d4d4 4px, transparent 4.5px) 14px 50% / 14px 14px no-repeat,
-    radial-gradient(circle, #d4d4d4 4px, transparent 4.5px) 30px 50% / 14px 14px no-repeat,
-    radial-gradient(circle, #d4d4d4 4px, transparent 4.5px) 46px 50% / 14px 14px no-repeat,
+    radial-gradient(circle, var(--line-strong) 4px, transparent 4.5px) 14px 50% / 14px 14px no-repeat,
+    radial-gradient(circle, var(--line-strong) 4px, transparent 4.5px) 30px 50% / 14px 14px no-repeat,
+    radial-gradient(circle, var(--line-strong) 4px, transparent 4.5px) 46px 50% / 14px 14px no-repeat,
     var(--bg-soft);
 }
 
@@ -868,7 +939,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   position: absolute;
   left: 0;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* margin-top: auto притискає приклад і посилання до низу —
@@ -1134,7 +1205,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .filters__btn[aria-pressed="true"] {
   border-color: var(--ink);
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
 }
 
 .filters__btn:focus-visible {
@@ -1261,7 +1332,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .faq summary::-webkit-details-marker { display: none; }
-@media (hover: hover) { .faq summary:hover { color: var(--accent); } }
+@media (hover: hover) { .faq summary:hover { color: var(--accent-text); } }
 
 .faq__sign {
   position: relative;
@@ -1284,7 +1355,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .faq__sign::after { transform: rotate(90deg); }
 .faq details[open] .faq__sign::after { transform: rotate(0deg); }
-.faq details[open] summary { color: var(--accent); }
+.faq details[open] summary { color: var(--accent-text); }
 
 .faq__a {
   padding-bottom: 24px;
@@ -1319,7 +1390,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    ========================================================================== */
 /* Form card */
 .formcard {
-  background: #fff;
+  background: var(--bg);
   color: var(--ink);
   border-radius: var(--r-xl);
   padding: clamp(24px, 3vw, 36px);
@@ -1337,7 +1408,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   letter-spacing: -0.01em;
 }
 
-.field label .req { color: var(--accent); }
+.field label .req { color: var(--accent-text); }
 
 .field input,
 .field select,
@@ -1347,7 +1418,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   padding: 0 15px;
   border: 1px solid var(--line-input);
   border-radius: var(--r-sm);
-  background: #fff;
+  background: var(--bg);
   font-size: 16px;
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
   appearance: none;
@@ -1379,19 +1450,19 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .field textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.14);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .field__error {
   display: none;
   font-size: 13.5px;
-  color: #c02626;
+  color: var(--danger);
   font-weight: 500;
 }
 
 .field.is-invalid input,
-.field.is-invalid select { border-color: #c02626; }
-.field.is-invalid input:focus { box-shadow: 0 0 0 3px rgba(192, 38, 38, 0.14); }
+.field.is-invalid select { border-color: var(--danger); }
+.field.is-invalid input:focus { box-shadow: 0 0 0 3px var(--danger-ring); }
 .field.is-invalid .field__error { display: block; }
 
 .field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); }
@@ -1413,14 +1484,14 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .form__status[data-state="ok"] {
   display: flex;
-  background: #eaf7f0;
-  color: #076b3a;
+  background: var(--ok-bg);
+  color: var(--ok-ink);
 }
 
 .form__status[data-state="err"] {
   display: flex;
-  background: #fdecec;
-  color: #a51f1f;
+  background: var(--err-bg);
+  color: var(--err-ink);
 }
 
 .form__status .ic { flex: none; margin-top: 2px; }
@@ -1472,7 +1543,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .footer .logo { color: #fff; }
-.footer .logo__mark { background: #fff; color: var(--ink); }
+.footer .logo__mark { background: #fff; color: #0a0a0a; }
 .footer__about { margin-top: var(--s-4); max-width: 34ch; line-height: 1.55; }
 
 .footer__col h4 {
@@ -1515,7 +1586,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .footer__req {
   margin-top: var(--s-5);
   font-size: 13px;
-  color: #6e6e6e;
+  color: #8a8a8a;
   line-height: 1.55;
 }
 
@@ -1534,7 +1605,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   padding: 0 20px 0 16px;
   border-radius: 999px;
   background: var(--ink);
-  color: #fff;
+  color: var(--on-ink);
   font-size: 15px;
   font-weight: 550;
   box-shadow: var(--e-3);
@@ -1543,7 +1614,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .callback.is-visible { transform: none; }
-@media (hover: hover) { .callback:hover { background: var(--accent); } }
+@media (hover: hover) { .callback:hover { background: var(--accent); color: #fff; } }
 
 .callback__pulse {
   width: 9px;
@@ -1573,7 +1644,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   bottom: 0;
   z-index: var(--z-widget);
   padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
-  background: rgba(255, 255, 255, 0.94);
+  background: var(--mobile-bar-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid var(--line);
@@ -1600,7 +1671,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .page__head .h1 { margin-block: var(--s-4) var(--s-3); }
-.page__date { font-size: 14.5px; color: var(--ink-3); }
+.page__date { font-size: 14.5px; color: var(--ink-2); }
 
 .crumbs {
   display: flex;
@@ -1613,7 +1684,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .crumbs a { min-height: 44px; display: inline-flex; align-items: center; }
-@media (hover: hover) { .crumbs a:hover { color: var(--accent); } }
+@media (hover: hover) { .crumbs a:hover { color: var(--accent-text); } }
 .crumbs span { color: var(--line-strong); }          /* роздільник «/» */
 .crumbs span:last-child { color: var(--ink-2); }      /* поточна сторінка: 5.7:1 */
 
@@ -1647,7 +1718,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .prose ol li { list-style: decimal; }
 .prose li::marker { color: var(--ink-3); }
 
-.prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.prose a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
 .prose strong { font-weight: 620; }
 
 .prose blockquote {
@@ -1717,6 +1788,85 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* Перехід за якорем #paket-N: картка не ховається під липким хедером */
 .pack[id] { scroll-margin-top: calc(var(--header-h) + var(--s-4)); }
+
+/* ==========================================================================
+   ЩОМІСЯЧНА ПІДТРИМКА (mobile-first)
+   Навмисно «тихіше» за картки розробки: без рамки-акценту й великої ціни,
+   щоб читалась як окрема додаткова послуга, а не частина ціни сайту
+   ========================================================================== */
+/* Спільне для всіх пакетів підтримки */
+.support__base {
+  padding: var(--s-5);
+  border-radius: var(--r-lg);
+  background: var(--bg-soft);
+}
+
+.support__base-title {
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.support__base .pack__list { margin-top: var(--s-3); }
+
+/* Три міні-картки */
+.support__plans {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+  padding: 0;
+  list-style: none;
+}
+
+.support-plan {
+  display: flex;
+  flex-direction: column;
+  padding: var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+}
+
+.support-plan__title {
+  margin-top: var(--s-2);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.support-plan__price {
+  margin-top: var(--s-3);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.support-plan__price span {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.support-plan .pack__list { margin-top: var(--s-4); }
+
+/* Планшет: спільний список у дві колонки */
+@media (min-width: 600px) {
+  .support__base .pack__list {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--s-6);
+  }
+}
+
+/* Десктоп: міні-картки в ряд */
+@media (min-width: 900px) {
+  .support__plans { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .support__base,
+  .support-plan { padding: var(--s-6); }
+}
 
 /* ==========================================================================
    УМОВИ СПІВПРАЦІ ТА ГАРАНТІЯ (mobile-first)
@@ -2046,7 +2196,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   min-height: 1.5em;
   margin-top: var(--s-3);
   font-size: 14px;
-  color: #c02626;
+  color: var(--danger);
 }
 
 .booking__nav {
@@ -2098,14 +2248,14 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .tg {
   margin-top: var(--s-4);
   border-radius: var(--r-lg);
-  background: #e6ebee;
+  background: var(--tg-bg);
   overflow: hidden;
 }
 
 .tg__head {
   padding: var(--s-3) var(--s-4);
   border-bottom: 1px solid var(--line);
-  background: #fff;
+  background: var(--bg);
   font-size: 14px;
   font-weight: 600;
 }
@@ -2130,7 +2280,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   max-width: 340px;
   padding: var(--s-3) var(--s-4) var(--s-5);
   border-radius: 14px 14px 14px 4px;
-  background: #fff;
+  background: var(--bg);
   box-shadow: var(--e-1);
   font-size: 14px;
   line-height: 1.5;
@@ -2173,7 +2323,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   position: absolute;
   left: 0;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* Десктоп: віджет зліва, «телефон власника» справа і їде за скролом */
@@ -2368,7 +2518,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   padding: 0 44px 0 15px;
   border: 1px solid var(--line-input);
   border-radius: var(--r-sm);
-  background: #fff;
+  background: var(--bg);
   font-size: 16px;
   cursor: pointer;
   user-select: none;
@@ -2396,10 +2546,10 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .cselect.is-open .cselect__control {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.14);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
-.field.is-invalid .cselect__control { border-color: #c02626; }
+.field.is-invalid .cselect__control { border-color: var(--danger); }
 
 @media (hover: hover) {
   .cselect__control:hover { border-color: var(--ink-2); }
@@ -2420,7 +2570,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   list-style: none;
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  background: #fff;
+  background: var(--bg);
   box-shadow: var(--e-3);
 }
 
@@ -2464,6 +2614,53 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 /* ==========================================================================
+   ПЕРЕМИКАЧ ТЕМИ
+   ========================================================================== */
+.theme-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;               /* як бургер — дві кнопки поруч однакові */
+  height: 46px;
+  flex: none;
+  border-radius: 15px;
+  background: var(--bg-soft);
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle svg {
+  grid-area: 1 / 1;          /* обидві іконки в одній клітинці, одна над одною */
+  width: 20px;
+  height: 20px;
+}
+
+/* Світла тема — показуємо місяць (клік увімкне темну), темна — сонце */
+.theme-toggle__sun { opacity: 0; transform: rotate(-90deg) scale(0.6); }
+[data-theme="dark"] .theme-toggle__sun  { opacity: 1; transform: none; }
+[data-theme="dark"] .theme-toggle__moon { opacity: 0; transform: rotate(90deg) scale(0.6); }
+
+@media (hover: hover) {
+  .theme-toggle:hover { background: var(--burger-hover); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-toggle svg { transition: opacity 300ms var(--ease-out), transform 400ms var(--ease-out); }
+
+  /* Плавна зміна кольорів — лише на 300 мс під час перемикання (клас ставить theme.js),
+     щоб не заважати швидким hover-переходам у звичайному режимі */
+  .theme-anim,
+  .theme-anim *,
+  .theme-anim *::before,
+  .theme-anim *::after {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease !important;
+  }
+}
+
+/* ==========================================================================
    ФІНАЛЬНА ПОЛІРОВКА (mobile-first)
    ========================================================================== */
 /* Посилання «Перейти до вмісту»: з'являється тільки при фокусі з клавіатури */
@@ -2476,7 +2673,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   border-radius: 999px;
   background: var(--ink);
   font-weight: 600;
-  color: #fff;
+  color: var(--on-ink);
   transform: translateY(-200%);
 }
 
@@ -2504,7 +2701,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.05em;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .not-found__links {

@@ -6,6 +6,15 @@
 <title>Сайти з онлайн-записом для барбершопів, салонів і кав'ярень — веб-агенція | Івано-Франківськ</title>
 <meta name="description" content="Сайти з онлайн-записом для барбершопів, салонів краси, спа і кав'ярень. Від 15 000 ₴, запуск від 5 днів, оплата 50/50, гарантія місяць.">
 <meta name="theme-color" content="#ffffff">
+<script>
+  /* Тема — до першого малювання, щоб темна не «блимала» білим */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <!-- ⚠️ РЕЖИМ МАКЕТА. Сайт закритий від пошукових систем.
@@ -86,6 +95,10 @@
     </nav>
 
     <div class="header__aside">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Увімкнути темну тему" title="Увімкнути темну тему">
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 1011 11z"/></svg>
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>
+      </button>
       <a href="zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
       <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" id="burger">
         <span></span><span></span><span></span>
@@ -280,7 +293,8 @@
       <details open>
         <summary>Скільки коштує? <span class="faq__sign" aria-hidden="true"></span></summary>
         <div class="faq__a">
-          <p>«Лендинг із записом» — 15 000 ₴ + підтримка 6 000 ₴/міс. «Сайт закладу» — 25 000 ₴ + 15 000 ₴/міс. «Сайт із замовленнями» — 40 000 ₴ + 20 000 ₴/міс.</p>
+          <p>Розробка — разова оплата: «Лендинг із записом» — 15 000 ₴, «Сайт закладу» — 25 000 ₴, «Сайт із замовленнями» — 40 000 ₴.</p>
+          <p>Щомісячна підтримка — окрема послуга за бажанням: 6 000, 15 000 або 20 000 ₴/міс залежно від пакета. <a href="roboty/#pidtrymka">Що в неї входить</a>.</p>
           <p>Ціна фіксується в договорі до старту робіт і не змінюється, якщо не змінюється обсяг задачі. Оплата 50/50: половина на старті, половина після здачі.</p>
         </div>
       </details>
@@ -485,5 +499,6 @@
 <!-- Аналітика: GA4 / GTM / Meta Pixel / Google Ads.
      Впишіть ID у analytics.js — доти жоден запит не надсилається. -->
 <script src="analytics.js" defer></script>
+<script src="theme.js" defer></script>
 </body>
 </html>
