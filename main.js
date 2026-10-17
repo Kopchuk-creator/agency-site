@@ -56,22 +56,65 @@
     });
   }
 
-  /* ---------- 4. Поява елементів при скролі ---------- */
-  var revealEls = document.querySelectorAll('[data-reveal]');
+  /* ---------- 4. Поява блоків при скролі (fade-in-up) ---------- */
+  // Що анімуємо. Перший екран (.about) сюди не входить —
+  // у нього своя CSS-анімація при завантаженні.
+  var REVEAL_SELECTORS = [
+    '.section__head',
+    '.pain', '.step',                       // «Знайомо?», «Як працюємо»
+    '.faq-layout > *',
+    '.filters', '.work', '.pack',           // «Роботи та ціни»
+    '.term', '.terms__more', '.case-cta',
+    '.booking', '.owner',                   // «Запис і контакти»
+    '.contacts__list', '.formcard',
+    '[data-reveal]'
+  ].join(',');
+  var STAGGER_MS = 90;     // крок затримки між сусідніми картками
+  var STAGGER_MAX = 4;     // не більше 4 кроків — остання картка не «запізнюється»
 
-  if (reduceMotion || !('IntersectionObserver' in window)) {
-    // Без анімації — просто показуємо все
-    Array.prototype.forEach.call(revealEls, function (el) { el.classList.add('is-in'); });
-  } else {
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var revealEls = Array.prototype.filter.call(
+      document.querySelectorAll(REVEAL_SELECTORS),
+      function (el) {
+        // Те, що вже видно при завантаженні, не ховаємо — інакше воно «блимне»
+        return el.getBoundingClientRect().top > window.innerHeight;
+      }
+    );
+
+    revealEls.forEach(function (el) {
+      el.setAttribute('data-reveal', '');
+
+      // Stagger: номер елемента серед «братів», які теж з'являються
+      var siblings = Array.prototype.filter.call(el.parentElement.children, function (child) {
+        return revealEls.indexOf(child) !== -1;
+      });
+      var index = siblings.indexOf(el);
+      el.style.setProperty('--reveal-delay', Math.min(index, STAGGER_MAX) * STAGGER_MS + 'ms');
+    });
+
+    // Тепер CSS має право ховати блоки до появи
+    document.documentElement.classList.add('reveal-on');
+
     var revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-in');
-        revealObserver.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+        var el = entry.target;
+        el.classList.add('is-in');
+        revealObserver.unobserve(el);   // кожен блок з'являється один раз
 
-    Array.prototype.forEach.call(revealEls, function (el) { revealObserver.observe(el); });
+        // Після появи прибираємо атрибут: картки повертаються до своїх
+        // коротких переходів (hover), а не до повільних 800 мс появи
+        el.addEventListener('transitionend', function done(e) {
+          if (e.target !== el || e.propertyName !== 'transform') return;
+          el.removeAttribute('data-reveal');
+          el.classList.remove('is-in');
+          el.style.removeProperty('--reveal-delay');
+          el.removeEventListener('transitionend', done);
+        });
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
   }
 
   /* ---------- 5. Лічильники в кейсах ---------- */

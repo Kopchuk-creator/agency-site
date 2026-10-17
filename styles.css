@@ -73,6 +73,7 @@
   --dur: 220ms;
   --dur-lg: 380ms;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* швидкий старт, довге м'яке гальмування */
 
   /* Layout */
   --container: 1200px;
@@ -299,16 +300,31 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* Hover — тільки там, де є миша: на телефоні після дотику кнопка не «залипає» */
 @media (hover: hover) {
-  .btn:hover { transform: translateY(-2px); }
-  .btn:hover svg { transform: translateX(4px); }
-  .btn--primary:hover { --btn-bg: var(--accent-ink); box-shadow: 0 12px 30px rgba(0, 102, 255, 0.3); }
-  .btn--dark:hover { --btn-bg: #262626; box-shadow: var(--e-3); }
+  .btn--primary:hover { --btn-bg: var(--accent-ink); }
+  .btn--dark:hover { --btn-bg: #262626; }
   .btn--ghost:hover { --btn-bg: var(--bg-soft); border-color: var(--ink); }
   .section--dark .btn--ghost:hover { --btn-bg: #1c1c1c; border-color: #3a3a3a; }
 }
 
-/* Після hover, щоб натискання завжди «перемагало» */
-.btn:active { transform: translateY(0) scale(0.985); }
+/* Тінь при наведенні — окремий шар, який лише проявляється (opacity),
+   а не перемальовує box-shadow на кожному кадрі */
+.btn--primary::after,
+.btn--dark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 14px 32px rgba(0, 102, 255, 0.32);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn--dark::after { box-shadow: var(--e-3); }
+
+@media (hover: hover) {
+  .btn--primary:hover::after,
+  .btn--dark:hover::after { opacity: 1; }
+}
 
 .btn--lg { min-height: 60px; padding: 0 34px; font-size: 17px; }
 .btn--sm { min-height: 44px; padding: 0 18px; font-size: 15px; }
@@ -335,9 +351,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 @media (hover: hover) { .link:hover { background-size: 100% 1.5px; } }
 
 @keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(11, 138, 75, 0.45); }
-  70%  { box-shadow: 0 0 0 7px rgba(11, 138, 75, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(11, 138, 75, 0); }
+  from { transform: scale(1);   opacity: 0.55; }
+  to   { transform: scale(2.6); opacity: 0; }
 }
 
 /* ==========================================================================
@@ -511,7 +526,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   transition: transform 320ms var(--ease);
 }
 
-.burger:active { transform: scale(0.93); }
 @media (hover: hover) { .burger:hover { background: #f0f0f0; } }
 .burger[aria-expanded="true"]::before { transform: none; }
 
@@ -741,7 +755,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* Плашка з'являється з легкою затримкою — якщо анімації не вимкнені */
 @media (prefers-reduced-motion: no-preference) {
-  .about__toast { animation: toastIn 500ms 600ms var(--ease) backwards; }
+  .about__toast { animation: toastIn 600ms 1100ms var(--ease-out) backwards; }
 }
 
 @keyframes toastIn {
@@ -788,7 +802,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   background: var(--bg);
-  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  position: relative;
+  transition: border-color var(--dur) var(--ease);
 }
 
 .pack__for {
@@ -860,7 +875,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 @media (hover: hover) {
-  .pack:hover { border-color: var(--line-strong); box-shadow: var(--e-2); }
+  .pack:hover { border-color: var(--line-strong); }
 }
 
 /* Три картки в ряд — тільки там, де їм вистачає ширини */
@@ -994,14 +1009,14 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   background: var(--bg);
-  overflow: hidden;
-  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  transition: border-color var(--dur) var(--ease);
 }
 
 /* width/height в HTML + aspect-ratio тут = місце під картинку резервується
    ще до завантаження, і сторінка не «стрибає» */
 .work__img {
   display: block;
+  border-radius: calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0;   /* замість overflow: hidden у картки */
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 10;
@@ -1062,7 +1077,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .work__link:focus-visible { outline: none; }
 
 @media (hover: hover) {
-  .work:hover { border-color: var(--line-strong); box-shadow: var(--e-2); }
+  .work:hover { border-color: var(--line-strong); }
   .work:hover .work__link { text-decoration: underline; }
 }
 
@@ -1244,7 +1259,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: var(--ink-2);
   font-size: 16.5px;
   line-height: 1.6;
-  animation: fadeUp var(--dur-lg) var(--ease);
 }
 
 .faq__a p + p { margin-top: 12px; }
@@ -1499,8 +1513,18 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   height: 9px;
   border-radius: 50%;
   background: #43d787;
-  animation: pulse 2.4s var(--ease) infinite;
+  position: relative;
   flex: none;
+}
+
+/* Кільце, що розходиться від крапки (анімація — у блоці «Рух» нижче) */
+.callback__pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  opacity: 0;
 }
 
 /* Sticky mobile call bar */
@@ -1621,15 +1645,22 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* ==========================================================================
    SCROLL REVEAL
    ========================================================================== */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 620ms var(--ease), transform 620ms var(--ease);
-  transition-delay: var(--d, 0ms);
-  will-change: opacity, transform;
-}
+/* Ховаємо блок до появи лише коли: 1) JS увімкнув reveal (клас .reveal-on на <html>),
+   2) людина не вимкнула анімації. Без JS або з reduced motion усе видно одразу. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-on [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition:
+      opacity 800ms var(--ease-out) var(--reveal-delay, 0ms),
+      transform 800ms var(--ease-out) var(--reveal-delay, 0ms);
+  }
 
-[data-reveal].is-in { opacity: 1; transform: none; }
+  .reveal-on [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
 
 /* ==========================================================================
    ПАКЕТИ: ДОДАТКОВІ ЕЛЕМЕНТИ СТОРІНКИ ЦІН (mobile-first)
@@ -2066,7 +2097,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   box-shadow: var(--e-1);
   font-size: 14px;
   line-height: 1.5;
-  animation: fadeUp 400ms var(--ease);
 }
 
 .tg__title { margin-bottom: var(--s-1); font-weight: 700; }
@@ -2203,14 +2233,25 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* ==========================================================================
    МІКРОВЗАЄМОДІЇ ПІСЛЯ АУДИТУ (mobile-first)
    ========================================================================== */
-/* Картки тарифів і робіт м'яко піднімаються — тільки з мишею
-   і тільки якщо людина не вимкнула анімації в системі */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .pack:hover,
-  .work:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--e-3);
-  }
+/* Тінь карток при наведенні — окремий шар з opacity */
+.pack::after,
+.work::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: var(--e-3);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pack,
+.work { isolation: isolate; }   /* тінь з z-index: -1 лишається під карткою, а не під фоном секції */
+
+@media (hover: hover) {
+  .pack:hover::after,
+  .work:hover::after { opacity: 1; }
 }
 
 /* Рекомендований тариф: акцентна рамка + мітка над карткою */
@@ -2256,15 +2297,74 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    МІКРОВЗАЄМОДІЇ
    ========================================================================== */
 
-/* Плавна поява відкритої відповіді FAQ */
-.faq details[open] .faq__a > p {
-  animation: fadeUp 420ms var(--ease) backwards;
-}
-
-.faq details[open] .faq__a > p:nth-child(2) { animation-delay: 70ms; }
 
 /* Підкреслення заголовка секції, що «дописується» при появі */
 .section__head .h2 { position: relative; }
+
+/* ==========================================================================
+   РУХ (тільки transform і opacity, тільки якщо анімації не вимкнені)
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---------- Перший екран: поява по черзі при завантаженні ---------- */
+  .about__eyebrow,
+  .about__title,
+  .about__text,
+  .about__subtitle,
+  .about__audience,
+  .about__facts,
+  .about__actions {
+    animation: heroIn 900ms var(--ease-out) backwards;
+  }
+
+  .about__title    { animation-delay: 90ms; }
+  .about__text     { animation-delay: 180ms; }
+  .about__subtitle,
+  .about__audience { animation-delay: 270ms; }
+  .about__facts    { animation-delay: 360ms; }
+  .about__actions  { animation-delay: 450ms; }
+
+  /* Скріншот виїжджає трохи пізніше і з легким наближенням */
+  .about__visual { animation: heroVisualIn 1100ms 300ms var(--ease-out) backwards; }
+
+  /* ---------- Кнопки ---------- */
+  .btn--primary::after,
+  .btn--dark::after { transition: opacity var(--dur-lg) var(--ease-out); }
+
+  .btn:active { transform: translateY(0) scale(0.97); }
+  .burger:active { transform: scale(0.93); }
+
+  /* ---------- Картки ---------- */
+  .pack,
+  .work { transition: transform 400ms var(--ease-out), border-color var(--dur) var(--ease); }
+
+  .pack::after,
+  .work::after { transition: opacity 400ms var(--ease-out); }
+
+  /* ---------- Дрібні появи ---------- */
+  .faq details[open] .faq__a > p { animation: fadeUp 420ms var(--ease) backwards; }
+  .faq details[open] .faq__a > p:nth-child(2) { animation-delay: 70ms; }
+  .tg__msg { animation: fadeUp 400ms var(--ease); }
+  .callback__pulse::after { animation: pulse 2.4s var(--ease-out) infinite; }
+}
+
+/* Підйом при наведенні — тільки з мишею */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn:hover { transform: translateY(-2px); }
+  .btn:hover svg { transform: translateX(4px); }
+  .btn:active { transform: translateY(0) scale(0.97); }   /* після hover — натискання перемагає */
+
+  .pack:hover,
+  .work:hover { transform: translateY(-6px); }
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+}
+
+@keyframes heroVisualIn {
+  from { opacity: 0; transform: translate3d(0, 32px, 0) scale(0.97); }
+}
 
 /* ==========================================================================
    RESPONSIVE
@@ -2374,7 +2474,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
     scroll-behavior: auto !important;
   }
 
-  [data-reveal] { opacity: 1; transform: none; }
 }
 
 @media print {
