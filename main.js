@@ -299,7 +299,9 @@
 
       if (firstInvalid) {
         statusEl.removeAttribute('data-state');
-        firstInvalid.focus();
+        // Якщо select замінений кастомним списком — фокусуємо видиме поле
+        var visible = document.querySelector('[data-cselect-for="' + firstInvalid.id + '"]');
+        (visible || firstInvalid).focus();
         return;
       }
 

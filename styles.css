@@ -269,12 +269,21 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   font-weight: 550;
   letter-spacing: -0.01em;
   white-space: nowrap;
-  transition: transform var(--dur) var(--ease),
-              box-shadow var(--dur) var(--ease),
-              background-color var(--dur) var(--ease),
-              border-color var(--dur) var(--ease),
-              color var(--dur) var(--ease);
+  isolation: isolate;          /* шар ::before з z-index: -1 лягає над фоном кнопки, під текстом */
   touch-action: manipulation;
+}
+
+/* Темніший фон при наведенні — окремий шар, який лише проявляється (opacity).
+   Колір шару задає кожен варіант кнопки через --btn-hover-bg */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--btn-hover-bg, transparent);
+  opacity: 0;
+  pointer-events: none;
 }
 
 
@@ -282,14 +291,16 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .btn--primary {
   --btn-bg: var(--accent);
+  --btn-hover-bg: var(--accent-ink);
   box-shadow: var(--e-accent);
 }
 
-.btn--dark { --btn-bg: var(--ink); }
+.btn--dark { --btn-bg: var(--ink); --btn-hover-bg: #262626; }
 
 .btn--ghost {
   --btn-bg: transparent;
   --btn-fg: var(--ink);
+  --btn-hover-bg: var(--bg-soft);
   border: 1px solid var(--line-strong);
 }
 
@@ -299,11 +310,12 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 /* Hover — тільки там, де є миша: на телефоні після дотику кнопка не «залипає» */
+.section--dark .btn--ghost { --btn-hover-bg: #1c1c1c; }
+
 @media (hover: hover) {
-  .btn--primary:hover { --btn-bg: var(--accent-ink); }
-  .btn--dark:hover { --btn-bg: #262626; }
-  .btn--ghost:hover { --btn-bg: var(--bg-soft); border-color: var(--ink); }
-  .section--dark .btn--ghost:hover { --btn-bg: #1c1c1c; border-color: #3a3a3a; }
+  .btn:hover::before { opacity: 1; }
+  .btn--ghost:hover { border-color: var(--ink); }
+  .section--dark .btn--ghost:hover { border-color: #3a3a3a; }
 }
 
 /* Тінь при наведенні — окремий шар, який лише проявляється (opacity),
@@ -1155,11 +1167,32 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .step {
+  position: relative;
+  isolation: isolate;
   counter-increment: step;
   padding: var(--s-5);
   border: 1px solid var(--line-dark);
   border-radius: var(--r-lg);
   background: var(--bg-dark-2);
+}
+
+/* На темному фоні звичайна тінь не видна: підсвічуємо рамку
+   і даємо глибоку тінь — усе одним шаром, що проявляється через opacity */
+.step::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 24px 48px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .step:hover::after { opacity: 1; }
 }
 
 .step::before {
@@ -2278,17 +2311,20 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: #fff;
 }
 
-/* Кроки віджета змінюються плавно: легкий виїзд справа */
+/* Кроки віджета: старий крок м'яко зникає, новий з'являється знизу.
+   Класи ставить demo.js; без анімацій кроки просто перемикаються */
 @media (prefers-reduced-motion: no-preference) {
-  .bstep:not([hidden]),
-  .booking__done:not([hidden]) {
-    animation: stepIn 280ms var(--ease);
-  }
+  .booking .is-entering { animation: stepEnter 340ms var(--ease-out) both; }
+  .booking .is-leaving  { animation: stepLeave 160ms ease-in both; }
 }
 
-@keyframes stepIn {
-  from { opacity: 0; transform: translateX(12px); }
+@keyframes stepEnter {
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
+}
+
+@keyframes stepLeave {
+  to { opacity: 0; transform: translateY(-8px); }
 }
 
 /* Дні прокручуються: згасання на правому краї підказує, що далі є ще */
@@ -2304,6 +2340,128 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* Підкреслення заголовка секції, що «дописується» при появі */
 .section__head .h2 { position: relative; }
+
+/* ==========================================================================
+   КАСТОМНИЙ SELECT (mobile-first)
+   ========================================================================== */
+/* Оригінальний <select> лишається у формі, але його не видно */
+.cselect__native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cselect { position: relative; }
+
+/* Поле виглядає так само, як інші поля форми */
+.cselect__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 44px 0 15px;
+  border: 1px solid var(--line-input);
+  border-radius: var(--r-sm);
+  background: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cselect__control.is-placeholder .cselect__value { color: var(--ink-2); }
+
+/* Стрілка-«галочка»: повертається через transform */
+.cselect__control::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 8px;
+  height: 8px;
+  margin-top: -6px;
+  border-right: 2px solid var(--ink-2);
+  border-bottom: 2px solid var(--ink-2);
+  transform: rotate(45deg);
+}
+
+.cselect.is-open .cselect__control::after { transform: translateY(4px) rotate(-135deg); }
+
+.cselect__control:focus,
+.cselect.is-open .cselect__control {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.14);
+}
+
+.field.is-invalid .cselect__control { border-color: #c02626; }
+
+@media (hover: hover) {
+  .cselect__control:hover { border-color: var(--ink-2); }
+}
+
+/* Список: випадає під полем, поверх решти форми */
+.cselect__list {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  left: 0;
+  z-index: 20;
+  max-height: 288px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: #fff;
+  box-shadow: var(--e-3);
+}
+
+.cselect__list[hidden] { display: none; }
+
+.cselect__option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 44px;              /* зручна зона дотику */
+  padding: 10px 40px 10px 12px;
+  border-radius: var(--r-sm);
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+/* Підсвічений пункт (стрілки або курсор) */
+.cselect__option.is-active { background: var(--bg-soft); }
+
+/* Вибраний пункт: колір + жирність + галочка — не лише колір */
+.cselect__option[aria-selected="true"] {
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+
+.cselect__option[aria-selected="true"]::after {
+  content: "✓";
+  content: "✓" / "";
+  position: absolute;
+  right: 14px;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cselect__control::after { transition: transform 200ms var(--ease-out); }
+  .cselect.is-open .cselect__list { animation: cselectIn 180ms var(--ease-out); }
+}
+
+@keyframes cselectIn {
+  from { opacity: 0; transform: translateY(-6px); }
+}
 
 /* ==========================================================================
    ФІНАЛЬНА ПОЛІРОВКА (mobile-first)
@@ -2412,10 +2570,12 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .about__visual { animation: heroVisualIn 1100ms 300ms var(--ease-out) backwards; }
 
   /* ---------- Кнопки ---------- */
+  .btn { transition: transform 300ms ease-out; }
+  .btn::before,
   .btn--primary::after,
-  .btn--dark::after { transition: opacity var(--dur-lg) var(--ease-out); }
+  .btn--dark::after { transition: opacity 300ms ease-out; }
 
-  .btn:active { transform: translateY(0) scale(0.97); }
+  .btn:active { transform: scale(0.97); }
   .burger:active { transform: scale(0.93); }
 
   /* ---------- Картки ---------- */
@@ -2423,7 +2583,10 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .work { transition: transform 400ms var(--ease-out), border-color var(--dur) var(--ease); }
 
   .pack::after,
-  .work::after { transition: opacity 400ms var(--ease-out); }
+  .work::after,
+  .step::after { transition: opacity 400ms var(--ease-out); }
+
+  .step { transition: transform 400ms var(--ease-out); }
 
   /* ---------- Дрібні появи ---------- */
   .faq details[open] .faq__a > p { animation: fadeUp 420ms var(--ease) backwards; }
@@ -2434,12 +2597,13 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* Підйом при наведенні — тільки з мишею */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .btn:hover { transform: translateY(-2px); }
+  .btn:hover { transform: scale(1.03); }
   .btn:hover svg { transform: translateX(4px); }
-  .btn:active { transform: translateY(0) scale(0.97); }   /* після hover — натискання перемагає */
+  .btn:active { transform: scale(0.97); }   /* після hover — натискання перемагає */
 
   .pack:hover,
-  .work:hover { transform: translateY(-6px); }
+  .work:hover,
+  .step:hover { transform: translateY(-6px); }
 }
 
 @keyframes heroIn {

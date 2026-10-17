@@ -26,6 +26,9 @@
   var TG_EMPTY = tgBody.innerHTML;     // запам'ятовуємо, щоб повернути при «Пройти ще раз»
 
   var current = 0;                     // індекс поточного кроку: 0, 1, 2
+  var switching = false;               // поки йде перехід, повторні кліки ігноруємо
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var LEAVE_MS = 160;                  // = тривалість stepLeave у CSS
 
   /* ---------- Допоміжне ---------- */
   function checked(name) {
@@ -128,11 +131,51 @@
     }
   });
 
-  /* ---------- Перемикання кроків через hidden ---------- */
-  function showStep(index) {
-    current = index;
-    steps.forEach(function (step, i) { step.hidden = i !== index; });
+  /* ---------- Плавна заміна одного блоку іншим ----------
+     1) старий блок отримує .is-leaving і зникає (opacity + transform);
+     2) після цього ховаємо його атрибутом hidden;
+     3) новий блок показуємо і даємо .is-entering — він виїжджає знизу.
+     Без анімацій (reduced motion) просто міняємо hidden. */
+  function enter(el) {
+    el.hidden = false;
+    if (reduceMotion) return;
+    el.classList.remove('is-entering');
+    void el.offsetWidth;                // перезапуск анімації, якщо клас уже був
+    el.classList.add('is-entering');
+  }
 
+  function swap(fromEl, toEl, after) {
+    if (!fromEl || fromEl === toEl || reduceMotion) {
+      if (fromEl && fromEl !== toEl) fromEl.hidden = true;
+      enter(toEl);
+      after();
+      return;
+    }
+
+    switching = true;
+    var done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      fromEl.classList.remove('is-leaving', 'is-entering');
+      fromEl.hidden = true;
+      enter(toEl);
+      switching = false;
+      after();
+    }
+
+    fromEl.classList.remove('is-entering');
+    fromEl.classList.add('is-leaving');
+    fromEl.addEventListener('animationend', function onEnd(e) {
+      if (e.target !== fromEl) return;  // анімації вкладених елементів ігноруємо
+      fromEl.removeEventListener('animationend', onEnd);
+      finish();
+    });
+    setTimeout(finish, LEAVE_MS + 80);  // страховка, якщо animationend не прийде
+  }
+
+  // Смужки прогресу й кнопки під поточний крок
+  function updateChrome(index) {
     dots.forEach(function (dot, i) {
       dot.classList.toggle('is-done', i < index);
       if (i === index) dot.setAttribute('aria-current', 'step');
@@ -142,16 +185,25 @@
     backBtn.hidden = index === 0;
     nextBtn.textContent = index === steps.length - 1 ? 'Записатись' : 'Далі';
     errorEl.textContent = '';
+  }
 
+  /* ---------- Перемикання кроків ---------- */
+  function showStep(index) {
+    var fromEl = steps[current];
+    current = index;
+    updateChrome(index);
     if (index === 2) { renderDays(); renderSlots(); }
 
-    // Фокус на заголовок кроку — скрінрідер одразу зачитає, де ми
-    steps[index].querySelector('.bstep__title').focus();
+    swap(fromEl, steps[index], function () {
+      // Фокус на заголовок кроку — скрінрідер одразу зачитає, де ми
+      steps[index].querySelector('.bstep__title').focus();
+    });
   }
 
   // «Далі» — це submit: так працює і клік, і Enter з клавіатури
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (switching) return;
     var required = ['service', 'master', 'time'][current];
     if (!checked(required)) {
       errorEl.textContent = ERRORS[current];
@@ -162,6 +214,7 @@
   });
 
   backBtn.addEventListener('click', function () {
+    if (switching) return;
     if (current > 0) showStep(current - 1);
   });
 
@@ -211,23 +264,31 @@
     tgBody.textContent = '';
     tgBody.appendChild(msg);
 
-    // Ховаємо форму, показуємо екран успіху
-    form.hidden = true;
+    // Форма плавно зникає, екран успіху виїжджає
     dots.forEach(function (dot) {
       dot.classList.add('is-done');
       dot.removeAttribute('aria-current');
     });
-    doneEl.hidden = false;
-    doneEl.focus();
+    swap(form, doneEl, function () { doneEl.focus(); });
   }
 
   restartBtn.addEventListener('click', function () {
+    if (switching) return;
     form.reset();
     daysEl.textContent = '';
     slotsEl.textContent = '';
     tgBody.innerHTML = TG_EMPTY;
-    doneEl.hidden = true;
-    form.hidden = false;
-    showStep(0);
+
+    // Поки форма прихована, без анімації повертаємо її на перший крок
+    steps.forEach(function (step, i) {
+      step.hidden = i !== 0;
+      step.classList.remove('is-entering', 'is-leaving');
+    });
+    current = 0;
+    updateChrome(0);
+
+    swap(doneEl, form, function () {
+      steps[0].querySelector('.bstep__title').focus();
+    });
   });
 })();
