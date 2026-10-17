@@ -109,36 +109,53 @@
 
 <!-- ═══════════════════════ ЕКРАН 1 — ПРО НАС ═══════════════════════ -->
 <section class="about" id="pro-nas" aria-labelledby="about-title">
-  <div class="container">
-    <p class="about__eyebrow">Веб-студія з Івано-Франківська</p>
+  <div class="container about__grid">
+    <div class="about__content">
+      <p class="about__eyebrow">Веб-студія з Івано-Франківська</p>
 
-    <h1 class="about__title" id="about-title">
-      Робимо сайти з онлайн-записом для малого бізнесу
-    </h1>
+      <h1 class="about__title" id="about-title">
+        Робимо сайти з онлайн-записом для малого бізнесу
+      </h1>
 
-    <p class="about__text">
-      Проєктуємо, верстаємо і підтримуємо сайти, через які клієнти записуються самі —
-      без дзвінків і листування в директі.
-    </p>
+      <p class="about__text">
+        Проєктуємо, верстаємо і підтримуємо сайти, через які клієнти записуються самі —
+        без дзвінків і листування в директі.
+      </p>
 
-    <h2 class="about__subtitle">Для кого працюємо</h2>
-    <ul class="about__audience">
-      <li>Барбершопи</li>
-      <li>Салони краси</li>
-      <li>Масаж і спа</li>
-      <li>Кав'ярні й ресторани</li>
-    </ul>
+      <h2 class="about__subtitle">Для кого працюємо</h2>
+      <ul class="about__audience">
+        <li>Барбершопи</li>
+        <li>Салони краси</li>
+        <li>Масаж і спа</li>
+        <li>Кав'ярні й ресторани</li>
+      </ul>
 
-    <ul class="about__facts">
-      <li><strong>4</strong> живі сайти в портфоліо</li>
-      <li><strong>від 5 днів</strong> до запуску</li>
-      <li><strong>1 місяць</strong> гарантії</li>
-    </ul>
+      <ul class="about__facts">
+        <li><strong>4</strong> живі сайти в портфоліо</li>
+        <li><strong>від 5 днів</strong> до запуску</li>
+        <li><strong>1 місяць</strong> гарантії</li>
+      </ul>
 
-    <div class="about__actions">
-      <a href="zapys/" class="btn btn--primary btn--lg">Спробувати онлайн-запис</a>
-      <a href="roboty/" class="btn btn--ghost btn--lg">Роботи і ціни</a>
+      <div class="about__actions">
+        <a href="zapys/" class="btn btn--primary btn--lg">Спробувати онлайн-запис</a>
+        <a href="roboty/" class="btn btn--ghost btn--lg">Роботи і ціни</a>
+      </div>
     </div>
+
+    <!-- Візуал: скріншот реальної роботи у «вікні браузера» + ілюстрація сповіщення -->
+    <figure class="about__visual">
+      <div class="about__frame">
+        <img src="img/works/barber-shop.webp" width="1280" height="800" fetchpriority="high"
+             alt="Головна сторінка сайту барбершопу BRUTAL CUT з кнопкою онлайн-запису">
+      </div>
+      <div class="about__toast" aria-hidden="true">
+        <span class="about__toast-title">🔔 Новий запис</span>
+        <span>Стрижка + борода · сьогодні, 17:00</span>
+      </div>
+      <figcaption class="about__caption">
+        BRUTAL CUT — одна з наших робіт. <a href="roboty/#roboty">Усі роботи →</a>
+      </figcaption>
+    </figure>
   </div>
 </section>
 

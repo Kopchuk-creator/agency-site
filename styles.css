@@ -30,6 +30,19 @@
   /* Lines */
   --line: #e8e8e8;
   --line-strong: #d4d4d4;
+  --line-input: #8a8a8a;   /* рамки полів і карток вибору: 3.4:1 на білому (WCAG 1.4.11) */
+
+  /* Шкала заголовків: мінімум — телефон, максимум — десктоп, між ними плавно.
+     Кожен рівень помітно менший за попередній: 64 → 56 → 44 → 24 → 18 */
+  --fs-display: clamp(34px, 4.4vw + 4px, 64px);  /* головний заголовок першого екрана */
+  --fs-h1: clamp(32px, 5vw, 56px);         /* H1 внутрішніх сторінок */
+  --fs-h2: clamp(26px, 3.6vw, 44px);       /* заголовки секцій */
+  --fs-h3: clamp(20px, 1.6vw, 24px);       /* заголовки карток */
+  --fs-h4: 18px;
+
+  /* Ритм сторінки: один відступ між секціями на всіх сторінках */
+  --section-y: clamp(56px, 8vw, 104px);
+  --head-gap: clamp(32px, 4vw, 56px);      /* від заголовка секції до її вмісту */
   --line-dark: #262626;
 
   /* Radius */
@@ -135,31 +148,29 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* ---------- Typography ---------- */
 .h1 {
-  /* Розмір узгоджений з шириною текстової колонки: за 96px заголовок
-     ламався на 6 куцих рядків і втрачав силу. */
-  font-size: clamp(38px, 5.4vw, 76px);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
+  font-size: var(--fs-h1);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
   font-weight: 640;
   text-wrap: balance;
 }
 
 .h2 {
-  font-size: clamp(32px, 4.6vw, 60px);
-  line-height: 1.04;
+  font-size: var(--fs-h2);
+  line-height: 1.1;
   letter-spacing: -0.035em;
   font-weight: 620;
 }
 
 .h3 {
-  font-size: clamp(21px, 2.2vw, 28px);
-  line-height: 1.2;
+  font-size: var(--fs-h3);
+  line-height: 1.25;
   letter-spacing: -0.02em;
   font-weight: 600;
 }
 
 .h4 {
-  font-size: 19px;
+  font-size: var(--fs-h4);
   line-height: 1.3;
   letter-spacing: -0.015em;
   font-weight: 600;
@@ -203,7 +214,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .section {
-  padding-block: clamp(64px, 9vw, 128px);
+  padding-block: var(--section-y);
   position: relative;
 }
 
@@ -220,7 +231,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .section__head {
   max-width: 780px;
-  margin-bottom: clamp(40px, 5vw, 72px);
+  margin-bottom: var(--head-gap);
 }
 
 .section__head .h2 { margin-block: var(--s-4) var(--s-4); }
@@ -265,33 +276,39 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   touch-action: manipulation;
 }
 
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(0) scale(0.985); }
 
 .btn svg { transition: transform var(--dur) var(--ease); flex: none; }
-.btn:hover svg { transform: translateX(4px); }
 
 .btn--primary {
   --btn-bg: var(--accent);
   box-shadow: var(--e-accent);
 }
-.btn--primary:hover { --btn-bg: var(--accent-ink); box-shadow: 0 12px 30px rgba(0, 102, 255, 0.3); }
 
 .btn--dark { --btn-bg: var(--ink); }
-.btn--dark:hover { --btn-bg: #262626; box-shadow: var(--e-3); }
 
 .btn--ghost {
   --btn-bg: transparent;
   --btn-fg: var(--ink);
   border: 1px solid var(--line-strong);
 }
-.btn--ghost:hover { --btn-bg: var(--bg-soft); border-color: var(--ink); }
 
 .section--dark .btn--ghost {
   --btn-fg: #fff;
   border-color: var(--line-dark);
 }
-.section--dark .btn--ghost:hover { --btn-bg: #1c1c1c; border-color: #3a3a3a; }
+
+/* Hover — тільки там, де є миша: на телефоні після дотику кнопка не «залипає» */
+@media (hover: hover) {
+  .btn:hover { transform: translateY(-2px); }
+  .btn:hover svg { transform: translateX(4px); }
+  .btn--primary:hover { --btn-bg: var(--accent-ink); box-shadow: 0 12px 30px rgba(0, 102, 255, 0.3); }
+  .btn--dark:hover { --btn-bg: #262626; box-shadow: var(--e-3); }
+  .btn--ghost:hover { --btn-bg: var(--bg-soft); border-color: var(--ink); }
+  .section--dark .btn--ghost:hover { --btn-bg: #1c1c1c; border-color: #3a3a3a; }
+}
+
+/* Після hover, щоб натискання завжди «перемагало» */
+.btn:active { transform: translateY(0) scale(0.985); }
 
 .btn--lg { min-height: 60px; padding: 0 34px; font-size: 17px; }
 .btn--sm { min-height: 44px; padding: 0 18px; font-size: 15px; }
@@ -315,7 +332,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   background-position: 0 100%;
   transition: background-size var(--dur) var(--ease);
 }
-.link:hover { background-size: 100% 1.5px; }
+@media (hover: hover) { .link:hover { background-size: 100% 1.5px; } }
 
 @keyframes pulse {
   0%   { box-shadow: 0 0 0 0 rgba(11, 138, 75, 0.45); }
@@ -368,7 +385,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .topbar__phone svg { color: var(--accent); flex: none; }
-.topbar__phone:hover { color: var(--accent); }
+@media (hover: hover) { .topbar__phone:hover { color: var(--accent); } }
 
 /* На вужчих екранах лишаємо головне: гарантію і телефон */
 @media (max-width: 860px) {
@@ -449,8 +466,9 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
 }
 
-.nav__link:hover { color: var(--ink); background: var(--bg-soft); }
-.nav__link[aria-current="true"] { color: var(--ink); font-weight: 550; }
+@media (hover: hover) { .nav__link:hover { color: var(--ink); background: var(--bg-soft); } }
+/* aria-current="page" — поточна сторінка, "true" — секція, яку підсвічує скрол */
+.nav__link[aria-current] { color: var(--ink); font-weight: 550; background: var(--bg-soft); }
 
 .header__aside {
   display: flex;
@@ -494,7 +512,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .burger:active { transform: scale(0.93); }
-.burger:hover { background: #f0f0f0; }
+@media (hover: hover) { .burger:hover { background: #f0f0f0; } }
 .burger[aria-expanded="true"]::before { transform: none; }
 
 .burger span {
@@ -557,6 +575,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   border-bottom: 1px solid var(--line);
 }
 
+.mobile-menu a.mobile-menu__link[aria-current] { color: var(--accent-ink); }
+
 .mobile-menu__foot { margin-top: var(--s-6); display: grid; gap: var(--s-3); }
 
 /* ==========================================================================
@@ -574,10 +594,10 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: var(--accent-ink);
 }
 
-/* clamp: на телефоні 32px, далі росте з шириною екрана до 64px */
+/* Найбільший заголовок сайту — тільки на першому екрані головної */
 .about__title {
   max-width: 18ch;
-  font-size: clamp(32px, 8vw, 64px);
+  font-size: var(--fs-display);
   font-weight: 640;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -650,6 +670,85 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   margin-top: var(--s-6);
 }
 
+/* ---------- Візуал першого екрана ---------- */
+/* Телефон: текст, під ним скріншот. Десктоп: дві колонки (див. медіа-запит нижче) */
+.about__grid {
+  display: grid;
+  gap: var(--s-8);
+}
+
+.about__visual {
+  position: relative;
+  margin: 0;
+}
+
+/* «Вікно браузера»: смужка з трьома крапками малюється градієнтами, без зайвого HTML */
+.about__frame {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  box-shadow: var(--e-3);
+}
+
+.about__frame::before {
+  content: "";
+  display: block;
+  height: 28px;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(circle, #d4d4d4 4px, transparent 4.5px) 14px 50% / 14px 14px no-repeat,
+    radial-gradient(circle, #d4d4d4 4px, transparent 4.5px) 30px 50% / 14px 14px no-repeat,
+    radial-gradient(circle, #d4d4d4 4px, transparent 4.5px) 46px 50% / 14px 14px no-repeat,
+    var(--bg-soft);
+}
+
+.about__frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Плашка-сповіщення поверх скріншота: показує, що отримує власник */
+.about__toast {
+  position: absolute;
+  left: var(--s-3);
+  bottom: 40px;
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: 14px 14px 14px 4px;
+  background: var(--bg);
+  box-shadow: var(--e-3);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.about__toast-title { font-weight: 700; color: var(--ink); }
+
+.about__caption {
+  margin-top: var(--s-4);
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.about__caption a {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Плашка з'являється з легкою затримкою — якщо анімації не вимкнені */
+@media (prefers-reduced-motion: no-preference) {
+  .about__toast { animation: toastIn 500ms 600ms var(--ease) backwards; }
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
 /* Планшет: більші цифри, кнопки поруч */
 @media (min-width: 600px) {
   .about__facts        { gap: var(--s-4); font-size: 15px; }
@@ -657,9 +756,19 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .about__actions      { flex-direction: row; }
 }
 
-/* Десктоп: більше повітря */
+/* Десктоп: текст і скріншот поруч, більше повітря */
 @media (min-width: 1024px) {
   .about { padding-block: var(--s-10) var(--s-9); }
+
+  .about__grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: center;
+  }
+
+  .about__toast {
+    left: calc(var(--s-6) * -1);   /* плашка трохи виходить за край вікна */
+    bottom: 64px;
+  }
 }
 
 /* ==========================================================================
@@ -679,7 +788,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   background: var(--bg);
-  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
 .pack__for {
@@ -692,7 +801,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .pack__title {
   margin-top: var(--s-2);
-  font-size: 22px;
+  font-size: var(--fs-h3);
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -822,7 +931,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .pain__title {
-  font-size: 18px;
+  font-size: var(--fs-h4);
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.01em;
@@ -886,7 +995,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   border-radius: var(--r-lg);
   background: var(--bg);
   overflow: hidden;
-  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
 /* width/height в HTML + aspect-ratio тут = місце під картинку резервується
@@ -918,7 +1027,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .work__title {
   margin-top: var(--s-2);
-  font-size: 22px;
+  font-size: var(--fs-h3);
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -1051,7 +1160,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .step__title {
-  font-size: 20px;
+  font-size: var(--fs-h3);
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -1104,7 +1213,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary:hover { color: var(--accent); }
+@media (hover: hover) { .faq summary:hover { color: var(--accent); } }
 
 .faq__sign {
   position: relative;
@@ -1187,7 +1296,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   width: 100%;
   min-height: 52px;
   padding: 0 15px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--line-input);
   border-radius: var(--r-sm);
   background: #fff;
   font-size: 16px;
@@ -1210,9 +1319,11 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   cursor: pointer;
 }
 
-.field input:hover,
-.field select:hover,
-.field textarea:hover { border-color: var(--ink-3); }
+@media (hover: hover) {
+  .field input:hover,
+  .field select:hover,
+  .field textarea:hover { border-color: var(--ink-2); }
+}
 
 .field input:focus,
 .field select:focus,
@@ -1237,7 +1348,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); }
 .field-row .field { margin-bottom: var(--s-4); }
 
-.form__legal { font-size: 12.5px; color: var(--ink-3); line-height: 1.5; margin-top: var(--s-3); }
+.form__legal { font-size: 13px; color: var(--ink-2); line-height: 1.5; margin-top: var(--s-3); }
 .form__legal a { text-decoration: underline; text-underline-offset: 2px; }
 
 .form__status {
@@ -1334,7 +1445,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   min-height: 24px;
 }
 
-.footer__col a:hover { color: #fff; }
+@media (hover: hover) { .footer__col a:hover { color: #fff; } }
 
 .footer__bottom {
   padding-top: var(--s-5);
@@ -1348,7 +1459,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .footer__legal { display: flex; flex-wrap: wrap; gap: var(--s-4); }
-.footer__legal a:hover { color: #fff; }
+@media (hover: hover) { .footer__legal a:hover { color: #fff; } }
 
 .footer__req {
   margin-top: var(--s-5);
@@ -1381,7 +1492,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .callback.is-visible { transform: none; }
-.callback:hover { background: var(--accent); }
+@media (hover: hover) { .callback:hover { background: var(--accent); } }
 
 .callback__pulse {
   width: 9px;
@@ -1417,7 +1528,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    ВНУТРІШНІ СТОРІНКИ (роботи, запис, юридичні)
    ========================================================================== */
 .page {
-  padding-block: clamp(48px, 6vw, 88px) clamp(56px, 8vw, 112px);
+  padding-block: clamp(32px, 5vw, 64px) var(--section-y);
 }
 
 .page__head {
@@ -1427,7 +1538,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   border-bottom: 1px solid var(--line);
 }
 
-.page__head .h1 { font-size: clamp(32px, 5vw, 54px); margin-block: var(--s-4) var(--s-3); }
+.page__head .h1 { margin-block: var(--s-4) var(--s-3); }
 .page__date { font-size: 14.5px; color: var(--ink-3); }
 
 .crumbs {
@@ -1441,8 +1552,9 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .crumbs a { min-height: 44px; display: inline-flex; align-items: center; }
-.crumbs a:hover { color: var(--accent); }
-.crumbs span { color: var(--line-strong); }
+@media (hover: hover) { .crumbs a:hover { color: var(--accent); } }
+.crumbs span { color: var(--line-strong); }          /* роздільник «/» */
+.crumbs span:last-child { color: var(--ink-2); }      /* поточна сторінка: 5.7:1 */
 
 /* Текстовий блок: комфортна довжина рядка, чіткі рівні заголовків */
 .prose {
@@ -1542,7 +1654,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    УМОВИ СПІВПРАЦІ ТА ГАРАНТІЯ (mobile-first)
    ========================================================================== */
 .terms {
-  margin-top: clamp(56px, 8vw, 104px);
+  margin-top: var(--section-y);
   scroll-margin-top: calc(var(--header-h) + var(--s-4));
 }
 
@@ -1562,7 +1674,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .term__title {
-  font-size: 20px;
+  font-size: var(--fs-h3);
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -1723,7 +1835,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   gap: var(--s-3);
   min-height: 60px;
   padding: var(--s-3) var(--s-4);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-input);
   border-radius: var(--r-md);
   cursor: pointer;
   transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
@@ -1756,9 +1868,30 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .option__price { font-weight: 600; white-space: nowrap; }
 
+/* Вибраний варіант: колір + товща рамка (inset-тінь) + значок ✓ —
+   помітно й тим, хто погано розрізняє кольори */
 .option:has(input:checked) {
   border-color: var(--accent);
   background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.option:has(input:checked)::after {
+  content: "✓";
+  content: "✓" / "";
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  pointer-events: none;
 }
 
 .option:has(input:focus-visible),
@@ -1768,7 +1901,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 @media (hover: hover) {
-  .option:hover { border-color: var(--line-strong); }
+  .option:hover { border-color: var(--ink-2); }
 }
 
 /* ---------- Чипи: дні й години ---------- */
@@ -1798,7 +1931,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   align-items: center;
   min-height: 44px;
   padding-inline: var(--s-4);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-input);
   border-radius: 999px;
   font-size: 15px;
   font-weight: 500;
@@ -1997,9 +2130,12 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    ========================================================================== */
 /* Великий розділ сторінки: «Наші роботи», «Ціни» */
 .page-block {
-  margin-top: clamp(48px, 7vw, 88px);
+  margin-top: var(--section-y);
   scroll-margin-top: calc(var(--header-h) + var(--s-4));
 }
+
+/* Перший блок одразу під заголовком сторінки: відступ уже дає --head-gap */
+.section__head + .page-block { margin-top: 0; }
 
 .page-block__lead { margin-block: var(--s-3) var(--s-6); }
 
@@ -2007,7 +2143,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    КОНТАКТИ І ФОРМА (mobile-first)
    ========================================================================== */
 .contacts {
-  margin-top: clamp(56px, 8vw, 104px);
+  margin-top: var(--section-y);
   scroll-margin-top: calc(var(--header-h) + var(--s-4));
 }
 
@@ -2062,6 +2198,58 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
     gap: var(--s-8);
     align-items: start;
   }
+}
+
+/* ==========================================================================
+   МІКРОВЗАЄМОДІЇ ПІСЛЯ АУДИТУ (mobile-first)
+   ========================================================================== */
+/* Картки тарифів і робіт м'яко піднімаються — тільки з мишею
+   і тільки якщо людина не вимкнула анімації в системі */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pack:hover,
+  .work:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--e-3);
+  }
+}
+
+/* Рекомендований тариф: акцентна рамка + мітка над карткою */
+.pack--featured {
+  position: relative;
+  border-color: var(--accent);
+  box-shadow: var(--e-accent);
+}
+
+.pack--featured::before {
+  content: "Рекомендуємо";
+  position: absolute;
+  top: -12px;
+  left: var(--s-5);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Кроки віджета змінюються плавно: легкий виїзд справа */
+@media (prefers-reduced-motion: no-preference) {
+  .bstep:not([hidden]),
+  .booking__done:not([hidden]) {
+    animation: stepIn 280ms var(--ease);
+  }
+}
+
+@keyframes stepIn {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Дні прокручуються: згасання на правому краї підказує, що далі є ще */
+.chips--days {
+  -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+  mask-image: linear-gradient(to right, #000 85%, transparent);
 }
 
 /* ==========================================================================
@@ -2136,12 +2324,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
   body { font-size: 16.5px; line-height: 1.55; }
 
-  /* Типографіка: щільніше, ніж на десктопі — інакше один абзац з'їдає екран */
-  .h1 { font-size: clamp(34px, 9.4vw, 42px); line-height: 1.04; letter-spacing: -0.035em; }
-  .h2 { font-size: clamp(26px, 7.4vw, 32px); line-height: 1.1; letter-spacing: -0.03em; }
-  .h3 { font-size: 20px; }
+  /* Заголовки й відступи секцій тепер задані токенами --fs-* і --head-gap */
   .lead { font-size: 16.5px; line-height: 1.5; }
-  .section__head { margin-bottom: var(--s-6); }
   .eyebrow { font-size: 12px; }
 
   /* Кнопки: дозволяємо перенос, інакше довгий текст розпирає макет */
@@ -2166,7 +2350,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* ══════════════════ МАЛИЙ ТЕЛЕФОН (≤380px) ══════════════════ */
 @media (max-width: 380px) {
   :root { --gutter: 16px; }
-  .h1 { font-size: 32px; }
 }
 
 /* ══════════════ ЛАНДШАФТНА ОРІЄНТАЦІЯ ТЕЛЕФОНА ══════════════ */
