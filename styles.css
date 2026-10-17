@@ -734,17 +734,28 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: var(--ink);
 }
 
+/* Hero: планшет */
+@media (min-width: 600px) {
+  .hero__actions { flex-direction: row; }
+  .hero__facts   { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Hero: десктоп */
+@media (min-width: 1024px) {
+  .hero { padding-block: var(--s-10) var(--s-9); }
+}
+
 /* ==========================================================================
-   SCREEN 2 — NICHES (mobile-first)
+   SCREEN 2 — PACKAGES (mobile-first)
    ========================================================================== */
-.niches__grid {
+.packages {
   display: grid;
   gap: var(--s-4);
   padding: 0;
   list-style: none;
 }
 
-.niche-card {
+.pack {
   display: flex;
   flex-direction: column;
   padding: var(--s-5);
@@ -754,34 +765,76 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
-.niche-card__title {
-  font-size: 20px;
+.pack__for {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.pack__title {
+  margin-top: var(--s-2);
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
-.niche-card__text {
-  margin-top: var(--s-2);
-  line-height: 1.5;
-  color: var(--ink-2);
-}
-
-.niche-card__price {
-  margin-top: auto;            /* притискає ціну до низу картки */
-  padding-top: var(--s-5);
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.niche-card__price span {
-  display: block;
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--ink-2);
-}
-
-.niche-card__link {
+.pack__price {
   margin-top: var(--s-4);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.pack__meta {
+  margin-top: var(--s-2);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.pack__list {
+  display: grid;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+  padding: 0;
+  list-style: none;
+}
+
+.pack__list li {
+  position: relative;
+  padding-left: 26px;
+  line-height: 1.45;
+}
+
+/* Галочка — декоративна, скрінрідер її пропускає */
+.pack__list li::before {
+  content: "✓";
+  content: "✓" / "";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* margin-top: auto притискає приклад і посилання до низу —
+   у всіх трьох картках вони стоять на одній лінії */
+.pack__example {
+  margin-top: auto;
+  padding-top: var(--s-5);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.pack__example a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pack__link {
+  margin-top: var(--s-3);
   font-size: 15px;
   font-weight: 600;
   color: var(--accent-ink);
@@ -789,21 +842,13 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 @media (hover: hover) {
-  .niche-card:hover { border-color: var(--line-strong); box-shadow: var(--e-2); }
-  .niche-card__link:hover { text-decoration: underline; }
+  .pack:hover { border-color: var(--line-strong); box-shadow: var(--e-2); }
+  .pack__link:hover { text-decoration: underline; }
 }
 
-/* Планшет */
-@media (min-width: 600px) {
-  .hero__actions { flex-direction: row; }
-  .hero__facts   { grid-template-columns: repeat(3, 1fr); }
-  .niches__grid  { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* Десктоп */
-@media (min-width: 1024px) {
-  .hero { padding-block: var(--s-10) var(--s-9); }
-  .niches__grid { grid-template-columns: repeat(4, 1fr); }
+/* Три картки в ряд — тільки там, де їм вистачає ширини */
+@media (min-width: 900px) {
+  .packages { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ---------- Порожня заглушка під превʼю проєкту ---------- */

@@ -81,7 +81,7 @@
     </a>
 
     <nav class="nav" aria-label="Головна навігація">
-      <a class="nav__link" href="#nishi">Ніші</a>
+      <a class="nav__link" href="#tsiny">Ціни</a>
       <a class="nav__link" href="#keysy">Роботи</a>
       <a class="nav__link" href="#proces">Як працюємо</a>
       <a class="nav__link" href="#faq">FAQ</a>
@@ -103,7 +103,7 @@
      backdrop-filter на .header робить його containing block для position:fixed
      і меню обрізалось би до висоти хедера. -->
   <div class="mobile-menu" id="mobile-menu" data-open="false">
-    <a class="mobile-menu__link" href="#nishi">Ніші <span aria-hidden="true">→</span></a>
+    <a class="mobile-menu__link" href="#tsiny">Ціни <span aria-hidden="true">→</span></a>
     <a class="mobile-menu__link" href="#keysy">Роботи <span aria-hidden="true">→</span></a>
     <a class="mobile-menu__link" href="#proces">Як працюємо <span aria-hidden="true">→</span></a>
     <a class="mobile-menu__link" href="#faq">FAQ <span aria-hidden="true">→</span></a>
@@ -131,54 +131,66 @@
 
     <div class="hero__actions">
       <a href="demo/" class="btn btn--primary btn--lg">Спробувати онлайн-запис</a>
-      <a href="#nishi" class="btn btn--ghost btn--lg">Ціни для моєї ніші</a>
+      <a href="#tsiny" class="btn btn--ghost btn--lg">Подивитись ціни</a>
     </div>
 
     <ul class="hero__facts">
       <li><strong>від 15 000 ₴</strong> фіксована ціна розробки</li>
       <li><strong>24/7</strong> запис без адміністратора</li>
-      <li><strong>Підтримка</strong> сайту щомісяця</li>
+      <li><strong>від 5 днів</strong> до запуску сайту</li>
     </ul>
   </div>
 </section>
 
-<!-- ═══════════════════════ ЕКРАН 2 — НІШІ ═══════════════════════ -->
-<section class="section niches" id="nishi" aria-labelledby="niches-title">
+<!-- ═══════════════════════ ЕКРАН 2 — ПАКЕТИ І ЦІНИ ═══════════════════════ -->
+<section class="section" id="tsiny" aria-labelledby="packages-title">
   <div class="container">
     <div class="section__head">
-      <h2 class="h2" id="niches-title">Оберіть свою нішу</h2>
-      <p class="lead">
-        Під кожну нішу — готова структура і чесна ціна ще до розмови.
-      </p>
+      <h2 class="h2" id="packages-title">Три пакети — під розмір вашого закладу</h2>
+      <p class="lead">Ціну і строк ви знаєте ще до розмови. Оплата 50/50, гарантія — місяць після запуску.</p>
     </div>
 
-    <ul class="niches__grid">
-      <li class="niche-card">
-        <h3 class="niche-card__title">Барбершопи</h3>
-        <p class="niche-card__text">Прайс, майстри, онлайн-запис без дзвінків.</p>
-        <p class="niche-card__price">15 000 ₴ <span>+ підтримка 6 000 ₴/міс</span></p>
-        <a class="niche-card__link" href="posluhy/#barbershop">Тариф для барбершопів →</a>
+    <ul class="packages">
+      <li class="pack">
+        <p class="pack__for">Барбершопи, майстри</p>
+        <h3 class="pack__title">Лендинг із записом</h3>
+        <p class="pack__price">15&nbsp;000&nbsp;₴</p>
+        <p class="pack__meta">Запуск за 5 днів<br>Підтримка 6&nbsp;000&nbsp;₴/міс</p>
+        <ul class="pack__list">
+          <li>Одна сторінка: послуги, прайс, майстри, контакти</li>
+          <li>Онлайн-запис зі сповіщенням у Telegram</li>
+          <li>Мобільна версія і базове SEO</li>
+        </ul>
+        <p class="pack__example">Приклад: <a href="#keysy">BRUTAL CUT</a></p>
+        <a class="pack__link" href="posluhy/#paket-1">Детальніше про пакет →</a>
       </li>
 
-      <li class="niche-card">
-        <h3 class="niche-card__title">Салони краси</h3>
-        <p class="niche-card__text">Послуги, портфоліо майстрів, запис на конкретний час.</p>
-        <p class="niche-card__price">15 000 ₴ <span>+ підтримка 6 000 ₴/міс</span></p>
-        <a class="niche-card__link" href="posluhy/#salon">Тариф для салонів →</a>
+      <li class="pack">
+        <p class="pack__for">Масаж, спа, салони</p>
+        <h3 class="pack__title">Сайт закладу</h3>
+        <p class="pack__price">25&nbsp;000&nbsp;₴</p>
+        <p class="pack__meta">Запуск за 10–12 днів<br>Підтримка 15&nbsp;000&nbsp;₴/міс</p>
+        <ul class="pack__list">
+          <li>Кілька сторінок: послуги, майстри, галерея, блог</li>
+          <li>Онлайн-бронювання процедур</li>
+          <li>SEO під ваше місто й нішу</li>
+        </ul>
+        <p class="pack__example">Приклад: <a href="#keysy">Aura SPA</a></p>
+        <a class="pack__link" href="posluhy/#paket-2">Детальніше про пакет →</a>
       </li>
 
-      <li class="niche-card">
-        <h3 class="niche-card__title">Масаж і спа</h3>
-        <p class="niche-card__text">Програми, сертифікати, бронювання кабінетів.</p>
-        <p class="niche-card__price">25 000 ₴ <span>+ підтримка 15 000 ₴/міс</span></p>
-        <a class="niche-card__link" href="posluhy/#spa">Тариф для спа →</a>
-      </li>
-
-      <li class="niche-card">
-        <h3 class="niche-card__title">Кав'ярні й ресторани</h3>
-        <p class="niche-card__text">Меню з фото, бронювання столиків, доставка.</p>
-        <p class="niche-card__price">40 000 ₴ <span>+ підтримка 20 000 ₴/міс</span></p>
-        <a class="niche-card__link" href="posluhy/#cafe">Тариф для кав'ярень →</a>
+      <li class="pack">
+        <p class="pack__for">Кав'ярні, ресторани, великі салони</p>
+        <h3 class="pack__title">Сайт із замовленнями</h3>
+        <p class="pack__price">40&nbsp;000&nbsp;₴</p>
+        <p class="pack__meta">Запуск за 15 днів<br>Підтримка 20&nbsp;000&nbsp;₴/міс</p>
+        <ul class="pack__list">
+          <li>Меню або каталог з фото й цінами</li>
+          <li>Кошик, замовлення, доставка або крамниця</li>
+          <li>Онлайн-запис чи бронювання столиків</li>
+        </ul>
+        <p class="pack__example">Приклади: <a href="#keysy">Food&amp;Vibe</a>, <a href="#keysy">Lumière</a></p>
+        <a class="pack__link" href="posluhy/#paket-3">Детальніше про пакет →</a>
       </li>
     </ul>
   </div>
@@ -370,8 +382,16 @@
       <details open>
         <summary>Скільки коштує? <span class="faq__sign" aria-hidden="true"></span></summary>
         <div class="faq__a">
-          <p>Барбершопи й салони краси — 15 000 ₴ + підтримка 6 000 ₴/міс. Масаж і спа — 25 000 ₴ + 15 000 ₴/міс. Кав'ярні й ресторани — 40 000 ₴ + 20 000 ₴/міс.</p>
+          <p>«Лендинг із записом» — 15 000 ₴ + підтримка 6 000 ₴/міс. «Сайт закладу» — 25 000 ₴ + 15 000 ₴/міс. «Сайт із замовленнями» — 40 000 ₴ + 20 000 ₴/міс.</p>
           <p>Ціна фіксується в договорі до старту робіт і не змінюється, якщо не змінюється обсяг задачі. Оплата 50/50: половина на старті, половина після здачі.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Скільки займе час? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <div class="faq__a">
+          <p>«Лендинг із записом» — 5 днів, «Сайт закладу» — 10–12 днів, «Сайт із замовленнями» — 15 днів. Термін прописуємо в договорі.</p>
+          <p>Найчастіша причина затримок — не розробка, а очікування контенту й погоджень від клієнта. Тому в брифі ми одразу домовляємось про дедлайни з вашого боку.</p>
         </div>
       </details>
 
@@ -385,10 +405,18 @@
       </details>
 
       <details>
-        <summary>Що входить у 6-місячну гарантію і чого вона не покриває? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <summary>Що входить у гарантію і чого вона не покриває? <span class="faq__sign" aria-hidden="true"></span></summary>
         <div class="faq__a">
-          <p><strong>Покриває:</strong> технічні дефекти сайту, проблеми з відображенням у браузерах, поломки форм і прийому заявок, проблеми з мобільною версією — усе, що пов'язано з нашою розробкою.</p>
+          <p>Гарантія діє місяць після запуску. <strong>Покриває:</strong> технічні дефекти сайту, проблеми з відображенням у браузерах, поломки форм і прийому заявок, проблеми з мобільною версією — усе, що пов'язано з нашою розробкою.</p>
           <p><strong>Не покриває:</strong> правки текстів і контенту, зміни дизайну, додавання нових функцій і сторінок, проблеми з боку сторонніх сервісів (домен, хостинг, платіжки). Для цього є щомісячна підтримка.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Що входить у щомісячну підтримку? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <div class="faq__a">
+          <p>У кожному пакеті: нагляд за хостингом і доменом, резервні копії, перевірка онлайн-запису й сповіщень, оновлення цін, послуг, фото й майстрів, виправлення технічних проблем після гарантії та щомісячний звіт — скільки людей зайшло на сайт і скільки записалось.</p>
+          <p>Різниця — в обсязі. «Лендинг із записом»: до 5 годин правок на місяць, відповідь протягом доби. «Сайт закладу»: до 10 годин, нові сторінки й акції, оновлення SEO. «Сайт із замовленнями»: до 15 годин, оновлення меню чи каталогу, відповідь протягом 4 робочих годин.</p>
         </div>
       </details>
 
@@ -574,10 +602,10 @@
       <div class="footer__col">
         <h4>Ніші</h4>
         <ul>
-          <li><a href="#nishi">Барбершопи</a></li>
-          <li><a href="#nishi">Салони краси</a></li>
-          <li><a href="#nishi">Масаж і спа</a></li>
-          <li><a href="#nishi">Кав'ярні й ресторани</a></li>
+          <li><a href="#tsiny">Барбершопи</a></li>
+          <li><a href="#tsiny">Салони краси</a></li>
+          <li><a href="#tsiny">Масаж і спа</a></li>
+          <li><a href="#tsiny">Кав'ярні й ресторани</a></li>
         </ul>
       </div>
 
