@@ -196,17 +196,17 @@
         <ul class="contacts__list">
           <li>
             <span class="contacts__label">Телефон</span>
-            <a href="tel:+380670000000">+38 (067) 000-00-00</a>
+            <a href="tel:[ТВІЙ ТЕЛЕФОН]">[ТВІЙ ТЕЛЕФОН]</a>
           </li>
           <li>
             <span class="contacts__label">Пошта</span>
-            <a href="mailto:hello@agency.ua">hello@agency.ua</a>
+            <a href="mailto:[ТВІЙ EMAIL]">[ТВІЙ EMAIL]</a>
           </li>
           <li>
             <span class="contacts__label">Месенджери</span>
-            <a href="https://t.me/" rel="noopener">Telegram</a> ·
-            <a href="viber://chat?number=%2B380670000000">Viber</a> ·
-            <a href="https://instagram.com/" rel="noopener">Instagram</a>
+            <a href="https://t.me/[ТВІЙ TELEGRAM]" rel="noopener">Telegram</a> ·
+            <a href="viber://chat?number=[ТВІЙ ТЕЛЕФОН]">Viber</a> ·
+            <a href="https://instagram.com/[ТВІЙ INSTAGRAM]" rel="noopener">Instagram</a>
           </li>
           <li>
             <span class="contacts__label">Місто</span>
@@ -250,6 +250,12 @@
             <div class="field">
               <label for="c-message">Коментар</label>
               <textarea id="c-message" name="message" rows="4" placeholder="Назва закладу, посилання на Instagram, побажання"></textarea>
+            </div>
+
+            <!-- Пастка для спам-ботів: людям не видно, боти заповнюють -->
+            <div class="hp" aria-hidden="true">
+              <label for="c-website">Не заповнюйте це поле</label>
+              <input type="text" id="c-website" name="website" tabindex="-1" autocomplete="off">
             </div>
 
             <button type="submit" class="btn btn--primary btn--block btn--lg" id="submitBtn">

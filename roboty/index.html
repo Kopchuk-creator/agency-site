@@ -69,173 +69,205 @@
       <h2 class="h2" id="works-title">Наші роботи</h2>
       <p class="lead page-block__lead">Відкрийте будь-який сайт і пройдіть запис як клієнт.</p>
 
-    <ul class="works">
-      <li class="work">
-        <img class="work__img" src="../img/works/barber-shop.webp" width="1280" height="800"
-             loading="lazy" decoding="async"
-             alt="Головна сторінка сайту барбершопу BRUTAL CUT">
-        <div class="work__body">
-          <p class="work__niche">Барбершоп</p>
-          <h3 class="work__title">BRUTAL CUT</h3>
-          <p class="work__text">Прайс, майстри, галерея робіт і онлайн-запис з найближчим вільним вікном.</p>
-          <a class="work__link" href="https://nazar-web-hash.github.io/barber-shop/frontend/" target="_blank" rel="noopener">
-            Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
-          </a>
-        </div>
-      </li>
+      <!-- Фільтр прихований, поки не завантажився JS: без скрипта кнопки
+           нічого б не робили, а роботи й так видно всі -->
+      <div class="filters" id="worksFilters" role="group" aria-label="Фільтр робіт за нішею" hidden>
+        <button type="button" class="filters__btn" data-filter="all" aria-pressed="true">Усі</button>
+        <button type="button" class="filters__btn" data-filter="barber" aria-pressed="false">Барбершопи</button>
+        <button type="button" class="filters__btn" data-filter="salon" aria-pressed="false">Салони краси</button>
+        <button type="button" class="filters__btn" data-filter="spa" aria-pressed="false">Спа</button>
+        <button type="button" class="filters__btn" data-filter="cafe" aria-pressed="false">Кав'ярні</button>
+      </div>
+      <p class="filters__count" id="worksCount" aria-live="polite"></p>
 
-      <li class="work">
-        <img class="work__img" src="../img/works/lumiere.webp" width="1280" height="800"
-             loading="lazy" decoding="async"
-             alt="Головна сторінка сайту салону краси Lumière">
-        <div class="work__body">
-          <p class="work__niche">Салон краси</p>
-          <h3 class="work__title">Lumière</h3>
-          <p class="work__text">Послуги, майстри, крамниця косметики та онлайн-запис за 2 хвилини.</p>
-          <a class="work__link" href="https://kopchuk-creator.github.io/Lumiere/" target="_blank" rel="noopener">
-            Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
-          </a>
-        </div>
-      </li>
+      <!-- Тільки скріншоти через <img>, жодних iframe -->
+      <ul class="works" id="worksList">
+        <li class="work" data-niche="barber">
+          <img class="work__img" src="../img/works/barber-shop.webp" width="1280" height="800"
+               loading="lazy" decoding="async"
+               alt="Головна сторінка сайту барбершопу BRUTAL CUT">
+          <div class="work__body">
+            <p class="work__niche">Барбершоп</p>
+            <h3 class="work__title">BRUTAL CUT</h3>
+            <p class="work__text">Прайс, майстри, галерея робіт і онлайн-запис з найближчим вільним вікном.</p>
+            <a class="work__link" href="https://nazar-web-hash.github.io/barber-shop/frontend/" target="_blank" rel="noopener">
+              Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
+            </a>
+          </div>
+        </li>
 
-      <li class="work">
-        <img class="work__img" src="../img/works/massage-center.webp" width="1280" height="800"
-             loading="lazy" decoding="async"
-             alt="Головна сторінка сайту мережі салонів масажу Aura SPA">
-        <div class="work__body">
-          <p class="work__niche">Масаж і спа</p>
-          <h3 class="work__title">Aura SPA</h3>
-          <p class="work__text">Програми масажу, підбір процедури, майстри та онлайн-бронювання.</p>
-          <a class="work__link" href="https://nazar-web-hash.github.io/massage-center/frontend/" target="_blank" rel="noopener">
-            Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
-          </a>
-        </div>
-      </li>
+        <li class="work" data-niche="salon">
+          <img class="work__img" src="../img/works/lumiere.webp" width="1280" height="800"
+               loading="lazy" decoding="async"
+               alt="Головна сторінка сайту салону краси Lumière">
+          <div class="work__body">
+            <p class="work__niche">Салон краси</p>
+            <h3 class="work__title">Lumière</h3>
+            <p class="work__text">Послуги, майстри, крамниця косметики та онлайн-запис за 2 хвилини.</p>
+            <a class="work__link" href="https://kopchuk-creator.github.io/Lumiere/" target="_blank" rel="noopener">
+              Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
+            </a>
+          </div>
+        </li>
 
-      <li class="work">
-        <img class="work__img" src="../img/works/food-vibe.webp" width="1280" height="800"
-             loading="lazy" decoding="async"
-             alt="Головна сторінка сайту кафе Food&amp;Vibe">
-        <div class="work__body">
-          <p class="work__niche">Кав'ярня</p>
-          <h3 class="work__title">Food&amp;Vibe</h3>
-          <p class="work__text">Меню з фото, кошик і доставка, українська та англійська версії.</p>
-          <a class="work__link" href="https://kopchuk-creator.github.io/Food-Vibe/" target="_blank" rel="noopener">
-            Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
-          </a>
-        </div>
-      </li>
-    </ul>
+        <li class="work" data-niche="spa">
+          <img class="work__img" src="../img/works/massage-center.webp" width="1280" height="800"
+               loading="lazy" decoding="async"
+               alt="Головна сторінка сайту мережі салонів масажу Aura SPA">
+          <div class="work__body">
+            <p class="work__niche">Масаж і спа</p>
+            <h3 class="work__title">Aura SPA</h3>
+            <p class="work__text">Програми масажу, підбір процедури, майстри та онлайн-бронювання.</p>
+            <a class="work__link" href="https://nazar-web-hash.github.io/massage-center/frontend/" target="_blank" rel="noopener">
+              Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
+            </a>
+          </div>
+        </li>
+
+        <li class="work" data-niche="cafe">
+          <img class="work__img" src="../img/works/food-vibe.webp" width="1280" height="800"
+               loading="lazy" decoding="async"
+               alt="Головна сторінка сайту кафе Food&amp;Vibe">
+          <div class="work__body">
+            <p class="work__niche">Кав'ярня</p>
+            <h3 class="work__title">Food&amp;Vibe</h3>
+            <p class="work__text">Меню з фото, кошик і доставка, українська та англійська версії.</p>
+            <a class="work__link" href="https://kopchuk-creator.github.io/Food-Vibe/" target="_blank" rel="noopener">
+              Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
+            </a>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <!-- ===== Ціни ===== -->
     <section class="page-block" id="tsiny" aria-labelledby="prices-title">
       <h2 class="h2" id="prices-title">Ціни</h2>
-      <p class="lead page-block__lead">Ціна і строк фіксуються в договорі. Оплата 50/50: половина на старті, половина після здачі. Гарантія — місяць після запуску.</p>
+      <p class="lead page-block__lead">Три пакети під розмір закладу. Ціна і строк фіксуються в договорі.</p>
 
-    <ul class="packages">
-      <li class="pack" id="paket-1">
-        <p class="pack__for">Барбершопи, майстри</p>
-        <h2 class="pack__title">Лендинг із записом</h2>
-        <p class="pack__price">15&nbsp;000&nbsp;₴</p>
-        <p class="pack__meta">Запуск за 5 днів<br>Підтримка 6&nbsp;000&nbsp;₴/міс</p>
+      <ul class="packages">
+        <li class="pack" id="paket-1">
+          <p class="pack__for">Барбершопи</p>
+          <h3 class="pack__title">Лендинг із записом</h3>
+          <p class="pack__price">15&nbsp;000&nbsp;₴</p>
+          <p class="pack__meta">Запуск за 5 днів<br>Підтримка 6&nbsp;000&nbsp;₴/міс</p>
 
-        <h3 class="pack__sub">Що входить</h3>
-        <ul class="pack__list">
-          <li>Одна сторінка: послуги, прайс, майстри, галерея, контакти</li>
-          <li>Онлайн-запис: послуга → майстер → час</li>
-          <li>Сповіщення про кожен запис у Telegram</li>
-          <li>Карта, телефон і месенджери в один дотик</li>
-          <li>Мобільна версія і базове SEO</li>
-        </ul>
+          <h4 class="pack__sub">Що входить</h4>
+          <ul class="pack__list">
+            <li>Дизайн під стиль вашого закладу</li>
+            <li>Верстка сторінки: послуги, прайс, майстри, контакти</li>
+            <li>Онлайн-запис зі сповіщенням у Telegram</li>
+            <li>Налаштування форми зв'язку</li>
+            <li>Мобільна версія і базове SEO</li>
+            <li>Публікація на вашому домені</li>
+          </ul>
 
-        <h3 class="pack__sub">Підтримка</h3>
-        <ul class="pack__list">
-          <li>До 5 годин правок на місяць</li>
-          <li>Відповідь протягом доби</li>
-        </ul>
+          <h4 class="pack__sub">Підтримка</h4>
+          <ul class="pack__list">
+            <li>До 5 годин правок на місяць</li>
+            <li>Відповідь протягом доби</li>
+          </ul>
 
-        <p class="pack__example">Приклад: <a href="https://nazar-web-hash.github.io/barber-shop/frontend/" target="_blank" rel="noopener">BRUTAL CUT<span class="visually-hidden"> (відкриється в новій вкладці)</span></a></p>
-        <a class="btn btn--primary btn--block pack__btn" href="../zapys/?paket=1#kontakty">Обрати пакет</a>
-      </li>
+          <p class="pack__example">Приклад: <a href="#roboty">BRUTAL CUT</a></p>
+          <a class="btn btn--primary btn--block pack__btn" href="../zapys/?paket=1#kontakty">
+            Замовити<span class="visually-hidden"> пакет «Лендинг із записом»</span>
+          </a>
+        </li>
 
-      <li class="pack" id="paket-2">
-        <p class="pack__for">Масаж, спа, салони</p>
-        <h2 class="pack__title">Сайт закладу</h2>
-        <p class="pack__price">25&nbsp;000&nbsp;₴</p>
-        <p class="pack__meta">Запуск за 10–12 днів<br>Підтримка 15&nbsp;000&nbsp;₴/міс</p>
+        <li class="pack" id="paket-2">
+          <p class="pack__for">Масаж і спа</p>
+          <h3 class="pack__title">Сайт закладу</h3>
+          <p class="pack__price">25&nbsp;000&nbsp;₴</p>
+          <p class="pack__meta">Запуск за 10–12 днів<br>Підтримка 15&nbsp;000&nbsp;₴/міс</p>
 
-        <h3 class="pack__sub">Що входить</h3>
-        <ul class="pack__list">
-          <li>Усе з пакета «Лендинг із записом»</li>
-          <li>Окремі сторінки: послуги, майстри, галерея, блог, контакти</li>
-          <li>Онлайн-бронювання з вибором процедури й майстра</li>
-          <li>Підбір процедури для нових гостей</li>
-          <li>SEO під ваше місто й нішу</li>
-        </ul>
+          <h4 class="pack__sub">Що входить</h4>
+          <ul class="pack__list">
+            <li>Усе з пакета «Лендинг із записом»</li>
+            <li>Верстка кількох сторінок: послуги, майстри, галерея, блог</li>
+            <li>Онлайн-бронювання з вибором процедури й майстра</li>
+            <li>Підбір процедури для нових гостей</li>
+            <li>SEO під ваше місто й нішу</li>
+          </ul>
 
-        <h3 class="pack__sub">Підтримка</h3>
-        <ul class="pack__list">
-          <li>До 10 годин правок на місяць</li>
-          <li>Нові сторінки, акції, оновлення SEO</li>
-          <li>Відповідь протягом доби</li>
-        </ul>
+          <h4 class="pack__sub">Підтримка</h4>
+          <ul class="pack__list">
+            <li>До 10 годин правок на місяць</li>
+            <li>Нові сторінки, акції, оновлення SEO</li>
+            <li>Відповідь протягом доби</li>
+          </ul>
 
-        <p class="pack__example">Приклад: <a href="https://nazar-web-hash.github.io/massage-center/frontend/" target="_blank" rel="noopener">Aura SPA<span class="visually-hidden"> (відкриється в новій вкладці)</span></a></p>
-        <a class="btn btn--primary btn--block pack__btn" href="../zapys/?paket=2#kontakty">Обрати пакет</a>
-      </li>
+          <p class="pack__example">Приклад: <a href="#roboty">Aura SPA</a></p>
+          <a class="btn btn--primary btn--block pack__btn" href="../zapys/?paket=2#kontakty">
+            Замовити<span class="visually-hidden"> пакет «Сайт закладу»</span>
+          </a>
+        </li>
 
-      <li class="pack" id="paket-3">
-        <p class="pack__for">Кав'ярні, ресторани, великі салони</p>
-        <h2 class="pack__title">Сайт із замовленнями</h2>
-        <p class="pack__price">40&nbsp;000&nbsp;₴</p>
-        <p class="pack__meta">Запуск за 15 днів<br>Підтримка 20&nbsp;000&nbsp;₴/міс</p>
+        <li class="pack" id="paket-3">
+          <p class="pack__for">Ресторани, кав'ярні, салони</p>
+          <h3 class="pack__title">Сайт із замовленнями</h3>
+          <p class="pack__price">40&nbsp;000&nbsp;₴</p>
+          <p class="pack__meta">Запуск за 15 днів<br>Підтримка 20&nbsp;000&nbsp;₴/міс</p>
 
-        <h3 class="pack__sub">Що входить</h3>
-        <ul class="pack__list">
-          <li>Усе з пакета «Сайт закладу»</li>
-          <li>Меню або каталог товарів з фото й цінами</li>
-          <li>Кошик і оформлення замовлення</li>
-          <li>Доставка, самовивіз або крамниця</li>
-          <li>Бронювання столиків чи онлайн-запис</li>
-          <li>Друга мова за потреби</li>
-        </ul>
+          <h4 class="pack__sub">Що входить</h4>
+          <ul class="pack__list">
+            <li>Усе з пакета «Сайт закладу»</li>
+            <li>Меню або каталог з фото й цінами</li>
+            <li>Кошик і оформлення замовлення</li>
+            <li>Доставка, самовивіз або крамниця</li>
+            <li>Бронювання столиків чи онлайн-запис</li>
+            <li>Друга мова за потреби</li>
+          </ul>
 
-        <h3 class="pack__sub">Підтримка</h3>
-        <ul class="pack__list">
-          <li>До 15 годин правок на місяць</li>
-          <li>Оновлення меню чи каталогу</li>
-          <li>Відповідь протягом 4 робочих годин</li>
-        </ul>
+          <h4 class="pack__sub">Підтримка</h4>
+          <ul class="pack__list">
+            <li>До 15 годин правок на місяць</li>
+            <li>Оновлення меню чи каталогу</li>
+            <li>Відповідь протягом 4 робочих годин</li>
+          </ul>
 
-        <p class="pack__example">Приклади: <a href="https://kopchuk-creator.github.io/Food-Vibe/" target="_blank" rel="noopener">Food&amp;Vibe<span class="visually-hidden"> (відкриється в новій вкладці)</span></a>, <a href="https://kopchuk-creator.github.io/Lumiere/" target="_blank" rel="noopener">Lumière<span class="visually-hidden"> (відкриється в новій вкладці)</span></a></p>
-        <a class="btn btn--primary btn--block pack__btn" href="../zapys/?paket=3#kontakty">Обрати пакет</a>
-      </li>
-    </ul>
-    </section>
-
-    <!-- ===== Що є в кожному пакеті ===== -->
-    <section class="included" aria-labelledby="included-title">
-      <h2 class="h3" id="included-title">У кожному пакеті</h2>
-      <ul class="included__grid">
-        <li><b>Дизайн під ваш заклад</b> Не шаблон: кольори, фото й тексти під ваш бренд.</li>
-        <li><b>Мобільна версія</b> Більшість записів роблять з телефона — під нього й проєктуємо.</li>
-        <li><b>Домен і хостинг на вас</b> Ви власник сайту, а не ми.</li>
-        <li><b>Гарантія місяць</b> Безкоштовно виправляємо технічні дефекти після запуску.</li>
+          <p class="pack__example">Приклади: <a href="#roboty">Food&amp;Vibe</a>, <a href="#roboty">Lumière</a></p>
+          <a class="btn btn--primary btn--block pack__btn" href="../zapys/?paket=3#kontakty">
+            Замовити<span class="visually-hidden"> пакет «Сайт із замовленнями»</span>
+          </a>
+        </li>
       </ul>
     </section>
 
-    <!-- ===== Підтримка ===== -->
-    <section class="included" aria-labelledby="support-title">
-      <h2 class="h3" id="support-title">Що робить щомісячна підтримка</h2>
-      <ul class="included__grid">
-        <li><b>Нагляд за сайтом</b> Хостинг, домен, резервні копії, перевірка запису й сповіщень.</li>
-        <li><b>Оновлення контенту</b> Ціни, послуги, фото, майстри — пишете нам, ми міняємо.</li>
-        <li><b>Технічні правки</b> Після гарантії виправляємо все, що перестало працювати.</li>
-        <li><b>Щомісячний звіт</b> Скільки людей зайшло на сайт і скільки записалось.</li>
-      </ul>
-    </section>
+    <!-- ===== Умови співпраці та гарантія ===== -->
+    <section class="terms" id="umovy" aria-labelledby="terms-title">
+      <h2 class="h2" id="terms-title">Умови співпраці та гарантія</h2>
 
+      <div class="terms__grid">
+        <article class="term">
+          <h3 class="term__title">Оплата в дві частини</h3>
+          <ol class="pay">
+            <li class="pay__step">
+              <span class="pay__pct">50%</span>
+              <span class="pay__text"><b>Аванс</b> перед стартом робіт</span>
+            </li>
+            <li class="pay__step">
+              <span class="pay__pct">50%</span>
+              <span class="pay__text"><b>Після здачі</b>, коли ви прийняли готовий сайт</span>
+            </li>
+          </ol>
+          <p class="term__note">Ціна і строк фіксуються в договорі й не змінюються, якщо не змінюється обсяг робіт.</p>
+        </article>
+
+        <article class="term">
+          <h3 class="term__title">Гарантія 1 місяць</h3>
+          <p class="term__text">Місяць після запуску безкоштовно виправляємо технічні помилки:</p>
+          <ul class="pack__list">
+            <li>Збої та помилки в роботі сайту</li>
+            <li>Відображення в різних браузерах</li>
+            <li>Онлайн-запис, форми й сповіщення</li>
+            <li>Мобільна версія</li>
+          </ul>
+          <p class="term__note">Правки текстів, зміни дизайну й нові функції в гарантію не входять — для цього є щомісячна підтримка.</p>
+        </article>
+      </div>
+
+      <p class="terms__more">Повні умови — у <a href="../publichna-oferta/">публічній оферті</a>.</p>
+    </section>
 
     <div class="case-cta">
       <a href="../zapys/" class="btn btn--primary btn--lg">Спробувати онлайн-запис</a>
@@ -257,5 +289,6 @@
 </footer>
 
 <script src="../main.js" defer></script>
+<script src="roboty.js" defer></script>
 </body>
 </html>

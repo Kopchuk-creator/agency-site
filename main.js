@@ -164,12 +164,19 @@
     callback.classList.toggle('is-visible', pastHero && !atForm);
   }
 
-  /* ---------- 9. Форма зв'язку ---------- */
+  /* ---------- 9. Форма зв'язку → Cloudflare Worker → Telegram ---------- */
+  // Токена бота тут немає: він у секретах Worker-а (див. worker/contact-worker.js).
+  // Сюди — тільки адреса Worker-а, її бачити не страшно.
+  var CONTACT_ENDPOINT = '';  // [АДРЕСА WORKER-А], напр. https://agency-form.<ваш-акаунт>.workers.dev
+
   var form = document.getElementById('contactForm');
 
   if (form) {
     var statusEl = document.getElementById('formStatus');
     var submitBtn = document.getElementById('submitBtn');
+    var packageSelect = form.elements.namedItem('package');
+    // Поля, які перевіряємо. Приховану пастку для ботів (website) — ні.
+    var FIELDS = 'input:not([name="website"]), select, textarea';
 
     var validators = {
       name: function (value) {
@@ -186,7 +193,6 @@
 
     // Кнопка «Обрати пакет» на сторінці цін веде сюди з ?paket=N —
     // одразу підставляємо цей пакет у форму
-    var packageSelect = form.elements.namedItem('package');
     var paketParam = new URLSearchParams(window.location.search).get('paket');
     var paketExists = packageSelect && Array.prototype.some.call(packageSelect.options, function (o) {
       return o.value === paketParam;
@@ -207,7 +213,7 @@
     }
 
     // Валідація на blur, а не на кожен символ
-    Array.prototype.forEach.call(form.querySelectorAll('input, select, textarea'), function (input) {
+    Array.prototype.forEach.call(form.querySelectorAll(FIELDS), function (input) {
       input.addEventListener('blur', function () {
         if (input.value !== '') validateField(input);
       });
@@ -232,13 +238,68 @@
         '<span>' + message + '</span>';
     }
 
+    function setLoading(on) {
+      submitBtn.classList.toggle('is-loading', on);
+      if (on) submitBtn.setAttribute('aria-disabled', 'true');
+      else submitBtn.removeAttribute('aria-disabled');
+    }
+
+    // Збираємо поля форми в об'єкт. Текст повідомлення для Telegram
+    // складає Worker — так через форму не можна надіслати довільний текст.
+    function collectData() {
+      var get = function (name) {
+        var field = form.elements.namedItem(name);
+        return field ? field.value.trim() : '';
+      };
+      return {
+        name: get('name'),
+        phone: get('phone'),
+        package: get('package'),
+        message: get('message'),
+        website: get('website'),          // пастка для ботів, Worker теж її перевіряє
+        page: window.location.href
+      };
+    }
+
+    function sendLead(data) {
+      if (!CONTACT_ENDPOINT) {
+        return Promise.reject(new Error('Не вказано адресу Worker-а (CONTACT_ENDPOINT) у main.js'));
+      }
+      return fetch(CONTACT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (res) {
+        return res.json()
+          .catch(function () { return {}; })
+          .then(function (body) {
+            if (!res.ok || !body.ok) throw new Error('Worker: ' + (body.error || 'HTTP ' + res.status));
+            return body;
+          });
+      });
+    }
+
+    function onSuccess(packageValue) {
+      showStatus('ok', 'Дякуємо! Заявку отримано — скоро зв\'яжемося.');
+      form.reset();
+      Array.prototype.forEach.call(form.querySelectorAll('.field'), function (f) {
+        f.classList.remove('is-invalid');
+      });
+
+      // Події для аналітики. dataLayer — для GTM, CustomEvent — для
+      // analytics.js, який перекидає це в GA4 і Meta як конверсію.
+      if (window.dataLayer) window.dataLayer.push({ event: 'contact_form_submit' });
+      window.dispatchEvent(new CustomEvent('agency:lead', {
+        detail: { form: 'contact', package: packageValue }
+      }));
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (submitBtn.classList.contains('is-loading')) return; // захист від подвійного кліку
 
-      var inputs = Array.prototype.slice.call(form.querySelectorAll('input, select, textarea'));
       var firstInvalid = null;
-
-      inputs.forEach(function (input) {
+      Array.prototype.forEach.call(form.querySelectorAll(FIELDS), function (input) {
         if (!validateField(input) && !firstInvalid) firstInvalid = input;
       });
 
@@ -248,46 +309,29 @@
         return;
       }
 
-      // ── Точка інтеграції з бекендом ──────────────────────────────
-      // Тут підставляється реальний ендпоінт: сервіс аудиту, CRM,
-      // Google Sheets, Telegram-бот. Зараз — імітація відповіді,
-      // щоб фронтенд можна було демонструвати автономно.
-      //
-      //   fetch('/api/contact', {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
-      //     body: JSON.stringify(Object.fromEntries(new FormData(form)))
-      //   }).then(...)
-      // ─────────────────────────────────────────────────────────────
+      // Пастка для спам-ботів: людина це поле не бачить і не заповнює.
+      // Якщо воно не порожнє — вдаємо успіх і нічого не надсилаємо.
+      var trap = form.elements.namedItem('website');
+      if (trap && trap.value) {
+        onSuccess('');
+        return;
+      }
 
-      // Зчитуємо до form.reset() — інакше значення вже стерте
-      var packageValue = packageSelect ? packageSelect.value : '';
-
-      submitBtn.classList.add('is-loading');
-      submitBtn.setAttribute('aria-disabled', 'true');
+      var packageValue = packageSelect.value;   // зчитуємо до form.reset()
+      setLoading(true);
       statusEl.removeAttribute('data-state');
 
-      window.setTimeout(function () {
-        submitBtn.classList.remove('is-loading');
-        submitBtn.removeAttribute('aria-disabled');
-
-        // ⚠️ РЕЖИМ МАКЕТА: заявка нікуди не надсилається, це імітація.
-        // Після підключення бекенду замінити на:
-        // 'Дякуємо! Передзвонимо протягом робочого дня.'
-        showStatus('ok', 'Так виглядатиме підтвердження. Це макет — заявка нікуди не надіслана.');
-        form.reset();
-
-        Array.prototype.forEach.call(form.querySelectorAll('.field'), function (f) {
-          f.classList.remove('is-invalid');
+      sendLead(collectData())
+        .then(function () {
+          onSuccess(packageValue);
+        })
+        .catch(function (err) {
+          console.warn('[contactForm]', err);
+          showStatus('err', 'Не вдалося надіслати заявку. Зателефонуйте або напишіть нам у месенджер — контакти поруч.');
+        })
+        .then(function () {
+          setLoading(false);
         });
-
-        // Події для аналітики. dataLayer — для GTM, CustomEvent — для
-        // analytics.js, який перекидає це в GA4 і Meta як конверсію.
-        if (window.dataLayer) window.dataLayer.push({ event: 'contact_form_submit' });
-        window.dispatchEvent(new CustomEvent('agency:lead', {
-          detail: { form: 'contact', package: packageValue }
-        }));
-      }, 900);
     });
   }
 
