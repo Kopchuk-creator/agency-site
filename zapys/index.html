@@ -61,26 +61,27 @@
 
     <div class="section__head">
       <h1 class="h1">Запишіться як ваш клієнт</h1>
-      <p class="lead">Це демо для вигаданого барбершопу. Чотири кроки — і ви побачите, яке сповіщення отримує власник. Дані нікуди не надсилаються.</p>
+      <p class="lead">Це демо для вигаданого барбершопу: послуга, майстер, час — і запис готовий. Дані нікуди не надсилаються.</p>
     </div>
 
-    <div class="demo">
+    <!-- ===================== 1. ДЕМО ОНЛАЙН-ЗАПИСУ ===================== -->
+    <section class="demo" id="demo" aria-labelledby="demo-title">
+      <h2 class="visually-hidden" id="demo-title">Демо онлайн-запису</h2>
 
-      <!-- ===== Віджет запису ===== -->
+      <!-- ----- Віджет: тільки HTML + JS, без iframe ----- -->
       <div class="booking">
         <div class="booking__top">
           <p class="booking__shop">Барбершоп «Бритва»</p>
           <ol class="booking__progress" aria-label="Кроки запису">
             <li data-dot="1" aria-current="step">Послуга</li>
             <li data-dot="2">Майстер</li>
-            <li data-dot="3">Час</li>
-            <li data-dot="4">Контакти</li>
+            <li data-dot="3">Дата й час</li>
           </ol>
         </div>
 
         <form class="booking__form" id="bookingForm" novalidate>
 
-          <!-- Крок 1 -->
+          <!-- Крок 1: послуга -->
           <fieldset class="bstep" data-step="1">
             <legend class="bstep__title" tabindex="-1">Оберіть послугу</legend>
             <div class="options">
@@ -107,7 +108,7 @@
             </div>
           </fieldset>
 
-          <!-- Крок 2 -->
+          <!-- Крок 2: майстер -->
           <fieldset class="bstep" data-step="2" hidden>
             <legend class="bstep__title" tabindex="-1">Оберіть майстра</legend>
             <div class="options">
@@ -130,26 +131,12 @@
             </div>
           </fieldset>
 
-          <!-- Крок 3: дні й години генерує demo.js -->
+          <!-- Крок 3: дата й час. Чипи днів і годин створює JS -->
           <fieldset class="bstep" data-step="3" hidden>
-            <legend class="bstep__title" tabindex="-1">Оберіть день і час</legend>
+            <legend class="bstep__title" tabindex="-1">Оберіть дату й час</legend>
             <div class="chips chips--days" id="days"></div>
             <div class="chips chips--slots" id="slots"></div>
             <p class="booking__hint">Закреслений час уже зайнятий.</p>
-          </fieldset>
-
-          <!-- Крок 4 -->
-          <fieldset class="bstep" data-step="4" hidden>
-            <legend class="bstep__title" tabindex="-1">Ваші контакти</legend>
-            <div class="field">
-              <label for="b-name">Ім'я</label>
-              <input type="text" id="b-name" name="name" autocomplete="given-name" placeholder="Максим">
-            </div>
-            <div class="field">
-              <label for="b-phone">Телефон</label>
-              <input type="tel" id="b-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="+38 (0__) ___-__-__">
-            </div>
-            <dl class="summary" id="summary"></dl>
           </fieldset>
 
           <p class="booking__error" id="bookingError" role="alert"></p>
@@ -160,39 +147,47 @@
           </div>
         </form>
 
+        <!-- Успішний запис -->
         <div class="booking__done" id="bookingDone" tabindex="-1" hidden>
           <p class="booking__done-title">Ви записані!</p>
-          <p class="booking__done-text" id="doneText"></p>
+          <dl class="summary" id="doneSummary"></dl>
           <button type="button" class="btn btn--ghost" id="restartBtn">Пройти ще раз</button>
         </div>
+
+        <noscript>
+          <p class="booking__hint booking__noscript">Щоб спробувати демо, увімкніть JavaScript у браузері.</p>
+        </noscript>
       </div>
 
-      <!-- ===== Що бачить власник ===== -->
+      <!-- ----- Переваги для власника ----- -->
       <aside class="owner" aria-labelledby="owner-title">
-        <h2 class="owner__title" id="owner-title">А це бачить власник</h2>
+        <h2 class="owner__title" id="owner-title">Що отримує власник</h2>
+
         <div class="tg">
           <p class="tg__head">Telegram · Записи «Бритва»</p>
           <div class="tg__body" id="tgBody" aria-live="polite">
             <p class="tg__empty">Сповіщення з'явиться тут, щойно ви завершите запис.</p>
           </div>
         </div>
+
         <ul class="owner__list">
-          <li>Запис приходить у Telegram за секунди</li>
-          <li>Клієнт бачить тільки вільний час</li>
-          <li>Працює 24/7, навіть коли ви стрижете</li>
+          <li><b>Миттєві сповіщення в Telegram</b> Кожен запис — за секунди, з послугою, майстром і часом.</li>
+          <li><b>Жодних пропущених записів</b> Запис працює 24/7, навіть коли салон зачинений.</li>
+          <li><b>Без накладок у графіку</b> Клієнт бачить тільки вільний час конкретного майстра.</li>
+          <li><b>Менше дзвінків під час роботи</b> Клієнти записуються самі, а не відволікають майстра.</li>
         </ul>
       </aside>
-    </div>
+    </section>
 
-    <!-- ===== Контакти і форма ===== -->
+    <!-- ===================== 2. КОНТАКТИ ТА ЗАЯВКА ===================== -->
     <section class="contacts" id="kontakty" aria-labelledby="contacts-title">
       <div class="section__head">
         <h2 class="h2" id="contacts-title">Контакти</h2>
-        <p class="lead">Розкажіть про свій заклад — порадимо пакет і назвемо строк.</p>
+        <p class="lead">Сподобався запис? Зробимо такий самий для вашого закладу.</p>
       </div>
 
       <div class="contacts__grid">
-        <!-- ⚠️ Контакти — заглушки. Підставте справжні перед запуском. -->
+        <!-- ⚠️ Плейсхолдери: підставте свої дані перед запуском -->
         <ul class="contacts__list">
           <li>
             <span class="contacts__label">Телефон</span>
@@ -209,15 +204,16 @@
             <a href="https://instagram.com/[ТВІЙ INSTAGRAM]" rel="noopener">Instagram</a>
           </li>
           <li>
-            <span class="contacts__label">Місто</span>
-            Івано-Франківськ, працюємо по всій Україні
+            <span class="contacts__label">Реквізити</span>
+            <span class="contacts__text">[РЕКВІЗИТИ ФОП]<br>Івано-Франківськ, працюємо по всій Україні</span>
           </li>
         </ul>
 
+        <!-- Форма: та сама логіка з Cloudflare Worker (main.js, #contactForm) -->
         <div class="formcard formcard--light">
           <div class="formcard__head">
-            <h3 class="h3">Обговорити проєкт</h3>
-            <p>Залиште контакти — передзвонимо й відповімо на запитання.</p>
+            <h3 class="h3">Хочу такий запис у себе</h3>
+            <p>Залиште контакти — передзвонимо й підберемо пакет.</p>
           </div>
 
           <form id="contactForm" novalidate>
@@ -260,7 +256,7 @@
 
             <button type="submit" class="btn btn--primary btn--block btn--lg" id="submitBtn">
               <span class="spinner" aria-hidden="true"></span>
-              <span class="btn__label">Надіслати заявку</span>
+              <span class="btn__label">Хочу такий запис</span>
             </button>
 
             <div class="form__status" id="formStatus" role="status" aria-live="polite"></div>

@@ -1665,7 +1665,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .booking__progress {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--s-2);
   margin-top: var(--s-4);
   padding: 0;
@@ -1826,7 +1826,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: var(--ink-2);
 }
 
-/* ---------- Крок 4: підсумок ---------- */
+/* ---------- Підсумок запису ---------- */
 .summary {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -1879,10 +1879,13 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: #fff;
 }
 
-.booking__done-text {
-  margin-block: var(--s-2) var(--s-5);
-  color: var(--ink-2);
+/* Підсумок запису: таблиця «назва — значення», вирівнюємо ліворуч */
+.booking__done .summary {
+  margin-block: var(--s-4) var(--s-5);
+  text-align: left;
 }
+
+.booking__noscript { padding: 0 var(--s-5) var(--s-5); }
 
 /* ---------- Що бачить власник ---------- */
 .owner__title {
@@ -1945,7 +1948,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .owner__list {
   display: grid;
-  gap: var(--s-2);
+  gap: var(--s-4);
   margin-top: var(--s-5);
   padding: 0;
   list-style: none;
@@ -1955,6 +1958,13 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   position: relative;
   padding-left: 26px;
   line-height: 1.45;
+  color: var(--ink-2);
+}
+
+/* Назва переваги — окремим рядком, опис під нею */
+.owner__list b {
+  display: block;
+  color: var(--ink);
 }
 
 .owner__list li::before {
@@ -1980,7 +1990,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
   .booking__form,
   .booking__done { padding: var(--s-6); }
-
 }
 
 /* ==========================================================================

@@ -168,6 +168,7 @@
   // Токена бота тут немає: він у секретах Worker-а (див. worker/contact-worker.js).
   // Сюди — тільки адреса Worker-а, її бачити не страшно.
   var CONTACT_ENDPOINT = '';  // [АДРЕСА WORKER-А], напр. https://agency-form.<ваш-акаунт>.workers.dev
+  var REQUEST_TIMEOUT = 10000; // 10 с: якщо Worker не відповів — показуємо помилку, а не вічний спінер
 
   var form = document.getElementById('contactForm');
 
@@ -238,8 +239,11 @@
         '<span>' + message + '</span>';
     }
 
+    // Стан «завантаження»: спінер на кнопці, повторний клік ігнорується,
+    // aria-busy підказує скрінрідеру, що форма зайнята
     function setLoading(on) {
       submitBtn.classList.toggle('is-loading', on);
+      form.setAttribute('aria-busy', String(on));
       if (on) submitBtn.setAttribute('aria-disabled', 'true');
       else submitBtn.removeAttribute('aria-disabled');
     }
@@ -265,18 +269,37 @@
       if (!CONTACT_ENDPOINT) {
         return Promise.reject(new Error('Не вказано адресу Worker-а (CONTACT_ENDPOINT) у main.js'));
       }
+
+      // AbortController обриває запит, якщо Worker завис
+      var controller = new AbortController();
+      var timer = setTimeout(function () { controller.abort(); }, REQUEST_TIMEOUT);
+
       return fetch(CONTACT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      }).then(function (res) {
-        return res.json()
-          .catch(function () { return {}; })
-          .then(function (body) {
-            if (!res.ok || !body.ok) throw new Error('Worker: ' + (body.error || 'HTTP ' + res.status));
-            return body;
-          });
-      });
+        body: JSON.stringify(data),
+        signal: controller.signal
+      })
+        .then(function (res) {
+          return res.json()
+            .catch(function () { return {}; })
+            .then(function (body) {
+              if (!res.ok || !body.ok) {
+                var err = new Error('Worker: ' + (body.error || 'HTTP ' + res.status));
+                err.code = body.error;       // 'validation', 'telegram', 'origin'…
+                throw err;
+              }
+              return body;
+            });
+        })
+        .finally(function () { clearTimeout(timer); });
+    }
+
+    // Текст помилки для людини залежно від причини
+    function errorMessage(err) {
+      if (err && err.code === 'validation') return "Перевірте ім'я, телефон і пакет — щось заповнено неправильно.";
+      if (err && err.name === 'AbortError') return 'Сервер не відповідає. Спробуйте ще раз або зателефонуйте нам.';
+      return 'Не вдалося надіслати заявку. Зателефонуйте або напишіть нам у месенджер — контакти поруч.';
     }
 
     function onSuccess(packageValue) {
@@ -327,7 +350,7 @@
         })
         .catch(function (err) {
           console.warn('[contactForm]', err);
-          showStatus('err', 'Не вдалося надіслати заявку. Зателефонуйте або напишіть нам у месенджер — контакти поруч.');
+          showStatus('err', errorMessage(err));
         })
         .then(function () {
           setLoading(false);
