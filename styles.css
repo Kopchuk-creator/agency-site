@@ -1776,6 +1776,417 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 [data-reveal].is-in { opacity: 1; transform: none; }
 
 /* ==========================================================================
+   СТОРІНКА «ПОСЛУГИ І ЦІНИ» (mobile-first)
+   ========================================================================== */
+.pack__sub {
+  margin-top: var(--s-5);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.pack__sub + .pack__list { margin-top: var(--s-3); }
+
+.pack__btn { margin-top: var(--s-4); }
+
+/* Перехід за якорем #paket-N: картка не ховається під липким хедером */
+.pack[id] { scroll-margin-top: calc(var(--header-h) + var(--s-4)); }
+
+.included { margin-top: clamp(48px, 7vw, 88px); }
+
+.included__grid {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-5);
+  padding: 0;
+  list-style: none;
+}
+
+.included__grid li {
+  padding: var(--s-5);
+  border-radius: var(--r-lg);
+  background: var(--bg-soft);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.included__grid b {
+  display: block;
+  margin-bottom: var(--s-1);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@media (min-width: 600px) {
+  .included__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .included__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ==========================================================================
+   СТОРІНКА «ДЕМО ОНЛАЙН-ЗАПИСУ» (mobile-first)
+   ========================================================================== */
+.demo {
+  display: grid;
+  gap: var(--s-6);
+  align-items: start;
+}
+
+/* ---------- Віджет ---------- */
+.booking {
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+  box-shadow: var(--e-2);
+  overflow: hidden;
+}
+
+.booking__top {
+  padding: var(--s-5);
+  background: var(--bg-dark);
+  color: var(--ink-on-dark);
+}
+
+.booking__shop { font-size: 18px; font-weight: 600; }
+
+.booking__progress {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: var(--ink-on-dark-2);
+}
+
+.booking__progress li {
+  padding-top: var(--s-2);
+  border-top: 3px solid var(--line-dark);
+  transition: border-color var(--dur) var(--ease);
+}
+
+.booking__progress li.is-done,
+.booking__progress li[aria-current="step"] { border-color: var(--accent); }
+.booking__progress li[aria-current="step"] { color: var(--ink-on-dark); font-weight: 600; }
+
+.booking__form,
+.booking__done { padding: var(--s-5); }
+
+/* display у CSS перебиває атрибут hidden, тому прописуємо явно */
+.bstep[hidden],
+.booking__form[hidden],
+.booking__done[hidden],
+.booking__nav .btn[hidden] { display: none; }
+
+.bstep {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.bstep__title {
+  margin-bottom: var(--s-4);
+  padding: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Фокус сюди ставить скрипт, а не клавіатура — рамка не потрібна */
+.bstep__title:focus,
+.booking__done:focus { outline: none; }
+
+/* ---------- Варіанти: послуга, майстер ---------- */
+.options { display: grid; gap: var(--s-2); }
+
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-height: 60px;
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+/* Радіокнопка прозора й розтягнута на весь блок:
+   клік будь-де вибирає варіант, а клавіатура (Tab, стрілки) працює як звичайно */
+.option input,
+.chip input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.option__name {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.option__name small {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+.option__price { font-weight: 600; white-space: nowrap; }
+
+.option:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.option:has(input:focus-visible),
+.chip:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .option:hover { border-color: var(--line-strong); }
+}
+
+/* ---------- Чипи: дні й години ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+/* Дні — в один рядок зі скролом, щоб не займали півекрана на телефоні */
+.chips--days {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: var(--s-2);
+  scrollbar-width: thin;
+}
+
+.chips--slots { margin-top: var(--s-3); }
+
+.chip {
+  position: relative;
+  flex: none;
+}
+
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.chip input:checked + span {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.chip input:disabled { cursor: not-allowed; }
+
+.chip input:disabled + span {
+  background: var(--bg-soft);
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+
+.booking__hint {
+  margin-top: var(--s-3);
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+/* ---------- Крок 4: підсумок ---------- */
+.summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-2) var(--s-4);
+  margin: var(--s-2) 0 0;
+  padding: var(--s-4);
+  border-radius: var(--r-md);
+  background: var(--bg-soft);
+  font-size: 15px;
+}
+
+.summary dt { color: var(--ink-2); }
+.summary dd { margin: 0; font-weight: 500; }
+
+.booking__error {
+  min-height: 1.5em;
+  margin-top: var(--s-3);
+  font-size: 14px;
+  color: #c02626;
+}
+
+.booking__nav {
+  display: flex;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.booking__nav .btn { flex: 1; }
+
+/* ---------- Фінал ---------- */
+.booking__done { text-align: center; }
+
+.booking__done-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.booking__done-title::before {
+  content: "✓";
+  content: "✓" / "";
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--s-4);
+  border-radius: 50%;
+  background: var(--accent);
+  font-size: 26px;
+  color: #fff;
+}
+
+.booking__done-text {
+  margin-block: var(--s-2) var(--s-5);
+  color: var(--ink-2);
+}
+
+/* ---------- Що бачить власник ---------- */
+.owner__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.tg {
+  margin-top: var(--s-4);
+  border-radius: var(--r-lg);
+  background: #e6ebee;
+  overflow: hidden;
+}
+
+.tg__head {
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tg__body {
+  display: flex;
+  align-items: flex-end;
+  min-height: 190px;
+  padding: var(--s-4);
+}
+
+.tg__empty {
+  align-self: center;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  color: var(--ink-2);
+}
+
+.tg__msg {
+  position: relative;
+  max-width: 340px;
+  padding: var(--s-3) var(--s-4) var(--s-5);
+  border-radius: 14px 14px 14px 4px;
+  background: #fff;
+  box-shadow: var(--e-1);
+  font-size: 14px;
+  line-height: 1.5;
+  animation: fadeUp 400ms var(--ease);
+}
+
+.tg__title { margin-bottom: var(--s-1); font-weight: 700; }
+
+.tg__time {
+  position: absolute;
+  right: var(--s-3);
+  bottom: var(--s-1);
+  font-size: 11px;
+  color: var(--ink-2);
+}
+
+.owner__list {
+  display: grid;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+  padding: 0;
+  list-style: none;
+}
+
+.owner__list li {
+  position: relative;
+  padding-left: 26px;
+  line-height: 1.45;
+}
+
+.owner__list li::before {
+  content: "✓";
+  content: "✓" / "";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ---------- CTA під демо ---------- */
+.demo-cta {
+  margin-top: clamp(48px, 7vw, 88px);
+  padding: var(--s-6) var(--s-5);
+  border-radius: var(--r-xl);
+  background: var(--bg-soft);
+}
+
+.demo-cta .muted { margin-top: var(--s-2); }
+.demo-cta .case-cta { margin-top: var(--s-5); }
+
+/* Десктоп: віджет зліва, «телефон власника» справа і їде за скролом */
+@media (min-width: 1024px) {
+  .demo {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: var(--s-8);
+  }
+
+  .owner {
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-5));
+  }
+
+  .booking__form,
+  .booking__done { padding: var(--s-6); }
+
+  .demo-cta { padding: var(--s-7); }
+}
+
+/* ==========================================================================
    МІКРОВЗАЄМОДІЇ
    ========================================================================== */
 

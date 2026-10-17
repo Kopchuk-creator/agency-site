@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо онлайн-запису для барбершопу | Агенція</title>
+<meta name="description" content="Спробуйте онлайн-запис очима клієнта: послуга, майстер, час — і подивіться, яке сповіщення отримує власник у Telegram.">
+<meta name="theme-color" content="#ffffff">
+<!-- ⚠️ РЕЖИМ МАКЕТА — прибрати перед справжнім запуском -->
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+
+<header class="header" id="header">
+  <div class="container header__bar">
+    <a href="../" class="logo" aria-label="На головну">
+      <span class="logo__mark" aria-hidden="true"><span>А</span></span>
+      Агенція
+    </a>
+
+    <nav class="nav" aria-label="Головна навігація">
+      <a class="nav__link" href="../posluhy/">Ціни</a>
+      <a class="nav__link" href="../#keysy">Роботи</a>
+      <a class="nav__link" href="../demo/" aria-current="page">Демо</a>
+      <a class="nav__link" href="../#faq">FAQ</a>
+    </nav>
+
+    <div class="header__aside">
+      <a href="../#audyt" class="btn btn--primary btn--sm">Обговорити проєкт</a>
+      <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-open="false">
+  <a class="mobile-menu__link" href="../posluhy/">Ціни <span aria-hidden="true">→</span></a>
+  <a class="mobile-menu__link" href="../#keysy">Роботи <span aria-hidden="true">→</span></a>
+  <a class="mobile-menu__link" href="../demo/" aria-current="page">Демо онлайн-запису <span aria-hidden="true">→</span></a>
+  <a class="mobile-menu__link" href="../#faq">FAQ <span aria-hidden="true">→</span></a>
+  <div class="mobile-menu__foot">
+    <a href="../#audyt" class="btn btn--primary btn--block btn--lg">Обговорити проєкт</a>
+  </div>
+</div>
+
+<main id="main" class="page">
+  <div class="container">
+
+    <nav class="crumbs" aria-label="Навігація">
+      <a href="../">Головна</a>
+      <span aria-hidden="true">/</span>
+      <span>Демо онлайн-запису</span>
+    </nav>
+
+    <div class="section__head">
+      <h1 class="h1">Запишіться як ваш клієнт</h1>
+      <p class="lead">Це демо для вигаданого барбершопу. Чотири кроки — і ви побачите, яке сповіщення отримує власник. Дані нікуди не надсилаються.</p>
+    </div>
+
+    <div class="demo">
+
+      <!-- ===== Віджет запису ===== -->
+      <div class="booking">
+        <div class="booking__top">
+          <p class="booking__shop">Барбершоп «Бритва»</p>
+          <ol class="booking__progress" aria-label="Кроки запису">
+            <li data-dot="1" aria-current="step">Послуга</li>
+            <li data-dot="2">Майстер</li>
+            <li data-dot="3">Час</li>
+            <li data-dot="4">Контакти</li>
+          </ol>
+        </div>
+
+        <form class="booking__form" id="bookingForm" novalidate>
+
+          <!-- Крок 1 -->
+          <fieldset class="bstep" data-step="1">
+            <legend class="bstep__title" tabindex="-1">Оберіть послугу</legend>
+            <div class="options">
+              <label class="option">
+                <input type="radio" name="service" value="Чоловіча стрижка" data-price="500">
+                <span class="option__name">Чоловіча стрижка <small>45 хв</small></span>
+                <span class="option__price">500 ₴</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="service" value="Стрижка + борода" data-price="750">
+                <span class="option__name">Стрижка + борода <small>75 хв</small></span>
+                <span class="option__price">750 ₴</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="service" value="Моделювання бороди" data-price="350">
+                <span class="option__name">Моделювання бороди <small>30 хв</small></span>
+                <span class="option__price">350 ₴</span>
+              </label>
+              <label class="option">
+                <input type="radio" name="service" value="Королівське гоління" data-price="450">
+                <span class="option__name">Королівське гоління <small>40 хв</small></span>
+                <span class="option__price">450 ₴</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Крок 2 -->
+          <fieldset class="bstep" data-step="2" hidden>
+            <legend class="bstep__title" tabindex="-1">Оберіть майстра</legend>
+            <div class="options">
+              <label class="option">
+                <input type="radio" name="master" value="Будь-який майстер">
+                <span class="option__name">Будь-який майстер <small>найбільше вільного часу</small></span>
+              </label>
+              <label class="option">
+                <input type="radio" name="master" value="Влад">
+                <span class="option__name">Влад <small>топ-барбер, 7 років</small></span>
+              </label>
+              <label class="option">
+                <input type="radio" name="master" value="Артем">
+                <span class="option__name">Артем <small>барбер, 4 роки</small></span>
+              </label>
+              <label class="option">
+                <input type="radio" name="master" value="Денис">
+                <span class="option__name">Денис <small>барбер, 2 роки</small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Крок 3: дні й години генерує demo.js -->
+          <fieldset class="bstep" data-step="3" hidden>
+            <legend class="bstep__title" tabindex="-1">Оберіть день і час</legend>
+            <div class="chips chips--days" id="days"></div>
+            <div class="chips chips--slots" id="slots"></div>
+            <p class="booking__hint">Закреслений час уже зайнятий.</p>
+          </fieldset>
+
+          <!-- Крок 4 -->
+          <fieldset class="bstep" data-step="4" hidden>
+            <legend class="bstep__title" tabindex="-1">Ваші контакти</legend>
+            <div class="field">
+              <label for="b-name">Ім'я</label>
+              <input type="text" id="b-name" name="name" autocomplete="given-name" placeholder="Максим">
+            </div>
+            <div class="field">
+              <label for="b-phone">Телефон</label>
+              <input type="tel" id="b-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="+38 (0__) ___-__-__">
+            </div>
+            <dl class="summary" id="summary"></dl>
+          </fieldset>
+
+          <p class="booking__error" id="bookingError" role="alert"></p>
+
+          <div class="booking__nav">
+            <button type="button" class="btn btn--ghost" id="backBtn" hidden>Назад</button>
+            <button type="submit" class="btn btn--primary" id="nextBtn">Далі</button>
+          </div>
+        </form>
+
+        <div class="booking__done" id="bookingDone" tabindex="-1" hidden>
+          <p class="booking__done-title">Ви записані!</p>
+          <p class="booking__done-text" id="doneText"></p>
+          <button type="button" class="btn btn--ghost" id="restartBtn">Пройти ще раз</button>
+        </div>
+      </div>
+
+      <!-- ===== Що бачить власник ===== -->
+      <aside class="owner" aria-labelledby="owner-title">
+        <h2 class="owner__title" id="owner-title">А це бачить власник</h2>
+        <div class="tg">
+          <p class="tg__head">Telegram · Записи «Бритва»</p>
+          <div class="tg__body" id="tgBody" aria-live="polite">
+            <p class="tg__empty">Сповіщення з'явиться тут, щойно ви завершите запис.</p>
+          </div>
+        </div>
+        <ul class="owner__list">
+          <li>Запис приходить у Telegram за секунди</li>
+          <li>Клієнт бачить тільки вільний час</li>
+          <li>Працює 24/7, навіть коли ви стрижете</li>
+        </ul>
+      </aside>
+    </div>
+
+    <!-- ===== CTA ===== -->
+    <section class="demo-cta" aria-labelledby="demo-cta-title">
+      <h2 class="h3" id="demo-cta-title">Хочете такий запис у себе?</h2>
+      <p class="muted">Запускаємо за 5 днів у пакеті «Лендинг із записом» — 15&nbsp;000&nbsp;₴.</p>
+      <div class="case-cta">
+        <a href="../#audyt" class="btn btn--primary btn--lg">Обговорити проєкт</a>
+        <a href="../posluhy/" class="btn btn--ghost btn--lg">Подивитись ціни</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__bottom" style="padding-top:0">
+      <span>© <span id="year">2026</span> Агенція. Усі права захищені.</span>
+      <nav class="footer__legal" aria-label="Правова інформація">
+        <a href="../polityka-konfidentsiynosti/">Політика конфіденційності</a>
+        <a href="../publichna-oferta/">Публічна оферта</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="../main.js" defer></script>
+<script src="demo.js" defer></script>
+</body>
+</html>
