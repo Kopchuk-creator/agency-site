@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Демо онлайн-запису для барбершопу | Агенція</title>
-<meta name="description" content="Спробуйте онлайн-запис очима клієнта: послуга, майстер, час — і подивіться, яке сповіщення отримує власник у Telegram.">
+<title>Запис і контакти — демо онлайн-запису | Агенція</title>
+<meta name="description" content="Спробуйте онлайн-запис очима клієнта і залиште заявку: підберемо пакет для вашого барбершопу, салону, спа чи кафе.">
 <meta name="theme-color" content="#ffffff">
 <!-- ⚠️ РЕЖИМ МАКЕТА — прибрати перед справжнім запуском -->
 <meta name="robots" content="noindex, nofollow">
@@ -27,14 +27,13 @@
     </a>
 
     <nav class="nav" aria-label="Головна навігація">
-      <a class="nav__link" href="../posluhy/">Ціни</a>
-      <a class="nav__link" href="../#keysy">Роботи</a>
-      <a class="nav__link" href="../demo/" aria-current="page">Демо</a>
-      <a class="nav__link" href="../#faq">FAQ</a>
+      <a class="nav__link" href="../">Про нас</a>
+      <a class="nav__link" href="../roboty/">Роботи та ціни</a>
+      <a class="nav__link" href="../zapys/" aria-current="page">Запис і контакти</a>
     </nav>
 
     <div class="header__aside">
-      <a href="../#audyt" class="btn btn--primary btn--sm">Обговорити проєкт</a>
+      <a href="../zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
       <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" id="burger">
         <span></span><span></span><span></span>
       </button>
@@ -43,12 +42,11 @@
 </header>
 
 <div class="mobile-menu" id="mobile-menu" data-open="false">
-  <a class="mobile-menu__link" href="../posluhy/">Ціни <span aria-hidden="true">→</span></a>
-  <a class="mobile-menu__link" href="../#keysy">Роботи <span aria-hidden="true">→</span></a>
-  <a class="mobile-menu__link" href="../demo/" aria-current="page">Демо онлайн-запису <span aria-hidden="true">→</span></a>
-  <a class="mobile-menu__link" href="../#faq">FAQ <span aria-hidden="true">→</span></a>
+  <a class="mobile-menu__link" href="../">Про нас <span aria-hidden="true">→</span></a>
+  <a class="mobile-menu__link" href="../roboty/">Роботи та ціни <span aria-hidden="true">→</span></a>
+  <a class="mobile-menu__link" href="../zapys/" aria-current="page">Запис і контакти <span aria-hidden="true">→</span></a>
   <div class="mobile-menu__foot">
-    <a href="../#audyt" class="btn btn--primary btn--block btn--lg">Обговорити проєкт</a>
+    <a href="../zapys/#kontakty" class="btn btn--primary btn--block btn--lg">Обговорити проєкт</a>
   </div>
 </div>
 
@@ -58,7 +56,7 @@
     <nav class="crumbs" aria-label="Навігація">
       <a href="../">Головна</a>
       <span aria-hidden="true">/</span>
-      <span>Демо онлайн-запису</span>
+      <span>Запис і контакти</span>
     </nav>
 
     <div class="section__head">
@@ -186,13 +184,86 @@
       </aside>
     </div>
 
-    <!-- ===== CTA ===== -->
-    <section class="demo-cta" aria-labelledby="demo-cta-title">
-      <h2 class="h3" id="demo-cta-title">Хочете такий запис у себе?</h2>
-      <p class="muted">Запускаємо за 5 днів у пакеті «Лендинг із записом» — 15&nbsp;000&nbsp;₴.</p>
-      <div class="case-cta">
-        <a href="../#audyt" class="btn btn--primary btn--lg">Обговорити проєкт</a>
-        <a href="../posluhy/" class="btn btn--ghost btn--lg">Подивитись ціни</a>
+    <!-- ===== Контакти і форма ===== -->
+    <section class="contacts" id="kontakty" aria-labelledby="contacts-title">
+      <div class="section__head">
+        <h2 class="h2" id="contacts-title">Контакти</h2>
+        <p class="lead">Розкажіть про свій заклад — порадимо пакет і назвемо строк.</p>
+      </div>
+
+      <div class="contacts__grid">
+        <!-- ⚠️ Контакти — заглушки. Підставте справжні перед запуском. -->
+        <ul class="contacts__list">
+          <li>
+            <span class="contacts__label">Телефон</span>
+            <a href="tel:+380670000000">+38 (067) 000-00-00</a>
+          </li>
+          <li>
+            <span class="contacts__label">Пошта</span>
+            <a href="mailto:hello@agency.ua">hello@agency.ua</a>
+          </li>
+          <li>
+            <span class="contacts__label">Месенджери</span>
+            <a href="https://t.me/" rel="noopener">Telegram</a> ·
+            <a href="viber://chat?number=%2B380670000000">Viber</a> ·
+            <a href="https://instagram.com/" rel="noopener">Instagram</a>
+          </li>
+          <li>
+            <span class="contacts__label">Місто</span>
+            Івано-Франківськ, працюємо по всій Україні
+          </li>
+        </ul>
+
+        <div class="formcard formcard--light">
+          <div class="formcard__head">
+            <h3 class="h3">Обговорити проєкт</h3>
+            <p>Залиште контакти — передзвонимо й відповімо на запитання.</p>
+          </div>
+
+          <form id="contactForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="c-name">Ім'я <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="c-name" name="name" autocomplete="given-name" placeholder="Максим" required>
+                <p class="field__error" role="alert">Вкажіть ім'я</p>
+              </div>
+
+              <div class="field">
+                <label for="c-phone">Телефон <span class="req" aria-hidden="true">*</span></label>
+                <input type="tel" id="c-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="+38 (0__) ___-__-__" required>
+                <p class="field__error" role="alert">Вкажіть коректний номер телефону</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="c-package">Пакет <span class="req" aria-hidden="true">*</span></label>
+              <select id="c-package" name="package" required>
+                <option value="" selected disabled>Оберіть пакет</option>
+                <option value="1">Лендинг із записом — 15 000 ₴</option>
+                <option value="2">Сайт закладу — 25 000 ₴</option>
+                <option value="3">Сайт із замовленнями — 40 000 ₴</option>
+                <option value="0">Ще не знаю — порадьте</option>
+              </select>
+              <p class="field__error" role="alert">Оберіть пакет або «Ще не знаю»</p>
+            </div>
+
+            <div class="field">
+              <label for="c-message">Коментар</label>
+              <textarea id="c-message" name="message" rows="4" placeholder="Назва закладу, посилання на Instagram, побажання"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--block btn--lg" id="submitBtn">
+              <span class="spinner" aria-hidden="true"></span>
+              <span class="btn__label">Надіслати заявку</span>
+            </button>
+
+            <div class="form__status" id="formStatus" role="status" aria-live="polite"></div>
+
+            <p class="form__legal">
+              Натискаючи кнопку, ви погоджуєтесь з <a href="../polityka-konfidentsiynosti/">політикою конфіденційності</a>.
+            </p>
+          </form>
+        </div>
       </div>
     </section>
   </div>

@@ -81,17 +81,13 @@
     </a>
 
     <nav class="nav" aria-label="Головна навігація">
-      <a class="nav__link" href="#tsiny">Ціни</a>
-      <a class="nav__link" href="#keysy">Роботи</a>
-      <a class="nav__link" href="demo/">Демо</a>
-      <a class="nav__link" href="#proces">Як працюємо</a>
-      <a class="nav__link" href="#faq">FAQ</a>
+      <a class="nav__link" href="./" aria-current="page">Про нас</a>
+      <a class="nav__link" href="roboty/">Роботи та ціни</a>
+      <a class="nav__link" href="zapys/">Запис і контакти</a>
     </nav>
 
     <div class="header__aside">
-      <a href="#audyt" class="btn btn--primary btn--sm">
-        <span>Безкоштовний аудит</span>
-      </a>
+      <a href="zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
       <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" id="burger">
         <span></span><span></span><span></span>
       </button>
@@ -104,102 +100,54 @@
      backdrop-filter на .header робить його containing block для position:fixed
      і меню обрізалось би до висоти хедера. -->
   <div class="mobile-menu" id="mobile-menu" data-open="false">
-    <a class="mobile-menu__link" href="#tsiny">Ціни <span aria-hidden="true">→</span></a>
-    <a class="mobile-menu__link" href="#keysy">Роботи <span aria-hidden="true">→</span></a>
-    <a class="mobile-menu__link" href="demo/">Демо онлайн-запису <span aria-hidden="true">→</span></a>
-    <a class="mobile-menu__link" href="#proces">Як працюємо <span aria-hidden="true">→</span></a>
-    <a class="mobile-menu__link" href="#faq">FAQ <span aria-hidden="true">→</span></a>
+    <a class="mobile-menu__link" href="./" aria-current="page">Про нас <span aria-hidden="true">→</span></a>
+    <a class="mobile-menu__link" href="roboty/">Роботи та ціни <span aria-hidden="true">→</span></a>
+    <a class="mobile-menu__link" href="zapys/">Запис і контакти <span aria-hidden="true">→</span></a>
     <div class="mobile-menu__foot">
-      <a href="#audyt" class="btn btn--primary btn--block btn--lg">Безкоштовний аудит сайту</a>
+      <a href="zapys/#kontakty" class="btn btn--primary btn--block btn--lg">Обговорити проєкт</a>
       <a href="tel:+380670000000" class="btn btn--ghost btn--block btn--lg">+38 (067) 000-00-00</a>
     </div>
   </div>
 
 <main id="main">
 
-<!-- ═══════════════════════ ЕКРАН 1 — ГЕРОЙ ═══════════════════════ -->
-<section class="hero" aria-labelledby="hero-title">
+<!-- ═══════════════════════ ЕКРАН 1 — ПРО НАС ═══════════════════════ -->
+<section class="about" id="pro-nas" aria-labelledby="about-title">
   <div class="container">
-    <p class="hero__eyebrow">Барбершопи · салони краси · спа · кав'ярні</p>
+    <p class="about__eyebrow">Веб-студія з Івано-Франківська</p>
 
-    <h1 class="hero__title" id="hero-title">
-      Сайт з онлайн-записом, який заповнює ваш графік
+    <h1 class="about__title" id="about-title">
+      Робимо сайти з онлайн-записом для малого бізнесу
     </h1>
 
-    <p class="hero__text">
-      Клієнт сам обирає послугу, майстра й час — без дзвінків, поки ви працюєте.
-      Фіксована ціна і підтримка після запуску.
+    <p class="about__text">
+      Проєктуємо, верстаємо і підтримуємо сайти, через які клієнти записуються самі —
+      без дзвінків і листування в директі.
     </p>
 
-    <div class="hero__actions">
-      <a href="demo/" class="btn btn--primary btn--lg">Спробувати онлайн-запис</a>
-      <a href="#tsiny" class="btn btn--ghost btn--lg">Подивитись ціни</a>
-    </div>
-
-    <ul class="hero__facts">
-      <li><strong>від 15 000 ₴</strong> фіксована ціна розробки</li>
-      <li><strong>24/7</strong> запис без адміністратора</li>
-      <li><strong>від 5 днів</strong> до запуску сайту</li>
+    <h2 class="about__subtitle">Для кого працюємо</h2>
+    <ul class="about__audience">
+      <li>Барбершопи</li>
+      <li>Салони краси</li>
+      <li>Масаж і спа</li>
+      <li>Кав'ярні й ресторани</li>
     </ul>
+
+    <ul class="about__facts">
+      <li><strong>4</strong> живі сайти в портфоліо</li>
+      <li><strong>від 5 днів</strong> до запуску</li>
+      <li><strong>1 місяць</strong> гарантії</li>
+    </ul>
+
+    <div class="about__actions">
+      <a href="zapys/" class="btn btn--primary btn--lg">Спробувати онлайн-запис</a>
+      <a href="roboty/" class="btn btn--ghost btn--lg">Роботи і ціни</a>
+    </div>
   </div>
 </section>
 
-<!-- ═══════════════════════ ЕКРАН 2 — ПАКЕТИ І ЦІНИ ═══════════════════════ -->
-<section class="section" id="tsiny" aria-labelledby="packages-title">
-  <div class="container">
-    <div class="section__head">
-      <h2 class="h2" id="packages-title">Три пакети — під розмір вашого закладу</h2>
-      <p class="lead">Ціну і строк ви знаєте ще до розмови. Оплата 50/50, гарантія — місяць після запуску.</p>
-    </div>
-
-    <ul class="packages">
-      <li class="pack">
-        <p class="pack__for">Барбершопи, майстри</p>
-        <h3 class="pack__title">Лендинг із записом</h3>
-        <p class="pack__price">15&nbsp;000&nbsp;₴</p>
-        <p class="pack__meta">Запуск за 5 днів<br>Підтримка 6&nbsp;000&nbsp;₴/міс</p>
-        <ul class="pack__list">
-          <li>Одна сторінка: послуги, прайс, майстри, контакти</li>
-          <li>Онлайн-запис зі сповіщенням у Telegram</li>
-          <li>Мобільна версія і базове SEO</li>
-        </ul>
-        <p class="pack__example">Приклад: <a href="#keysy">BRUTAL CUT</a></p>
-        <a class="pack__link" href="posluhy/#paket-1">Детальніше про пакет →</a>
-      </li>
-
-      <li class="pack">
-        <p class="pack__for">Масаж, спа, салони</p>
-        <h3 class="pack__title">Сайт закладу</h3>
-        <p class="pack__price">25&nbsp;000&nbsp;₴</p>
-        <p class="pack__meta">Запуск за 10–12 днів<br>Підтримка 15&nbsp;000&nbsp;₴/міс</p>
-        <ul class="pack__list">
-          <li>Кілька сторінок: послуги, майстри, галерея, блог</li>
-          <li>Онлайн-бронювання процедур</li>
-          <li>SEO під ваше місто й нішу</li>
-        </ul>
-        <p class="pack__example">Приклад: <a href="#keysy">Aura SPA</a></p>
-        <a class="pack__link" href="posluhy/#paket-2">Детальніше про пакет →</a>
-      </li>
-
-      <li class="pack">
-        <p class="pack__for">Кав'ярні, ресторани, великі салони</p>
-        <h3 class="pack__title">Сайт із замовленнями</h3>
-        <p class="pack__price">40&nbsp;000&nbsp;₴</p>
-        <p class="pack__meta">Запуск за 15 днів<br>Підтримка 20&nbsp;000&nbsp;₴/міс</p>
-        <ul class="pack__list">
-          <li>Меню або каталог з фото й цінами</li>
-          <li>Кошик, замовлення, доставка або крамниця</li>
-          <li>Онлайн-запис чи бронювання столиків</li>
-        </ul>
-        <p class="pack__example">Приклади: <a href="#keysy">Food&amp;Vibe</a>, <a href="#keysy">Lumière</a></p>
-        <a class="pack__link" href="posluhy/#paket-3">Детальніше про пакет →</a>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ═══════════════════════ ЕКРАН 3 — БІЛЬ → РІШЕННЯ ═══════════════════════ -->
-<section class="section section--soft" id="bil" aria-labelledby="pains-title">
+<!-- ═══════════════════════ ЕКРАН 2 — ЗНАЙОМО? ═══════════════════════ -->
+<section class="section" id="bil" aria-labelledby="pains-title">
   <div class="container">
     <div class="section__head">
       <h2 class="h2" id="pains-title">Знайомо? Ось що змінює сайт з онлайн-записом</h2>
@@ -215,7 +163,7 @@
         </div>
         <div class="pain__side pain__side--fix">
           <p class="pain__label">З нами</p>
-          <p class="pain__title">Клієнт записується сам, 24/7</p>
+          <p class="pain__title">Клієнт записується сам</p>
           <p class="pain__text">Обирає послугу, майстра й час, а вам приходить сповіщення в Telegram.</p>
         </div>
       </li>
@@ -236,13 +184,13 @@
       <li class="pain">
         <div class="pain__side">
           <p class="pain__label">Зараз</p>
-          <h3 class="pain__title">Вас немає в Google</h3>
-          <p class="pain__text">Шукають «барбершоп поруч» — і знаходять тих, у кого є сайт.</p>
+          <h3 class="pain__title">Пропущені клієнти після закриття</h3>
+          <p class="pain__text">О 23:00 людина хоче записатись, а відповісти нікому — зранку вона вже в іншому салоні.</p>
         </div>
         <div class="pain__side pain__side--fix">
           <p class="pain__label">З нами</p>
-          <p class="pain__title">Сайт, який знаходять у пошуку</p>
-          <p class="pain__text">Налаштовуємо під ваше місто й нішу, додаємо адресу на карті.</p>
+          <p class="pain__title">Запис працює 24/7</p>
+          <p class="pain__text">Клієнт бачить вільний час і записується, навіть коли ви спите.</p>
         </div>
       </li>
 
@@ -262,80 +210,12 @@
 
     <div class="pains__cta">
       <p class="pains__cta-text">Подивіться, як запис виглядає очима вашого клієнта.</p>
-      <a href="demo/" class="btn btn--primary btn--lg">Спробувати онлайн-запис</a>
+      <a href="zapys/" class="btn btn--primary btn--lg">Спробувати онлайн-запис</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════ ЕКРАН 4 — РОБОТИ ═══════════════════════ -->
-<section class="section" id="keysy" aria-labelledby="works-title">
-  <div class="container">
-    <div class="section__head">
-      <h2 class="h2" id="works-title">Наші роботи</h2>
-      <p class="lead">Це живі сайти: відкрийте будь-який і пройдіть запис як клієнт.</p>
-    </div>
-
-    <ul class="works">
-      <li class="work">
-        <img class="work__img" src="img/works/barber-shop.webp" width="1280" height="800"
-             loading="lazy" decoding="async"
-             alt="Головна сторінка сайту барбершопу BRUTAL CUT">
-        <div class="work__body">
-          <p class="work__niche">Барбершоп</p>
-          <h3 class="work__title">BRUTAL CUT</h3>
-          <p class="work__text">Прайс, майстри, галерея робіт і онлайн-запис з найближчим вільним вікном.</p>
-          <a class="work__link" href="https://nazar-web-hash.github.io/barber-shop/frontend/" target="_blank" rel="noopener">
-            Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
-          </a>
-        </div>
-      </li>
-
-      <li class="work">
-        <img class="work__img" src="img/works/lumiere.webp" width="1280" height="800"
-             loading="lazy" decoding="async"
-             alt="Головна сторінка сайту салону краси Lumière">
-        <div class="work__body">
-          <p class="work__niche">Салон краси</p>
-          <h3 class="work__title">Lumière</h3>
-          <p class="work__text">Послуги, майстри, крамниця косметики та онлайн-запис за 2 хвилини.</p>
-          <a class="work__link" href="https://kopchuk-creator.github.io/Lumiere/" target="_blank" rel="noopener">
-            Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
-          </a>
-        </div>
-      </li>
-
-      <li class="work">
-        <img class="work__img" src="img/works/massage-center.webp" width="1280" height="800"
-             loading="lazy" decoding="async"
-             alt="Головна сторінка сайту мережі салонів масажу Aura SPA">
-        <div class="work__body">
-          <p class="work__niche">Масаж і спа</p>
-          <h3 class="work__title">Aura SPA</h3>
-          <p class="work__text">Програми масажу, підбір процедури, майстри та онлайн-бронювання.</p>
-          <a class="work__link" href="https://nazar-web-hash.github.io/massage-center/frontend/" target="_blank" rel="noopener">
-            Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
-          </a>
-        </div>
-      </li>
-
-      <li class="work">
-        <img class="work__img" src="img/works/food-vibe.webp" width="1280" height="800"
-             loading="lazy" decoding="async"
-             alt="Головна сторінка сайту кафе Food&amp;Vibe">
-        <div class="work__body">
-          <p class="work__niche">Кав'ярня</p>
-          <h3 class="work__title">Food&amp;Vibe</h3>
-          <p class="work__text">Меню з фото, кошик і доставка, українська та англійська версії.</p>
-          <a class="work__link" href="https://kopchuk-creator.github.io/Food-Vibe/" target="_blank" rel="noopener">
-            Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
-          </a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ═══════════════════════ ЕКРАН 5 — ЯК ПРАЦЮЄМО ═══════════════════════ -->
+<!-- ═══════════════════════ ЕКРАН 3 — ЯК ПРАЦЮЄМО ═══════════════════════ -->
 <section class="section section--dark" id="proces" aria-labelledby="steps-title">
   <div class="container">
     <div class="section__head">
@@ -364,7 +244,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════ ЕКРАН 6 — FAQ ═══════════════════════ -->
+<!-- ═══════════════════════ ЕКРАН 4 — FAQ ═══════════════════════ -->
 <section class="section section--soft" id="faq">
   <div class="container faq-layout">
     <div data-reveal>
@@ -376,7 +256,7 @@
         <p class="small muted" style="margin-bottom:20px">
           15 хвилин розмови — і ви розумієте, скільки коштує ваш проєкт і за який термін реально його зробити.
         </p>
-        <a href="#audyt" class="btn btn--dark btn--block">Записатись на консультацію</a>
+        <a href="zapys/#kontakty" class="btn btn--dark btn--block">Записатись на консультацію</a>
       </div>
     </div>
 
@@ -467,112 +347,9 @@
   </div>
 </section>
 
-<!-- ═══════════════════════ ЕКРАН 7 — ФІНАЛЬНИЙ CTA ═══════════════════════ -->
-<section class="section section--dark cta" id="audyt">
-  <div class="container cta__grid">
-    <div data-reveal>
-      <span class="eyebrow"><span class="eyebrow__num">10</span> Безкоштовний аудит</span>
-      <h2 class="h2" style="margin-block:16px 20px">
-        Дізнайтесь, скільки заявок ви втрачаєте прямо зараз
-      </h2>
-      <p class="lead">
-        Введіть адресу вашого сайту — за 3 хвилини надішлемо PDF-звіт із усіма проблемами:
-        швидкість, мобільна версія, SEO, форми. Без дзвінків і без зобов'язань.
-      </p>
-
-      <ul class="cta__points">
-        <li>
-          <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-          Оцінка сайту за 30+ технічними параметрами
-        </li>
-        <li>
-          <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-          Порівняння з трьома конкурентами у вашій ніші
-        </li>
-        <li>
-          <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-          Розрахунок втрачених заявок на місяць
-        </li>
-        <li>
-          <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
-          Список того, що варто виправити першим
-        </li>
-      </ul>
-
-      <div class="cta__alt">
-        <p>Або поговоримо голосом — 15 хвилин, без презентацій і тиску.</p>
-        <a href="https://cal.com/" class="btn btn--ghost btn--lg" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-          Записатись на 15-хвилинну консультацію
-        </a>
-      </div>
-    </div>
-
-    <!-- ФОРМА: фронтенд-валідація + стани. Точка інтеграції — у main.js -->
-    <div class="formcard" data-reveal>
-      <div class="formcard__head">
-        <h3 class="h3">Замовити аудит сайту</h3>
-        <p>Заповніть 4 поля — звіт прийде на пошту протягом 3 хвилин.</p>
-      </div>
-
-      <form id="auditForm" novalidate>
-        <div class="field" data-field="url">
-          <label for="f-url">Адреса вашого сайту <span class="req" aria-hidden="true">*</span></label>
-          <input type="url" id="f-url" name="url" inputmode="url" autocomplete="url"
-                 placeholder="site.com.ua" required>
-          <p class="field__hint">Немає сайту? Напишіть «немає» — порадимо, з чого почати.</p>
-          <p class="field__error" role="alert">Вкажіть адресу сайту, наприклад site.com.ua</p>
-        </div>
-
-        <div class="field-row">
-          <div class="field" data-field="phone">
-            <label for="f-phone">Телефон <span class="req" aria-hidden="true">*</span></label>
-            <input type="tel" id="f-phone" name="phone" inputmode="tel" autocomplete="tel"
-                   placeholder="+38 (0__) ___-__-__" required>
-            <p class="field__error" role="alert">Вкажіть коректний номер телефону</p>
-          </div>
-
-          <div class="field" data-field="email">
-            <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input type="email" id="f-email" name="email" inputmode="email" autocomplete="email"
-                   placeholder="you@company.ua" required>
-            <p class="field__error" role="alert">Вкажіть коректну пошту — саме туди прийде звіт</p>
-          </div>
-        </div>
-
-        <div class="field" data-field="niche">
-          <label for="f-niche">Ваша ніша <span class="req" aria-hidden="true">*</span></label>
-          <select id="f-niche" name="niche" required>
-            <option value="" selected disabled>Оберіть зі списку</option>
-            <option>Барбершоп</option>
-            <option>Салон краси</option>
-            <option>Масаж / спа</option>
-            <option>Кав'ярня / ресторан</option>
-            <option>Інше</option>
-          </select>
-          <p class="field__error" role="alert">Оберіть нішу — від неї залежить, з чим порівнюємо</p>
-        </div>
-
-        <button type="submit" class="btn btn--primary btn--block btn--lg" id="submitBtn">
-          <span class="spinner" aria-hidden="true"></span>
-          <span class="btn__label">Отримати PDF-звіт</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </button>
-
-        <div class="form__status" id="formStatus" role="status" aria-live="polite"></div>
-
-        <p class="form__legal">
-          Натискаючи кнопку, ви погоджуєтесь з <a href="polityka-konfidentsiynosti/">політикою конфіденційності</a>.
-          Ми не передаємо контакти третім особам і не надсилаємо розсилок.
-        </p>
-      </form>
-    </div>
-  </div>
-</section>
-
 </main>
 
-<!-- ═══════════════════════ ЕКРАН 8 — ФУТЕР ═══════════════════════ -->
+<!-- ═══════════════════════ ФУТЕР ═══════════════════════ -->
 <footer class="footer">
   <div class="container">
     <div class="footer__grid">
@@ -582,28 +359,27 @@
           Агенція
         </a>
         <p class="footer__about">
-          Розробляємо сайти для малого та середнього бізнесу в Івано-Франківській області
-          та по всій Україні. Фіксовані терміни, прозорі ціни, технічна гарантія 6 місяців.
+          Робимо сайти з онлайн-записом для барбершопів, салонів краси, спа і кав'ярень.
+          Фіксовані ціни й строки, гарантія місяць після запуску.
         </p>
       </div>
 
       <div class="footer__col">
-        <h4>Послуги</h4>
+        <h4>Сторінки</h4>
         <ul>
-          <li><a href="demo/">Демо онлайн-запису</a></li>
-          <li><a href="#keysy">Наші роботи</a></li>
-          <li><a href="#proces">Як працюємо</a></li>
-          <li><a href="#audyt">Безкоштовний аудит</a></li>
+          <li><a href="./">Про нас</a></li>
+          <li><a href="roboty/">Роботи та ціни</a></li>
+          <li><a href="zapys/">Запис і контакти</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
         <h4>Ніші</h4>
         <ul>
-          <li><a href="#tsiny">Барбершопи</a></li>
-          <li><a href="#tsiny">Салони краси</a></li>
-          <li><a href="#tsiny">Масаж і спа</a></li>
-          <li><a href="#tsiny">Кав'ярні й ресторани</a></li>
+          <li><a href="roboty/#tsiny">Барбершопи</a></li>
+          <li><a href="roboty/#tsiny">Салони краси</a></li>
+          <li><a href="roboty/#tsiny">Масаж і спа</a></li>
+          <li><a href="roboty/#tsiny">Кав'ярні й ресторани</a></li>
         </ul>
       </div>
 
@@ -656,22 +432,20 @@
       <nav class="footer__legal" aria-label="Правова інформація">
         <a href="polityka-konfidentsiynosti/">Політика конфіденційності</a>
         <a href="publichna-oferta/">Публічна оферта</a>
-        <a href="blog/">Блог</a>
-        <a href="#keysy">Наші роботи</a>
       </nav>
     </div>
   </div>
 </footer>
 
 <!-- Віджет зворотного дзвінка -->
-<a href="#audyt" class="callback" id="callback">
+<a href="zapys/#kontakty" class="callback" id="callback">
   <span class="callback__pulse" aria-hidden="true"></span>
   Передзвонимо за 5 хв
 </a>
 
 <!-- Липка панель на мобільному -->
 <div class="mobile-bar">
-  <a href="#audyt" class="btn btn--primary">Безкоштовний аудит</a>
+  <a href="zapys/#kontakty" class="btn btn--primary">Обговорити проєкт</a>
   <a href="tel:+380670000000" class="btn btn--ghost btn--icon" aria-label="Зателефонувати">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>
   </a>

@@ -80,20 +80,20 @@
   }
 
   /* ---------- Події сайту ----------
-     main.js штовхає подію 'audit_form_submit' у dataLayer після успішної
+     main.js штовхає подію 'contact_form_submit' у dataLayer після успішної
      відправки форми. Тут перекидаємо її в GA4 і Meta як конверсію. */
   window.addEventListener('agency:lead', function (e) {
     var detail = (e && e.detail) || {};
 
     if (window.gtag && CONFIG.ga4) {
       window.gtag('event', 'generate_lead', {
-        form: detail.form || 'audit',
-        niche: detail.niche || ''
+        form: detail.form || 'contact',
+        package: detail.package || ''
       });
     }
 
     if (window.fbq && CONFIG.metaPixel) {
-      window.fbq('track', 'Lead', { content_name: detail.form || 'audit' });
+      window.fbq('track', 'Lead', { content_name: detail.form || 'contact' });
     }
   });
 })();

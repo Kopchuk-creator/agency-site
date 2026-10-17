@@ -100,7 +100,6 @@ body {
 
 /* Грід-елементи за замовчуванням мають min-width:auto і можуть розпирати
    колонку довгим вмістом. Гасимо це в усіх сіткових блоках сайту. */
-.cta__grid > *,
 .faq-layout > *,
 
 
@@ -137,7 +136,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* ---------- Typography ---------- */
 .h1 {
-  /* Розмір узгоджений з шириною текстової колонки hero: за 96px заголовок
+  /* Розмір узгоджений з шириною текстової колонки: за 96px заголовок
      ламався на 6 куцих рядків і втрачав силу. */
   font-size: clamp(38px, 5.4vw, 76px);
   line-height: 1.02;
@@ -228,6 +227,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .section__head .h2 { margin-block: var(--s-4) var(--s-4); }
+.section__head .h1 { margin-bottom: var(--s-4); }
 
 .hairline { height: 1px; background: var(--line); border: 0; margin: 0; }
 
@@ -680,30 +680,31 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .mobile-menu__foot { margin-top: var(--s-6); display: grid; gap: var(--s-3); }
 
 /* ==========================================================================
-   SCREEN 1 — HERO (mobile-first)
+   SCREEN 1 — ПРО НАС (mobile-first)
    ========================================================================== */
-.hero {
+.about {
   padding-block: var(--s-8) var(--s-7);
   background: var(--bg-soft);
 }
 
-.hero__eyebrow {
+.about__eyebrow {
   margin-bottom: var(--s-3);
   font-size: 14px;
   font-weight: 500;
   color: var(--accent-ink);
 }
 
-.hero__title {
-  max-width: 16ch;
+/* clamp: на телефоні 32px, далі росте з шириною екрана до 64px */
+.about__title {
+  max-width: 18ch;
   font-size: clamp(32px, 8vw, 64px);
+  font-weight: 640;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  font-weight: 640;
   text-wrap: balance;
 }
 
-.hero__text {
+.about__text {
   max-width: 52ch;
   margin-top: var(--s-4);
   font-size: 18px;
@@ -711,38 +712,74 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: var(--ink-2);
 }
 
-.hero__actions {
+.about__subtitle {
+  margin-top: var(--s-6);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Ніші — «таблетки»: flex-wrap сам переносить їх на новий рядок */
+.about__audience {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+  padding: 0;
+  list-style: none;
+}
+
+.about__audience li {
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Три факти в ряд навіть на телефоні — так кнопки не падають за перший екран */
+.about__facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-3);
+  max-width: 640px;            /* на широкому екрані факти не розлітаються по краях */
+  margin-top: var(--s-6);
+  padding: var(--s-5) 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+
+.about__facts strong {
+  display: block;
+  margin-bottom: var(--s-1);
+  font-size: 18px;
+  color: var(--ink);
+}
+
+/* На телефоні кнопки одна під одною на всю ширину */
+.about__actions {
   display: flex;
   flex-direction: column;
   gap: var(--s-3);
   margin-top: var(--s-6);
 }
 
-.hero__facts {
-  display: grid;
-  gap: var(--s-4);
-  margin-top: var(--s-7);
-  padding: 0;
-  list-style: none;
-  font-size: 15px;
-  color: var(--ink-2);
-}
-
-.hero__facts strong {
-  display: block;
-  font-size: 20px;
-  color: var(--ink);
-}
-
-/* Hero: планшет */
+/* Планшет: більші цифри, кнопки поруч */
 @media (min-width: 600px) {
-  .hero__actions { flex-direction: row; }
-  .hero__facts   { grid-template-columns: repeat(3, 1fr); }
+  .about__facts        { gap: var(--s-4); font-size: 15px; }
+  .about__facts strong { font-size: 22px; }
+  .about__actions      { flex-direction: row; }
 }
 
-/* Hero: десктоп */
+/* Десктоп: більше повітря */
 @media (min-width: 1024px) {
-  .hero { padding-block: var(--s-10) var(--s-9); }
+  .about { padding-block: var(--s-10) var(--s-9); }
 }
 
 /* ==========================================================================
@@ -1250,40 +1287,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .faq-aside .h3 { margin-block: var(--s-3) var(--s-3); }
 
 /* ==========================================================================
-   SCREEN 10 — FINAL CTA / AUDIT FORM
+   ФОРМА (картка, поля, статуси)
    ========================================================================== */
-.cta {
-  position: relative;
-  overflow: hidden;
-}
-
-.cta__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: start;
-}
-
-.cta__points { margin-top: var(--s-6); display: grid; gap: 14px; }
-
-.cta__points li {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  font-size: 16.5px;
-  color: #d4d4d4;
-}
-
-.cta__points .ic { flex: none; margin-top: 3px; color: var(--accent); }
-
-.cta__alt {
-  margin-top: var(--s-7);
-  padding-top: var(--s-5);
-  border-top: 1px solid var(--line-dark);
-}
-
-.cta__alt p { color: var(--ink-on-dark-2); margin-bottom: var(--s-4); font-size: 16px; }
-
 /* Form card */
 .formcard {
   background: #fff;
@@ -1307,7 +1312,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .field label .req { color: var(--accent); }
 
 .field input,
-.field select {
+.field select,
+.field textarea {
   width: 100%;
   min-height: 52px;
   padding: 0 15px;
@@ -1319,6 +1325,13 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   appearance: none;
 }
 
+.field textarea {
+  min-height: 120px;
+  padding-block: 12px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
 .field select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -1328,10 +1341,12 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .field input:hover,
-.field select:hover { border-color: var(--ink-3); }
+.field select:hover,
+.field textarea:hover { border-color: var(--ink-3); }
 
 .field input:focus,
-.field select:focus {
+.field select:focus,
+.field textarea:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.14);
@@ -2157,17 +2172,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: var(--accent);
 }
 
-/* ---------- CTA під демо ---------- */
-.demo-cta {
-  margin-top: clamp(48px, 7vw, 88px);
-  padding: var(--s-6) var(--s-5);
-  border-radius: var(--r-xl);
-  background: var(--bg-soft);
-}
-
-.demo-cta .muted { margin-top: var(--s-2); }
-.demo-cta .case-cta { margin-top: var(--s-5); }
-
 /* Десктоп: віджет зліва, «телефон власника» справа і їде за скролом */
 @media (min-width: 1024px) {
   .demo {
@@ -2183,7 +2187,78 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .booking__form,
   .booking__done { padding: var(--s-6); }
 
-  .demo-cta { padding: var(--s-7); }
+}
+
+/* ==========================================================================
+   БЛОКИ ВНУТРІШНІХ СТОРІНОК (mobile-first)
+   ========================================================================== */
+/* Великий розділ сторінки: «Наші роботи», «Ціни» */
+.page-block {
+  margin-top: clamp(48px, 7vw, 88px);
+  scroll-margin-top: calc(var(--header-h) + var(--s-4));
+}
+
+.page-block__lead { margin-block: var(--s-3) var(--s-6); }
+
+/* ==========================================================================
+   КОНТАКТИ І ФОРМА (mobile-first)
+   ========================================================================== */
+.contacts {
+  margin-top: clamp(56px, 8vw, 104px);
+  scroll-margin-top: calc(var(--header-h) + var(--s-4));
+}
+
+.contacts__grid {
+  display: grid;
+  gap: var(--s-6);
+}
+
+.contacts__list {
+  display: grid;
+  gap: var(--s-4);
+  padding: 0;
+  list-style: none;
+}
+
+.contacts__list li {
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line);
+  line-height: 1.5;
+}
+
+.contacts__label {
+  display: block;
+  margin-bottom: var(--s-1);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.contacts__list a {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@media (hover: hover) {
+  .contacts__list a:hover { color: var(--accent-ink); }
+}
+
+/* Форма на світлому фоні: м'яка тінь замість темної */
+.formcard--light {
+  border: 1px solid var(--line);
+  box-shadow: var(--e-2);
+}
+
+/* Десктоп: контакти зліва, форма справа */
+@media (min-width: 1024px) {
+  .contacts__grid {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: var(--s-8);
+    align-items: start;
+  }
 }
 
 /* ==========================================================================
@@ -2237,7 +2312,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
   .faq-layout { grid-template-columns: 1fr; }
   .faq-aside { position: static; margin-top: var(--s-5); }
-  .cta__grid { grid-template-columns: 1fr; }
 
   /* Три колонки ніш на планшеті занадто тісні — переходимо на дві */
 
@@ -2305,7 +2379,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* ══════════════ ЛАНДШАФТНА ОРІЄНТАЦІЯ ТЕЛЕФОНА ══════════════ */
 @media (max-height: 520px) and (orientation: landscape) {
-  .hero { padding-block: var(--s-6); }
+  .about { padding-block: var(--s-6); }
   .mobile-bar { position: static; }
   body { padding-bottom: 0; }
 }

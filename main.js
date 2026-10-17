@@ -164,30 +164,34 @@
     callback.classList.toggle('is-visible', pastHero && !atForm);
   }
 
-  /* ---------- 9. Форма аудиту ---------- */
-  var form = document.getElementById('auditForm');
+  /* ---------- 9. Форма зв'язку ---------- */
+  var form = document.getElementById('contactForm');
 
   if (form) {
     var statusEl = document.getElementById('formStatus');
     var submitBtn = document.getElementById('submitBtn');
 
     var validators = {
-      url: function (value) {
-        if (!value.trim()) return false;
-        if (/^нема/i.test(value.trim())) return true; // «немає сайту» — валідно
-        return /^(https?:\/\/)?([a-zа-яїієґ0-9-]+\.)+[a-zа-яїієґ]{2,}(\/\S*)?$/i.test(value.trim());
+      name: function (value) {
+        return value.trim().length >= 2;
       },
       phone: function (value) {
         var digits = value.replace(/\D/g, '');
         return digits.length >= 9 && digits.length <= 15;
       },
-      email: function (value) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
-      },
-      niche: function (value) {
+      package: function (value) {
         return value !== '';
       }
     };
+
+    // Кнопка «Обрати пакет» на сторінці цін веде сюди з ?paket=N —
+    // одразу підставляємо цей пакет у форму
+    var packageSelect = form.elements.namedItem('package');
+    var paketParam = new URLSearchParams(window.location.search).get('paket');
+    var paketExists = packageSelect && Array.prototype.some.call(packageSelect.options, function (o) {
+      return o.value === paketParam;
+    });
+    if (paketParam && paketExists) packageSelect.value = paketParam;
 
     function fieldWrap(input) {
       return input.closest('.field');
@@ -203,7 +207,7 @@
     }
 
     // Валідація на blur, а не на кожен символ
-    Array.prototype.forEach.call(form.querySelectorAll('input, select'), function (input) {
+    Array.prototype.forEach.call(form.querySelectorAll('input, select, textarea'), function (input) {
       input.addEventListener('blur', function () {
         if (input.value !== '') validateField(input);
       });
@@ -231,7 +235,7 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var inputs = Array.prototype.slice.call(form.querySelectorAll('input, select'));
+      var inputs = Array.prototype.slice.call(form.querySelectorAll('input, select, textarea'));
       var firstInvalid = null;
 
       inputs.forEach(function (input) {
@@ -249,7 +253,7 @@
       // Google Sheets, Telegram-бот. Зараз — імітація відповіді,
       // щоб фронтенд можна було демонструвати автономно.
       //
-      //   fetch('/api/audit', {
+      //   fetch('/api/contact', {
       //     method: 'POST',
       //     headers: { 'Content-Type': 'application/json' },
       //     body: JSON.stringify(Object.fromEntries(new FormData(form)))
@@ -257,7 +261,7 @@
       // ─────────────────────────────────────────────────────────────
 
       // Зчитуємо до form.reset() — інакше значення вже стерте
-      var nicheValue = form.niche ? form.niche.value : '';
+      var packageValue = packageSelect ? packageSelect.value : '';
 
       submitBtn.classList.add('is-loading');
       submitBtn.setAttribute('aria-disabled', 'true');
@@ -269,7 +273,7 @@
 
         // ⚠️ РЕЖИМ МАКЕТА: заявка нікуди не надсилається, це імітація.
         // Після підключення бекенду замінити на:
-        // 'Заявку прийнято. PDF-звіт прийде на пошту протягом 3 хвилин.'
+        // 'Дякуємо! Передзвонимо протягом робочого дня.'
         showStatus('ok', 'Так виглядатиме підтвердження. Це макет — заявка нікуди не надіслана.');
         form.reset();
 
@@ -279,9 +283,9 @@
 
         // Події для аналітики. dataLayer — для GTM, CustomEvent — для
         // analytics.js, який перекидає це в GA4 і Meta як конверсію.
-        if (window.dataLayer) window.dataLayer.push({ event: 'audit_form_submit' });
+        if (window.dataLayer) window.dataLayer.push({ event: 'contact_form_submit' });
         window.dispatchEvent(new CustomEvent('agency:lead', {
-          detail: { form: 'audit', niche: nicheValue }
+          detail: { form: 'contact', package: packageValue }
         }));
       }, 900);
     });
