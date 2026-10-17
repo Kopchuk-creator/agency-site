@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сторінку не знайдено — Агенція</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+  // GitHub Pages віддає цю сторінку для будь-якої неіснуючої адреси на будь-якій глибині,
+  // тому відносні шляхи тут не працюють. Визначаємо корінь сайту:
+  // на github.io це /agency-site/, на власному домені — просто /.
+  (function () {
+    var first = location.pathname.split('/')[1];
+    var root = /\.github\.io$/.test(location.hostname) && first ? '/' + first + '/' : '/';
+
+    // Старі адреси, які могли залишитись у закладках чи повідомленнях
+    var moved = { posluhy: 'roboty/#tsiny', demo: 'zapys/', blog: '', keysy: 'roboty/#roboty' };
+    var page = location.pathname.slice(root.length).split('/')[0];
+    if (Object.prototype.hasOwnProperty.call(moved, page)) {
+      location.replace(root + moved[page]);
+      return;
+    }
+
+    var base = document.createElement('base');
+    base.href = root;
+    document.head.appendChild(base);
+  })();
+</script>
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<a href="#main" class="skip-link">Перейти до вмісту</a>
+
+<header class="header" id="header">
+  <div class="container header__bar">
+    <a href="./" class="logo" aria-label="На головну">
+      <span class="logo__mark" aria-hidden="true"><span>А</span></span>
+      Агенція
+    </a>
+  </div>
+</header>
+
+<main id="main" class="page">
+  <div class="container">
+    <div class="section__head not-found">
+      <p class="not-found__code" aria-hidden="true">404</p>
+      <h1 class="h1">Такої сторінки немає</h1>
+      <p class="lead">Можливо, адреса змінилась — сайт нещодавно оновився. Ось куди можна перейти:</p>
+    </div>
+
+    <ul class="not-found__links">
+      <li><a class="btn btn--primary btn--lg" href="./">Про нас</a></li>
+      <li><a class="btn btn--ghost btn--lg" href="roboty/">Роботи та ціни</a></li>
+      <li><a class="btn btn--ghost btn--lg" href="zapys/">Запис і контакти</a></li>
+    </ul>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__bottom footer__bottom--solo">
+      <span>© <span id="year">2026</span> Агенція. Усі права захищені.</span>
+      <nav class="footer__legal" aria-label="Правова інформація">
+        <a href="polityka-konfidentsiynosti/">Політика конфіденційності</a>
+        <a href="publichna-oferta/">Публічна оферта</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

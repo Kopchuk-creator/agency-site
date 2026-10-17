@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Подати вручну в Google Search Console, коли знімете noindex (див. LAUNCH.md) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://kopchuk-creator.github.io/agency-site/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://kopchuk-creator.github.io/agency-site/roboty/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://kopchuk-creator.github.io/agency-site/zapys/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+</urlset>

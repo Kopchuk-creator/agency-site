@@ -6,10 +6,11 @@
 <title>Сайти з онлайн-записом для барбершопів, салонів і кав'ярень — веб-агенція | Івано-Франківськ</title>
 <meta name="description" content="Сайти з онлайн-записом для барбершопів, салонів краси, спа і кав'ярень. Від 15 000 ₴, запуск від 5 днів, оплата 50/50, гарантія місяць.">
 <meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <!-- ⚠️ РЕЖИМ МАКЕТА. Сайт закритий від пошукових систем.
      Перед справжнім запуском: прибрати цей robots-тег, розкоментувати
-     canonical і og:image та підставити реальний домен. -->
+     canonical та підставити реальний домен. -->
 <meta name="robots" content="noindex, nofollow">
 <!-- <link rel="canonical" href="https://ВАШ-ДОМЕН.ua/"> -->
 
@@ -18,7 +19,10 @@
 <meta property="og:locale" content="uk_UA">
 <meta property="og:title" content="Сайт з онлайн-записом, який заповнює ваш графік">
 <meta property="og:description" content="Для барбершопів, салонів краси, спа і кав'ярень. Від 15 000 ₴, запуск від 5 днів, оплата 50/50.">
-<!-- <meta property="og:image" content="https://ВАШ-ДОМЕН.ua/og.jpg"> -->
+<meta property="og:image" content="https://kopchuk-creator.github.io/agency-site/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 
 <!-- Fonts: preconnect + swap -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,8 +49,7 @@
 
 <body>
 
-<a href="#main" class="btn btn--dark btn--sm" style="position:absolute;left:-9999px;top:8px;z-index:999"
-   onfocus="this.style.left='16px'" onblur="this.style.left='-9999px'">Перейти до вмісту</a>
+<a href="#main" class="skip-link">Перейти до вмісту</a>
 
 <!-- Соціальний доказ у хедері (ТЗ, екран 1) -->
 <div class="topbar">
@@ -261,12 +264,12 @@
 <section class="section section--soft" id="faq">
   <div class="container faq-layout">
     <div data-reveal>
-      <h2 class="h2" style="margin-block:16px">Найчастіші запитання</h2>
+      <h2 class="h2 faq-title">Найчастіші запитання</h2>
 
       <div class="faq-aside">
         <span class="eyebrow">Не знайшли відповідь?</span>
         <h3 class="h3">Спитайте напряму</h3>
-        <p class="small muted" style="margin-bottom:20px">
+        <p class="small muted faq-aside__text">
           15 хвилин розмови — і ви розумієте, скільки коштує ваш проєкт і за який термін реально його зробити.
         </p>
         <a href="zapys/#kontakty" class="btn btn--dark btn--block">Записатись на консультацію</a>
@@ -356,6 +359,20 @@
           <p>Працюємо як ФОП, за договором, із закривними документами.</p>
         </div>
       </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ ЕКРАН 5 — ФІНАЛЬНИЙ ЗАКЛИК ═══════════════════════ -->
+<section class="section final-cta" aria-labelledby="final-cta-title">
+  <div class="container">
+    <div class="final-cta__box">
+      <h2 class="h2" id="final-cta-title">Хочете, щоб клієнти записувались самі?</h2>
+      <p class="lead">Спробуйте онлайн-запис очима клієнта — а потім залиште заявку. Від 15&nbsp;000&nbsp;₴, запуск від 5 днів.</p>
+      <div class="final-cta__actions">
+        <a href="zapys/" class="btn btn--primary btn--lg">Спробувати онлайн-запис</a>
+        <a href="roboty/#tsiny" class="btn btn--ghost btn--lg">Подивитись ціни</a>
+      </div>
     </div>
   </div>
 </section>
@@ -453,7 +470,7 @@
 <!-- Віджет зворотного дзвінка -->
 <a href="zapys/#kontakty" class="callback" id="callback">
   <span class="callback__pulse" aria-hidden="true"></span>
-  Передзвонимо за 5 хв
+  Залишити заявку
 </a>
 
 <!-- Липка панель на мобільному -->
