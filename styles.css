@@ -584,8 +584,9 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .nav__link:hover { color: var(--ink); }
   .nav__link:hover::after { transform: scaleX(1); }
 }
-/* aria-current="page" — поточна сторінка: плашка, як і раніше; підкреслення — лише при наведенні */
-.nav__link[aria-current] { color: var(--ink); font-weight: 550; background: var(--bg-soft); }
+/* aria-current="page" — поточна вкладка: підкреслення лишається постійно */
+.nav__link[aria-current] { color: var(--ink); font-weight: 550; }
+.nav__link[aria-current]::after { transform: scaleX(1); }
 
 @media (prefers-reduced-motion: no-preference) {
   .nav__link::after { transition: transform 300ms var(--ease-out); }
