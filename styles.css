@@ -87,7 +87,7 @@
   --e-1: 0 1px 2px rgba(10, 10, 10, 0.04);
   --e-2: 0 4px 16px rgba(10, 10, 10, 0.06);
   --e-3: 0 12px 32px rgba(10, 10, 10, 0.1);
-  --e-accent: 0 8px 24px rgba(0, 102, 255, 0.24);
+  --e-accent: 0 4px 12px rgba(0, 102, 255, 0.18);
 
   /* Motion */
   --dur: 220ms;
@@ -139,7 +139,7 @@
   --e-1: 0 1px 2px rgba(0, 0, 0, 0.4);
   --e-2: 0 4px 16px rgba(0, 0, 0, 0.45);
   --e-3: 0 12px 32px rgba(0, 0, 0, 0.55);
-  --e-accent: 0 8px 24px rgba(0, 102, 255, 0.3);
+  --e-accent: 0 4px 12px rgba(0, 102, 255, 0.24);
 
   --on-ink: #121212;
   --header-bg: rgba(18, 18, 18, 0.82);
@@ -397,12 +397,12 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: 0 14px 32px rgba(0, 102, 255, 0.32);
+  box-shadow: 0 8px 18px rgba(0, 102, 255, 0.26);
   opacity: 0;
   pointer-events: none;
 }
 
-.btn--dark::after { box-shadow: var(--e-3); }
+.btn--dark::after { box-shadow: 0 6px 16px rgba(10, 10, 10, 0.14); }
 
 @media (hover: hover) {
   .btn--primary:hover::after,
@@ -1608,7 +1608,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: var(--on-ink);
   font-size: 15px;
   font-weight: 550;
-  box-shadow: var(--e-3);
+  box-shadow: var(--e-2);
   transform: translateY(120%);
   transition: transform var(--dur-lg) var(--ease), background-color var(--dur) var(--ease);
 }
@@ -2794,9 +2794,15 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* Підйом при наведенні — тільки з мишею */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .btn:hover { transform: scale(1.03); }
+  .btn:hover { transform: translateY(-3px); }
   .btn:hover svg { transform: translateX(4px); }
-  .btn:active { transform: scale(0.97); }   /* після hover — натискання перемагає */
+  .btn:active { transform: translateY(-1px) scale(0.98); }   /* після hover — натискання перемагає */
+
+  /* «Залишити заявку»: швидкий підйом при наведенні; поява знизу лишається повільною */
+  .callback.is-visible:hover {
+    transform: translateY(-3px);
+    transition: transform 300ms ease-out, background-color var(--dur) var(--ease);
+  }
 
   .pack:hover,
   .work:hover,
