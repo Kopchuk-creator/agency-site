@@ -553,20 +553,43 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .nav__link {
+  --nav-x: 13px;                       /* бічний відступ; підкреслення рівно під текстом */
+  position: relative;
   display: inline-flex;
   align-items: center;
   height: 40px;
-  padding: 0 13px;
+  padding: 0 var(--nav-x);
   border-radius: 8px;
   font-size: 15.5px;
   font-weight: 480;
   color: var(--ink-2);
-  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  transition: color var(--dur) var(--ease);
 }
 
-@media (hover: hover) { .nav__link:hover { color: var(--ink); background: var(--bg-soft); } }
-/* aria-current="page" — поточна сторінка, "true" — секція, яку підсвічує скрол */
+/* Підкреслення: лінія, що «розтягується» зліва направо (лише transform) */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: var(--nav-x);
+  right: var(--nav-x);
+  bottom: 6px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@media (hover: hover) {
+  .nav__link:hover { color: var(--ink); }
+  .nav__link:hover::after { transform: scaleX(1); }
+}
+/* aria-current="page" — поточна сторінка: плашка, як і раніше; підкреслення — лише при наведенні */
 .nav__link[aria-current] { color: var(--ink); font-weight: 550; background: var(--bg-soft); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav__link::after { transition: transform 300ms var(--ease-out); }
+}
 
 .header__aside {
   display: flex;
@@ -2816,6 +2839,11 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .btn:hover svg { transform: translateX(4px); }
   .btn:active { transform: translateY(-1px) scale(0.98); }   /* після hover — натискання перемагає */
 
+  /* Сині й білі кнопки поза хедером «підстрибують» і зависають на -3px —
+     там само, де звичайний підйом, тож після анімації нічого не смикається */
+  .btn--primary:not(.header .btn):hover,
+  .btn--ghost:not(.header .btn):hover { animation: btnJump 560ms var(--ease-out); }
+
   /* «Залишити заявку»: швидкий підйом при наведенні; поява знизу лишається повільною */
   .callback.is-visible:hover {
     transform: translateY(-3px);
@@ -2825,6 +2853,14 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .pack:hover,
   .work:hover,
   .step:hover { transform: translateY(-6px); }
+}
+
+@keyframes btnJump {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(-8px); }
+  60%  { transform: translateY(-1px); }
+  80%  { transform: translateY(-5px); }
+  100% { transform: translateY(-3px); }
 }
 
 @keyframes heroIn {
@@ -2844,13 +2880,13 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
   .footer__grid { grid-template-columns: 1fr 1fr; }
 
-  .nav__link { padding-inline: 10px; font-size: 15px; }
+  .nav__link { --nav-x: 10px; font-size: 15px; }
 }
 
 /* Меню згортається ступенево: спершу ховаємо другорядні пункти,
    і лише потім переходимо на бургер. Так посилань видно максимум. */
 @media (max-width: 1180px) {
-  .nav__link { padding-inline: 8px; font-size: 14.5px; }
+  .nav__link { --nav-x: 8px; font-size: 14.5px; }
 }
 
 @media (max-width: 1080px) {
