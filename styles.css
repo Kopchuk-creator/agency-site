@@ -1609,11 +1609,29 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   font-size: 15px;
   font-weight: 550;
   box-shadow: var(--e-2);
-  transform: translateY(120%);
-  transition: transform var(--dur-lg) var(--ease), background-color var(--dur) var(--ease);
+  /* Сховано повністю: власна висота + відступ знизу (20px) + запас на тінь.
+     visibility — щоб прихована кнопка не ловила Tab і кліки;
+     вимикається із затримкою, коли кнопка вже виїхала */
+  transform: translateY(calc(100% + 48px));
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform var(--dur-lg) var(--ease),
+    opacity var(--dur-lg) var(--ease),
+    visibility 0s linear var(--dur-lg),
+    background-color var(--dur) var(--ease);
 }
 
-.callback.is-visible { transform: none; }
+.callback.is-visible {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    transform var(--dur-lg) var(--ease),
+    opacity var(--dur-lg) var(--ease),
+    visibility 0s,
+    background-color var(--dur) var(--ease);
+}
 @media (hover: hover) { .callback:hover { background: var(--accent); color: #fff; } }
 
 .callback__pulse {
