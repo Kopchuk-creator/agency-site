@@ -11,20 +11,26 @@
   --page: #ffffff;         /* фон сторінки */
   --bg: #ffffff;           /* фон карток, полів, випадних списків */
   --bg-soft: #fafafa;
-  --bg-dark: #0a0a0a;
-  --bg-dark-2: #141414;
+  --bg-dark: #0e1d30;      /* темно-синій з логотипу Starix */
+  --bg-dark-2: #15263d;
 
   /* Ink */
   --ink: #0a0a0a;
   --ink-2: #666666;
   --ink-3: #8f8f8f;
   --ink-on-dark: #ffffff;
-  --ink-on-dark-2: #a1a1a1;
+  --ink-on-dark-2: #9fb0c4;  /* 7.7:1 на темно-синьому */
 
-  /* Accent */
-  --accent: #0066ff;
-  --accent-ink: #0052cc;
-  --accent-soft: #eef4ff;
+  /* Accent — синій з логотипу, затемнений до 5.2:1 з білим текстом */
+  --accent: #2a6dbf;
+  --accent-ink: #1d5ca8;
+  --accent-soft: #edf4fb;
+
+  /* Бренд Starix: градієнт зірки — лише для декору (лінії, цифри), не для тексту на білому */
+  --brand-blue: #4a8bd0;
+  --brand-teal: #4fb3bf;
+  --brand-gold: #e6c07e;
+  --brand-grad: linear-gradient(90deg, var(--brand-blue), var(--brand-teal) 55%, var(--brand-gold));
 
   /* Semantic */
   --ok: #0b8a4b;
@@ -37,13 +43,13 @@
 
   /* Службові кольори, які відрізняються між темами */
   --on-ink: #ffffff;                         /* текст на елементах із фоном var(--ink) */
-  --accent-hover: #0052cc;                   /* фон синьої кнопки при наведенні */
-  --accent-text: #0066ff;                    /* синій текст і посилання на світлому фоні */
+  --accent-hover: #1f5ca6;                   /* фон синьої кнопки при наведенні */
+  --accent-text: #2a6dbf;                    /* синій текст і посилання на світлому фоні */
   --header-bg: rgba(255, 255, 255, 0.82);
   --mobile-bar-bg: rgba(255, 255, 255, 0.94);
   --burger-hover: #f0f0f0;
   --btn-dark-hover: #262626;
-  --focus-ring: rgba(0, 102, 255, 0.14);
+  --focus-ring: rgba(42, 109, 191, 0.16);
   --danger: #c02626;
   --danger-ring: rgba(192, 38, 38, 0.14);
   --ok-bg: #eaf7f0;
@@ -63,7 +69,7 @@
   /* Ритм сторінки: один відступ між секціями на всіх сторінках */
   --section-y: clamp(56px, 8vw, 104px);
   --head-gap: clamp(32px, 4vw, 56px);      /* від заголовка секції до її вмісту */
-  --line-dark: #262626;
+  --line-dark: #22344d;
 
   /* Radius */
   --r-sm: 8px;
@@ -87,7 +93,7 @@
   --e-1: 0 1px 2px rgba(10, 10, 10, 0.04);
   --e-2: 0 4px 16px rgba(10, 10, 10, 0.06);
   --e-3: 0 12px 32px rgba(10, 10, 10, 0.1);
-  --e-accent: 0 4px 12px rgba(0, 102, 255, 0.18);
+  --e-accent: 0 4px 12px rgba(42, 109, 191, 0.2);
 
   /* Motion */
   --dur: 220ms;
@@ -117,36 +123,36 @@
   --page: #121212;
   --bg: #1c1c1c;               /* картки трохи світліші за сторінку — так «підняті» */
   --bg-soft: #171717;
-  --bg-dark: #0c0c0c;          /* «Як працюємо» і футер лишаються найтемнішими */
-  --bg-dark-2: #1a1a1a;
+  --bg-dark: #0b1624;          /* «Як працюємо» і футер — глибокий синій бренду */
+  --bg-dark-2: #132233;
 
   --ink: #ececec;
   --ink-2: #a8a8a8;            /* 7.8:1 на #121212 */
   --ink-3: #8a8a8a;
   --ink-on-dark: #ffffff;
-  --ink-on-dark-2: #a1a1a1;
+  --ink-on-dark-2: #9fb0c4;
 
-  --accent: #0066ff;           /* кнопки: білий текст 5.1:1 */
-  --accent-ink: #7fb0ff;       /* акцентний текст і посилання на темному */
-  --accent-text: #7fb0ff;
-  --accent-soft: #15233b;
+  --accent: #2a6dbf;           /* кнопки: білий текст 5.2:1 */
+  --accent-ink: #7fb8e6;       /* акцентний текст і посилання на темному */
+  --accent-text: #7fb8e6;
+  --accent-soft: #13253a;
 
   --line: #2a2a2a;
   --line-strong: #3a3a3a;
   --line-input: #6e6e6e;       /* 3.4:1 на #1c1c1c */
-  --line-dark: #2a2a2a;
+  --line-dark: #1e2d40;
 
   --e-1: 0 1px 2px rgba(0, 0, 0, 0.4);
   --e-2: 0 4px 16px rgba(0, 0, 0, 0.45);
   --e-3: 0 12px 32px rgba(0, 0, 0, 0.55);
-  --e-accent: 0 4px 12px rgba(0, 102, 255, 0.24);
+  --e-accent: 0 4px 12px rgba(42, 109, 191, 0.28);
 
   --on-ink: #121212;
   --header-bg: rgba(18, 18, 18, 0.82);
   --mobile-bar-bg: rgba(18, 18, 18, 0.94);
   --burger-hover: #262626;
   --btn-dark-hover: #d4d4d4;
-  --focus-ring: rgba(127, 176, 255, 0.28);
+  --focus-ring: rgba(127, 184, 230, 0.28);
   --danger: #ff7a7a;
   --danger-ring: rgba(255, 122, 122, 0.2);
   --ok-bg: #0f2a1d;
@@ -381,12 +387,12 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 /* Hover — тільки там, де є миша: на телефоні після дотику кнопка не «залипає» */
-.section--dark .btn--ghost { --btn-hover-bg: #1c1c1c; }
+.section--dark .btn--ghost { --btn-hover-bg: var(--bg-dark-2); }
 
 @media (hover: hover) {
   .btn:hover::before { opacity: 1; }
   .btn--ghost:hover { border-color: var(--ink); }
-  .section--dark .btn--ghost:hover { border-color: #3a3a3a; }
+  .section--dark .btn--ghost:hover { border-color: rgba(255, 255, 255, 0.3); }
 }
 
 /* Тінь при наведенні — окремий шар, який лише проявляється (opacity),
@@ -397,7 +403,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: 0 8px 18px rgba(0, 102, 255, 0.26);
+  box-shadow: 0 8px 18px rgba(42, 109, 191, 0.28);
   opacity: 0;
   pointer-events: none;
 }
@@ -470,7 +476,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   white-space: nowrap;
 }
 
-.topbar__trust svg { color: var(--accent); flex: none; }
+.topbar__trust svg { color: var(--brand-teal); flex: none; }
 
 .topbar__phone {
   display: inline-flex;
@@ -482,8 +488,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   transition: color var(--dur) var(--ease);
 }
 
-.topbar__phone svg { color: var(--accent); flex: none; }
-@media (hover: hover) { .topbar__phone:hover { color: var(--accent); } }
+.topbar__phone svg { color: var(--brand-teal); flex: none; }
+@media (hover: hover) { .topbar__phone:hover { color: var(--brand-teal); } }
 
 /* На вужчих екранах лишаємо головне: гарантію і телефон */
 @media (max-width: 860px) {
@@ -528,19 +534,12 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .logo__mark {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--on-ink);
-  display: grid;
-  place-items: center;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+  display: block;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 9px;          /* плитка зірки Starix */
 }
-
-.logo__mark span { transform: translateY(-0.5px); }
 
 /* Лого — лівий край, меню — правий. margin-left:auto штовхає навігацію вправо;
    .header__aside має власний auto-відступ на випадок прихованої навігації. */
@@ -575,7 +574,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   bottom: 6px;
   height: 2px;
   border-radius: 2px;
-  background: currentColor;
+  background: var(--brand-grad);
   transform: scaleX(0);
   transform-origin: left;
 }
@@ -1294,11 +1293,16 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   content: counter(step, decimal-leading-zero);
   content: counter(step, decimal-leading-zero) / "";
   display: block;
+  width: fit-content;          /* градієнт — по ширині цифр, а не всієї картки */
   margin-bottom: var(--s-4);
   font-size: 28px;
   font-weight: 650;
   line-height: 1;
-  color: var(--accent);
+  color: var(--brand-teal);    /* запасний колір, якщо background-clip не підтримується */
+  background: var(--brand-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-variant-numeric: tabular-nums;
 }
 
@@ -1567,7 +1571,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 .footer .logo { color: #fff; }
-.footer .logo__mark { background: #fff; color: #0a0a0a; }
+/* На темно-синьому футері плитка зливається з фоном — тонка рамка її окреслює */
+.footer .logo__mark { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14); }
 .footer__about { margin-top: var(--s-4); max-width: 34ch; line-height: 1.55; }
 
 .footer__col h4 {
@@ -1601,7 +1606,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   align-items: center;
   justify-content: space-between;
   font-size: 13.5px;
-  color: #7a7a7a;
+  color: #8a9bb0;           /* сіро-синій: 6:1 на темно-синьому футері */
 }
 
 .footer__legal { display: flex; flex-wrap: wrap; gap: var(--s-4); }
@@ -1610,7 +1615,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .footer__req {
   margin-top: var(--s-5);
   font-size: 13px;
-  color: #8a8a8a;
+  color: #8a9bb0;
   line-height: 1.55;
 }
 
@@ -1628,11 +1633,12 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   height: 54px;
   padding: 0 20px 0 16px;
   border-radius: 999px;
-  background: var(--ink);
-  color: var(--on-ink);
+  background: var(--bg-dark);          /* темно-синій бренду в обох темах */
+  color: var(--ink-on-dark);
   font-size: 15px;
   font-weight: 550;
-  box-shadow: var(--e-2);
+  /* тонка рамка — щоб кнопку було видно і над темно-синіми блоками */
+  box-shadow: var(--e-2), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
   /* Сховано повністю: власна висота + відступ знизу (20px) + запас на тінь.
      visibility — щоб прихована кнопка не ловила Tab і кліки;
      вимикається із затримкою, коли кнопка вже виїхала */
