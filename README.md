@@ -1,27 +1,32 @@
 # Сайт агенції — макет
 
 Сайт агенції з 3 сторінок: «Про нас», «Роботи та ціни», «Запис і контакти».
-Чистий HTML/CSS/JS, mobile-first. Контакти й реквізити — плейсхолдери, індексація закрита.
+Чистий HTML/CSS/JS, mobile-first. Індексація поки закрита.
+
+**Усі файли сайту — у папці `frontend/`.** Шляхи нижче (`index.html`, `main.js` тощо) — відносно неї.
+У корені лишаються документація, `worker/` (Cloudflare Worker) і `.github/` (публікація).
 
 👉 **Покроковий запуск (Worker, тест форми, SEO) — у [LAUNCH.md](LAUNCH.md).**
 
 ## Як подивитись
 
 ```bash
-npx serve -l 4321 .
+npx serve -l 4321 frontend
 ```
 
 Далі відкрити `http://localhost:4321`. Збірка не потрібна — чистий HTML/CSS/JS.
 
 ## Публікація на GitHub Pages
 
-Репозиторій → **Settings → Pages → Source: Deploy from a branch → main / (root)**.
-За хвилину сайт буде на `https://<нік>.github.io/<репозиторій>/`.
+Сайт публікує GitHub Actions (`.github/workflows/pages.yml`): після кожного push у `main`,
+що змінює `frontend/`, папка викладається на Pages. Адреса — `https://<нік>.github.io/<репозиторій>/`.
+
+Один раз потрібно: репозиторій → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+Ручний перезапуск — вкладка **Actions → «Публікація сайту» → Run workflow**.
 
 Усі шляхи всередині — **відносні**, тож сайт однаково працює і в корені домену,
 і в підпапці. Не замінюйте їх на абсолютні (`/styles.css`) — на Pages це ламає стилі.
 
-Файл `.nojekyll` вимикає обробку Jekyll: вона не потрібна і лише сповільнює деплой.
 
 **Сайт закритий від індексації** (`noindex` на всіх сторінках) — поки це макет.
 Перед справжнім запуском див. чек-лист нижче.
@@ -29,21 +34,22 @@ npx serve -l 4321 .
 ## Структура
 
 ```
-index.html                              Головна (Про нас): про нас, «Знайомо?», як працюємо, FAQ
-roboty/                                 Роботи та ціни: скріншоти робіт + 3 пакети
-zapys/                                  Запис і контакти: демо онлайн-запису + форма
-zapys/demo.js                           логіка демо-віджета запису
-img/works/                              скріншоти робіт (WebP)
-img/og.jpg                              картинка для соцмереж 1200×630
-favicon.png, apple-touch-icon.png       іконки вкладки й телефона
-404.html                                сторінка «не знайдено» + перенаправлення старих адрес
-sitemap.xml                             карта сайту для Google Search Console
-styles.css                              уся стилістика + дизайн-токени
-main.js                                 меню, форма зв'язку → Cloudflare Worker
+.github/workflows/pages.yml             публікація frontend/ на GitHub Pages
+frontend/index.html                     Головна (Про нас): про нас, «Знайомо?», як працюємо, FAQ
+frontend/roboty/                        Роботи та ціни: скріншоти робіт + 3 пакети
+frontend/zapys/                         Запис і контакти: демо онлайн-запису + форма
+frontend/zapys/demo.js                  логіка демо-віджета запису
+frontend/img/works/                     скріншоти робіт (WebP)
+frontend/img/og.jpg                     картинка для соцмереж 1200×630
+frontend/favicon.png, apple-touch-icon.png   іконки вкладки й телефона
+frontend/404.html                       сторінка «не знайдено» + перенаправлення старих адрес
+frontend/sitemap.xml                    карта сайту для Google Search Console
+frontend/styles.css                     уся стилістика + дизайн-токени
+frontend/main.js                        меню, форма зв'язку → Cloudflare Worker
 worker/contact-worker.js                Cloudflare Worker: заявка → Telegram (деплоїться окремо)
-analytics.js                            GA4 / GTM / Meta / Ads — вимкнено, поки ID порожні
-polityka-konfidentsiynosti/             політика конфіденційності (шаблон)
-publichna-oferta/                       публічна оферта (шаблон)
+frontend/analytics.js                   GA4 / GTM / Meta / Ads — вимкнено, поки ID порожні
+frontend/polityka-konfidentsiynosti/    політика конфіденційності (шаблон)
+frontend/publichna-oferta/              публічна оферта (шаблон)
 ```
 
 ## Показники
