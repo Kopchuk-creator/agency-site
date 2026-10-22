@@ -2,6 +2,7 @@
 # Один раз: Settings → Pages → Build and deployment → Source: GitHub Actions.
 # Якщо поряд з'являється запуск «pages build and deployment» — Source досі
 # «Deploy from a branch», і та збірка перезапише сайт README-файлом.
+# Після зміни Source сайт оновлюється лише з наступним запуском цього workflow.
 name: Публікація сайту
 
 on:
