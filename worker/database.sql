@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS leads (
+  name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  package TEXT NOT NULL
+);

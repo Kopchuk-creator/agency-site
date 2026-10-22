@@ -139,7 +139,7 @@
   /* ---------- 9. Форма зв'язку → Cloudflare Worker → Telegram ---------- */
   // Токена бота тут немає: він у секретах Worker-а (див. worker/contact-worker.js).
   // Сюди — тільки адреса Worker-а, її бачити не страшно.
-  var CONTACT_ENDPOINT = '';  // [АДРЕСА WORKER-А], напр. https://agency-form.<ваш-акаунт>.workers.dev
+  var CONTACT_ENDPOINT = 'https://aged-field-7cb9agency-form.nazarhayduk2.workers.dev';  // [АДРЕСА WORKER-А], напр. https://agency-form.<ваш-акаунт>.workers.dev
   var REQUEST_TIMEOUT = 10000; // 10 с: якщо Worker не відповів — показуємо помилку, а не вічний спінер
 
   var form = document.getElementById('contactForm');
