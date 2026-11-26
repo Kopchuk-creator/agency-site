@@ -1,8 +1,10 @@
-# Публікує папку frontend/ на GitHub Pages.
+# Публікує сайт на GitHub Pages:
+#   /          — основний сайт з гілки main (папка frontend/)
+#   /preview/  — нова версія з гілки redesign, щоб показати її до погодження
 # Один раз: Settings → Pages → Build and deployment → Source: GitHub Actions.
-# Якщо поряд з'являється запуск «pages build and deployment» — Source досі
-# «Deploy from a branch», і та збірка перезапише сайт README-файлом.
-# Після зміни Source сайт оновлюється лише з наступним запуском цього workflow.
+#
+# Push у redesign запускає «Прев'ю redesign», а коли той завершиться —
+# цей workflow (workflow_run завжди працює від main, тож публікацію дозволено).
 name: Публікація сайту
 
 on:
@@ -11,6 +13,9 @@ on:
     paths:
       - 'frontend/**'
       - '.github/workflows/pages.yml'
+  workflow_run:
+    workflows: ["Прев'ю redesign"]
+    types: [completed]
   workflow_dispatch:          # кнопка «Run workflow» для ручного перезапуску
 
 permissions:
@@ -18,22 +23,45 @@ permissions:
   pages: write
   id-token: write
 
-# Нова публікація скасовує ту, що ще не завершилась
+# Нова публікація скасовує ту, що ще не завершилась (кожна збирає обидві версії)
 concurrency:
   group: pages
   cancel-in-progress: true
 
+env:
+  PREVIEW_BRANCH: redesign
+
 jobs:
   deploy:
+    # Після прев'ю публікуємо лише якщо воно пройшло успішно
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Збираємо основний сайт і прев'ю
+        run: |
+          mkdir -p _site
+          cp -r frontend/. _site/
+          # Гілки прев'ю може й не бути (наприклад, після злиття) — тоді публікуємо лише основний сайт
+          if git ls-remote --exit-code --heads origin "$PREVIEW_BRANCH" > /dev/null; then
+            git fetch --depth=1 origin "$PREVIEW_BRANCH"
+            mkdir -p _site/preview
+            git archive FETCH_HEAD frontend | tar -x -C "$RUNNER_TEMP"
+            cp -r "$RUNNER_TEMP/frontend/." _site/preview/
+            echo "Прев'ю з гілки $PREVIEW_BRANCH: /preview/"
+          else
+            echo "Гілки $PREVIEW_BRANCH немає — прев'ю не публікується"
+          fi
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: frontend
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

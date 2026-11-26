@@ -1,0 +1,17 @@
+# Сигнал для «Публікації сайту»: гілку redesign оновлено — перезібрати /preview/.
+# Сам нічого не публікує: GitHub дозволяє публікувати Pages лише від main,
+# тож публікацію робить pages.yml через подію workflow_run.
+name: "Прев'ю redesign"
+
+on:
+  push:
+    branches: [redesign]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Гілку redesign оновлено — «Публікація сайту» перезбере /preview/"
