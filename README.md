@@ -39,7 +39,9 @@ frontend/index.html                     Головна (Про нас): про �
 frontend/roboty/                        Роботи та ціни: скріншоти робіт + 3 пакети
 frontend/zapys/                         Запис і контакти: демо онлайн-запису + форма
 frontend/zapys/demo.js                  логіка демо-віджета запису
-frontend/img/works/                     скріншоти робіт (WebP)
+frontend/img/works/                     скріншоти робіт (WebP): перший екран
+frontend/img/works/full/                знімки сайтів на всю довжину — гортаються в картках робіт
+frontend/fx.js                          ефекти: слова заголовка, підсвітка карток, нахил, промінь, прогрес
 frontend/img/og.jpg                     картинка для соцмереж 1200×630
 frontend/favicon.png, apple-touch-icon.png   іконки вкладки й телефона
 frontend/404.html                       сторінка «не знайдено» + перенаправлення старих адрес

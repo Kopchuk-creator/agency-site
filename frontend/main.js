@@ -62,13 +62,13 @@
   var REVEAL_SELECTORS = [
     '.section__head',
     '.pain', '.step',                       // «Знайомо?», «Як працюємо»
-    '.faq-layout > *',
-    '.filters', '.work', '.pack',           // «Роботи та ціни»
+    '.faq__col', '.faq-cta',             // FAQ
+    '.footer__cta', '.footer__grid',      // футер
+    '.work', '.pack',                       // «Роботи та ціни»
     '.support__base', '.support-plan',      // щомісячна підтримка
     '.term', '.terms__more', '.case-cta',
     '.booking', '.owner',                   // «Запис і контакти»
-    '.contacts__list', '.formcard',
-    '.final-cta__box',                      // фінальний заклик на головній
+    '.contacts__aside > *', '.formcard',
     '[data-reveal]'
   ].join(',');
   var STAGGER_MS = 90;     // крок затримки між сусідніми картками
@@ -130,8 +130,8 @@
   function toggleCallback() {
     if (!callback) return;
     var pastHero = window.scrollY > 700;
-    // Ховаємо, коли видно фінальний заклик або футер — там уже є свої кнопки
-    var end = document.querySelector('.final-cta') || document.querySelector('.footer');
+    // Ховаємо, коли видно футер — там уже є свій заклик і телефон
+    var end = document.querySelector('.footer');
     var atEnd = end ? end.getBoundingClientRect().top < window.innerHeight : false;
     callback.classList.toggle('is-visible', pastHero && !atEnd);
   }

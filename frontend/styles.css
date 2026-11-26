@@ -1,6 +1,7 @@
 /* ==========================================================================
-   Агенція — Design System
-   Сміливий мінімалізм. Ч/Б + електричний синій. Inter.
+   Starix — Design System
+   «Довіра й експертиза»: сланцево-сині нейтральні, синій акцент із логотипу,
+   градієнт зірки лише в декорі. Шрифт Geist (з кирилицею).
    ========================================================================== */
 
 /* ---------- Tokens ---------- */
@@ -10,14 +11,14 @@
   /* Surfaces */
   --page: #ffffff;         /* фон сторінки */
   --bg: #ffffff;           /* фон карток, полів, випадних списків */
-  --bg-soft: #fafafa;
+  --bg-soft: #f5f7fa;
   --bg-dark: #0e1d30;      /* темно-синій з логотипу Starix */
   --bg-dark-2: #15263d;
 
   /* Ink */
-  --ink: #0a0a0a;
-  --ink-2: #666666;
-  --ink-3: #8f8f8f;
+  --ink: #0f1729;          /* майже чорний з відтінком темно-синього лого */
+  --ink-2: #525e70;        /* 6.6:1 на білому */
+  --ink-3: #636f82;        /* 4.9:1 на білому — лише дрібні підписи */
   --ink-on-dark: #ffffff;
   --ink-on-dark-2: #9fb0c4;  /* 7.7:1 на темно-синьому */
 
@@ -37,9 +38,9 @@
   --no: #9a9a9a;
 
   /* Lines */
-  --line: #e8e8e8;
-  --line-strong: #d4d4d4;
-  --line-input: #8a8a8a;   /* рамки полів і карток вибору: 3.4:1 на білому (WCAG 1.4.11) */
+  --line: #e3e8ef;
+  --line-strong: #cbd3de;
+  --line-input: #8590a1;   /* рамки полів і карток вибору: 3.2:1 на білому (WCAG 1.4.11) */
 
   /* Службові кольори, які відрізняються між темами */
   --on-ink: #ffffff;                         /* текст на елементах із фоном var(--ink) */
@@ -47,8 +48,8 @@
   --accent-text: #2a6dbf;                    /* синій текст і посилання на світлому фоні */
   --header-bg: rgba(255, 255, 255, 0.82);
   --mobile-bar-bg: rgba(255, 255, 255, 0.94);
-  --burger-hover: #f0f0f0;
-  --btn-dark-hover: #262626;
+  --burger-hover: #eaeef4;
+  --btn-dark-hover: #1f2c42;
   --focus-ring: rgba(42, 109, 191, 0.16);
   --danger: #c02626;
   --danger-ring: rgba(192, 38, 38, 0.14);
@@ -90,9 +91,10 @@
   --s-10: 128px;
 
   /* Elevation */
-  --e-1: 0 1px 2px rgba(10, 10, 10, 0.04);
-  --e-2: 0 4px 16px rgba(10, 10, 10, 0.06);
-  --e-3: 0 12px 32px rgba(10, 10, 10, 0.1);
+  /* Тіні з відтінком темно-синього — одне джерело світла згори */
+  --e-1: 0 1px 2px rgba(15, 23, 41, 0.05);
+  --e-2: 0 4px 16px rgba(15, 23, 41, 0.07);
+  --e-3: 0 14px 36px rgba(15, 23, 41, 0.11);
   --e-accent: 0 4px 12px rgba(42, 109, 191, 0.2);
 
   /* Motion */
@@ -100,6 +102,19 @@
   --dur-lg: 380ms;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* швидкий старт, довге м'яке гальмування */
+
+  /* Шрифт */
+  --font: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Зерно для «живих» фонів: SVG-шум, без запитів до сервера */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.06 0 0 0 0 0.09 0 0 0 0 0.16 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-opacity: 0.05;
+
+  /* Ефекти «Темного преміуму» у світлій темі — стриманіші */
+  --spot-color: rgba(42, 109, 191, 0.10);
+  --aurora-opacity: 0.32;
+  /* Градієнт тексту: темніші відтінки зірки, щоб великий заголовок мав ≥3:1 на світлому */
+  --text-grad: linear-gradient(90deg, #1d5ca8, #1b7f8a 55%, #8f6212);
 
   /* Layout */
   --container: 1200px;
@@ -113,53 +128,60 @@
 }
 
 /* ==========================================================================
-   ТЕМНА ТЕМА
-   Глибокі темно-сірі, не чистий чорний: текст читається м'якше.
-   Атрибут data-theme ставить скрипт у <head> ще до першого малювання.
+   ТЕМНА ТЕМА — ЄДИНА ТЕМА САЙТУ
+   Атрибут data-theme="dark" стоїть прямо в <html> кожної сторінки.
+   Значення в :root вище — базові, тут вони перевизначаються фірмовими.
    ========================================================================== */
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --page: #121212;
-  --bg: #1c1c1c;               /* картки трохи світліші за сторінку — так «підняті» */
-  --bg-soft: #171717;
-  --bg-dark: #0b1624;          /* «Як працюємо» і футер — глибокий синій бренду */
-  --bg-dark-2: #132233;
+  /* Фірмова тема Starix: глибокий темно-синій логотипу, не чистий чорний */
+  --page: #070d18;
+  --bg: #0d1829;               /* картки, поля, списки */
+  --bg-soft: #0a1321;
+  --bg-dark: #050b16;          /* «Як працюємо» і футер — ще глибше */
+  --bg-dark-2: #0d1829;
 
-  --ink: #ececec;
-  --ink-2: #a8a8a8;            /* 7.8:1 на #121212 */
-  --ink-3: #8a8a8a;
+  --ink: #e8eef7;
+  --ink-2: #9fb0c6;            /* 8.8:1 на сторінці */
+  --ink-3: #8394ab;            /* 6.3:1 */
   --ink-on-dark: #ffffff;
-  --ink-on-dark-2: #9fb0c4;
+  --ink-on-dark-2: #9fb0c6;
 
   --accent: #2a6dbf;           /* кнопки: білий текст 5.2:1 */
-  --accent-ink: #7fb8e6;       /* акцентний текст і посилання на темному */
-  --accent-text: #7fb8e6;
-  --accent-soft: #13253a;
+  --accent-ink: #8cc0ee;
+  --accent-text: #8cc0ee;      /* 10:1 на сторінці */
+  --accent-soft: #10233c;
 
-  --line: #2a2a2a;
-  --line-strong: #3a3a3a;
-  --line-input: #6e6e6e;       /* 3.4:1 на #1c1c1c */
-  --line-dark: #1e2d40;
+  --line: #17253a;
+  --line-strong: #24364f;
+  --line-input: #5a6c86;       /* ≥3:1 на картці */
+  --line-dark: #17253a;
 
-  --e-1: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --e-2: 0 4px 16px rgba(0, 0, 0, 0.45);
-  --e-3: 0 12px 32px rgba(0, 0, 0, 0.55);
-  --e-accent: 0 4px 12px rgba(42, 109, 191, 0.28);
+  --e-1: 0 1px 2px rgba(0, 4, 12, 0.5);
+  --e-2: 0 6px 20px rgba(0, 4, 12, 0.55);
+  --e-3: 0 18px 44px rgba(0, 4, 12, 0.6);
+  --e-accent: 0 6px 22px rgba(42, 109, 191, 0.35);
 
-  --on-ink: #121212;
-  --header-bg: rgba(18, 18, 18, 0.82);
-  --mobile-bar-bg: rgba(18, 18, 18, 0.94);
-  --burger-hover: #262626;
-  --btn-dark-hover: #d4d4d4;
-  --focus-ring: rgba(127, 184, 230, 0.28);
+  --on-ink: #070d18;
+  --header-bg: rgba(7, 13, 24, 0.72);
+  --mobile-bar-bg: rgba(7, 13, 24, 0.9);
+  --burger-hover: #15233a;
+  --btn-dark-hover: #cfd8e6;
+  --focus-ring: rgba(140, 192, 238, 0.3);
   --danger: #ff7a7a;
   --danger-ring: rgba(255, 122, 122, 0.2);
-  --ok-bg: #0f2a1d;
+  --ok-bg: #0c2a20;
   --ok-ink: #6fd69d;
-  --err-bg: #2d1414;
+  --err-bg: #2d1420;
   --err-ink: #ff8a8a;
-  --tg-bg: #0f1418;
+  --tg-bg: #0a1424;
+  --grain-opacity: 0.08;
+
+  /* Ефекти */
+  --spot-color: rgba(127, 184, 230, 0.16);
+  --aurora-opacity: 0.55;
+  --text-grad: linear-gradient(90deg, #7fb2e6, #63c3cd 55%, #e9c88c);
 }
 
 /* ---------- Reset ---------- */
@@ -177,10 +199,9 @@ body {
   margin: 0;
   background: var(--page);
   color: var(--ink);
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font);
   font-size: 18px;
   line-height: 1.6;
-  font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   /* clip, а не hidden: не створює scroll-контейнер і не ламає position:sticky.
@@ -190,7 +211,7 @@ body {
 
 /* Грід-елементи за замовчуванням мають min-width:auto і можуть розпирати
    колонку довгим вмістом. Гасимо це в усіх сіткових блоках сайту. */
-.faq-layout > *,
+.faq__col { min-width: 0; }
 
 img, svg, video { max-width: 100%; display: block; }
 img { height: auto; }
@@ -226,24 +247,26 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* ---------- Typography ---------- */
 .h1 {
   font-size: var(--fs-h1);
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
   font-weight: 640;
   text-wrap: balance;
 }
 
 .h2 {
   font-size: var(--fs-h2);
-  line-height: 1.1;
-  letter-spacing: -0.035em;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
   font-weight: 620;
+  text-wrap: balance;
 }
 
 .h3 {
   font-size: var(--fs-h3);
   line-height: 1.25;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   font-weight: 600;
+  text-wrap: balance;
 }
 
 .h4 {
@@ -282,6 +305,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   background: var(--accent);
 }
 
+p, li, dd { text-wrap: pretty; }
+
 /* ---------- Layout ---------- */
 .container {
   width: 100%;
@@ -298,7 +323,11 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .section--soft { background: var(--bg-soft); }
 
 .section--dark {
-  background: var(--bg-dark);
+  isolation: isolate;
+  background:
+    radial-gradient(50% 60% at 100% 0%, rgba(74, 139, 208, 0.20), transparent 70%),
+    radial-gradient(35% 45% at 0% 100%, rgba(79, 179, 191, 0.10), transparent 70%),
+    var(--bg-dark);
   color: var(--ink-on-dark);
 }
 
@@ -408,7 +437,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   pointer-events: none;
 }
 
-.btn--dark::after { box-shadow: 0 6px 16px rgba(10, 10, 10, 0.14); }
+.btn--dark::after { box-shadow: 0 6px 16px rgba(15, 23, 41, 0.18); }
 
 @media (hover: hover) {
   .btn--primary:hover::after,
@@ -703,8 +732,26 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    SCREEN 1 — ПРО НАС (mobile-first)
    ========================================================================== */
 .about {
+  position: relative;
+  isolation: isolate;
   padding-block: var(--s-8) var(--s-7);
-  background: var(--bg-soft);
+  background:
+    radial-gradient(60% 55% at 88% 8%, rgba(74, 139, 208, 0.16), transparent 70%),
+    radial-gradient(40% 40% at 70% 85%, rgba(79, 179, 191, 0.10), transparent 70%),
+    radial-gradient(30% 30% at 4% 96%, rgba(230, 192, 126, 0.12), transparent 70%),
+    var(--bg-soft);
+}
+
+/* Зерно поверх градієнта — фон не виглядає «пластиковим» */
+.about::before,
+.section--dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--grain);
+  opacity: var(--grain-opacity);
+  pointer-events: none;
 }
 
 .about__eyebrow {
@@ -718,9 +765,9 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .about__title {
   max-width: 18ch;
   font-size: var(--fs-display);
-  font-weight: 640;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-weight: 650;
+  line-height: 1.04;
+  letter-spacing: -0.048em;
   text-wrap: balance;
 }
 
@@ -734,10 +781,9 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 .about__subtitle {
   margin-top: var(--s-6);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: var(--ink-2);
 }
 
@@ -878,7 +924,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* Десктоп: текст і скріншот поруч, більше повітря */
 @media (min-width: 1024px) {
-  .about { padding-block: var(--s-10) var(--s-9); }
+  .about { padding-block: var(--s-8) var(--s-9); }   /* оптично: знизу більше, ніж зверху */
 
   .about__grid {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
@@ -931,8 +977,9 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   margin-top: var(--s-4);
   font-size: 32px;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
   line-height: 1.1;
+  font-variant-numeric: tabular-nums;
 }
 
 .pack__meta {
@@ -1098,7 +1145,10 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 /* ==========================================================================
-   SCREEN 4 — WORKS (mobile-first)
+   РОБОТИ: КАРТКИ-«ВІКНА БРАУЗЕРА» (mobile-first)
+   Знімок сайту на всю довжину; при наведенні він плавно гортається вниз.
+   Пропорції вікна задаємо змінними --win-w/--win-h: з них же рахується,
+   на скільки прогорнути, щоб низ знімка точно став на низ вікна.
    ========================================================================== */
 .works {
   display: grid;
@@ -1109,26 +1159,85 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 /* position: relative — щоб розтягнуте посилання (нижче) покрило всю картку */
 .work {
+  --win-w: 16;
+  --win-h: 10;
   position: relative;
   display: flex;
   flex-direction: column;
+  min-width: 0;            /* довга адреса в смужці браузера не розпирає колонку сітки */
   border: 1px solid var(--line);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-xl);
   background: var(--bg);
   transition: border-color var(--dur) var(--ease);
 }
 
-/* width/height в HTML + aspect-ratio тут = місце під картинку резервується
-   ще до завантаження, і сторінка не «стрибає» */
+/* Смужка браузера: три точки й адреса сайту */
+.work__browser {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  /* Фон смужки не має вилазити за заокруглені кути картки */
+  border-radius: calc(var(--r-xl) - 1px) calc(var(--r-xl) - 1px) 0 0;
+}
+
+.work__browser > span:not(.work__url) {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+
+.work__url {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--s-2);
+  padding: 3px 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  font-size: 12px;
+  color: var(--ink-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* «Вікно»: обрізає довгий знімок; container-type дає одиниці cqi (ширина вікна) */
+.work__window {
+  position: relative;
+  aspect-ratio: var(--win-w) / var(--win-h);
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-soft);
+  container-type: inline-size;
+}
+
 .work__img {
   display: block;
-  border-radius: calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0;   /* замість overflow: hidden у картки */
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  object-position: top;
-  border-bottom: 1px solid var(--line);
+}
+
+/* Підказка лише для миші: на телефоні наводити нічим */
+.work__hint {
+  display: none;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(7, 13, 24, 0.78);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work__hint { display: inline-flex; }
 }
 
 .work__body {
@@ -1136,6 +1245,13 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   flex-direction: column;
   flex: 1;
   padding: var(--s-5);
+}
+
+.work__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
 }
 
 .work__niche {
@@ -1146,11 +1262,20 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: var(--accent-ink);
 }
 
+.work__tag {
+  padding: 2px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
 .work__title {
   margin-top: var(--s-2);
   font-size: var(--fs-h3);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .work__text {
@@ -1159,9 +1284,31 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   color: var(--ink-2);
 }
 
+/* Що є на сайті — мітки */
+.work__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--s-4);
+  padding: 0;
+  list-style: none;
+}
+
+.work__features li {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-ink);
+}
+
 .work__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin-top: auto;
-  padding-top: var(--s-4);
+  padding-top: var(--s-5);
   font-weight: 600;
   color: var(--accent-ink);
   text-decoration: none;
@@ -1187,64 +1334,33 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .work:hover .work__link { text-decoration: underline; }
 }
 
-/* Планшет і більше: дві колонки */
-@media (min-width: 768px) {
-  .works { grid-template-columns: repeat(2, 1fr); }
+/* Сітка з фіксованою кількістю колонок: картка в неповному ряду
+   лишається тієї ж ширини, що й решта, а не розтягується на весь рядок */
+@media (min-width: 680px) {
+  .works { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+/* Десктоп: завжди по три в ряд */
 @media (min-width: 1024px) {
-  .work__body { padding: var(--s-6); }
+  .works { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .work { --win-h: 11; }
+  .work__body { padding: var(--s-5) var(--s-6) var(--s-6); }
 }
 
-/* ==========================================================================
-   ФІЛЬТР РОБІТ (mobile-first)
-   ========================================================================== */
-/* Кнопки-«таблетки»: на телефоні самі переносяться в другий рядок */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-}
+/* Прокрутка знімка при наведенні (і з клавіатури — коли посилання у фокусі).
+   Униз — повільно, назад — швидко */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .work__img { transition: transform 900ms var(--ease-out); }
+  .work__hint { transition: opacity 300ms var(--ease); }
 
-/* display у CSS перебиває атрибут hidden, тому прописуємо явно */
-.filters[hidden],
-.work[hidden] { display: none; }
+  .work:hover .work__img,
+  .work:focus-within .work__img {
+    transform: translateY(calc(-100% + 100cqi * var(--win-h) / var(--win-w)));
+    transition: transform 8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
 
-.filters__btn {
-  min-height: 44px;              /* зручна зона натискання пальцем */
-  padding-inline: var(--s-4);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--bg);
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--ink);
-  cursor: pointer;
-  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
-}
-
-/* Активний фільтр. aria-pressed — і для стилю, і для скрінрідера */
-.filters__btn[aria-pressed="true"] {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--on-ink);
-}
-
-.filters__btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-@media (hover: hover) {
-  .filters__btn:hover { border-color: var(--ink); }
-}
-
-.filters__count {
-  min-height: 1.5em;             /* місце під текст є одразу — сітка не «стрибає» */
-  margin-block: var(--s-3) var(--s-5);
-  font-size: 14px;
-  color: var(--ink-2);
+  .work:hover .work__hint,
+  .work:focus-within .work__hint { opacity: 0; }
 }
 
 /* ==========================================================================
@@ -1331,14 +1447,15 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* ==========================================================================
    SCREEN 9 — FAQ
    ========================================================================== */
-.faq-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: start;
-}
+/* Запитання: на телефоні одна колонка, на широкому — дві рівні */
+.faq { display: grid; }
+.faq__col { border-top: 1px solid var(--line); }
+.faq__col + .faq__col { border-top: 0; }      /* на телефоні колонки йдуть підряд — без подвійної лінії */
 
-.faq { border-top: 1px solid var(--line); }
+@media (min-width: 900px) {
+  .faq { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-7); align-items: start; }
+  .faq__col + .faq__col { border-top: 1px solid var(--line); }
+}
 
 .faq details {
   border-bottom: 1px solid var(--line);
@@ -1400,18 +1517,47 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   to   { opacity: 1; transform: none; }
 }
 
-.faq-aside {
-  position: sticky;
-  top: calc(var(--header-h) + 24px);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: var(--s-5);
-  background: var(--bg-soft);
+/* «Не знайшли відповідь?» — широка смуга під запитаннями */
+.faq-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  gap: var(--s-5);
+  margin-top: var(--s-7);
+  padding: var(--s-6) var(--s-5);
+  border-radius: var(--r-xl);
+  background:
+    radial-gradient(60% 120% at 100% 0%, rgba(74, 139, 208, 0.2), transparent 70%),
+    radial-gradient(35% 80% at 0% 100%, rgba(230, 192, 126, 0.12), transparent 70%),
+    var(--accent-soft);
 }
 
-.faq-aside .h3 { margin-block: var(--s-3) var(--s-3); }
-.faq-aside__text { margin-bottom: var(--s-5); }
-.faq-title { margin-block: var(--s-4); }
+.faq-cta__kicker { font-size: 15px; font-weight: 600; color: var(--accent-text); }
+.faq-cta__title {
+  margin-top: var(--s-2);
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.faq-cta__lead { margin-top: var(--s-2); max-width: 52ch; color: var(--ink-2); }
+
+.faq-cta__actions { display: flex; flex-direction: column; gap: var(--s-3); }
+
+@media (min-width: 600px) {
+  .faq-cta__actions { flex-direction: row; flex-wrap: wrap; }
+}
+
+@media (min-width: 1024px) {
+  .faq-cta {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--s-7);
+    padding: var(--s-7) var(--s-8);
+  }
+}
 
 /* ==========================================================================
    ФОРМА (картка, поля, статуси)
@@ -1556,17 +1702,81 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    FOOTER
    ========================================================================== */
 .footer {
-  background: var(--bg-dark);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  container-type: inline-size;     /* для одиниць cqw у великій назві внизу */
+  padding-top: clamp(64px, 8vw, 112px);
+  background:
+    radial-gradient(55% 45% at 90% 0%, rgba(74, 139, 208, 0.2), transparent 70%),
+    radial-gradient(40% 40% at 0% 35%, rgba(79, 179, 191, 0.08), transparent 70%),
+    var(--bg-dark);
   color: var(--ink-on-dark-2);
-  padding-block: clamp(48px, 6vw, 80px) var(--s-6);
   font-size: 15px;
 }
 
+/* Зерно, як на першому екрані */
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--grain);
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+}
+
+/* ---- Заклик ---- */
+.footer__cta {
+  display: grid;
+  gap: var(--s-6);
+  padding-bottom: clamp(48px, 6vw, 80px);
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.footer__title {
+  max-width: 17ch;
+  font-size: clamp(30px, 4.6vw, 60px);
+  font-weight: 650;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+/* На темно-синьому — яскравий градієнт зірки в обох темах */
+.footer .text-grad { background: var(--brand-grad); -webkit-background-clip: text; background-clip: text; }
+
+.footer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-5) var(--s-6);
+}
+
+.footer__phone {
+  display: grid;
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.footer__phone-label { font-size: 13px; font-weight: 500; letter-spacing: 0; color: var(--ink-on-dark-2); }
+
+@media (hover: hover) { .footer__phone:hover { color: var(--brand-teal); } }
+
+@media (min-width: 1024px) {
+  .footer__cta { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+}
+
+/* ---- Колонки ---- */
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
+  grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: clamp(24px, 4vw, 56px);
-  padding-bottom: var(--s-7);
+  padding-block: var(--s-7);
   border-bottom: 1px solid var(--line-dark);
 }
 
@@ -1575,48 +1785,98 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .footer .logo__mark { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14); }
 .footer__about { margin-top: var(--s-4); max-width: 34ch; line-height: 1.55; }
 
-.footer__col h4 {
+.footer__req {
+  margin-top: var(--s-4);
+  max-width: 34ch;
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: #fff;
+  line-height: 1.55;
+  color: #8a9bb0;           /* сіро-синій: 6:1 на темно-синьому футері */
+}
+
+.footer__col h4 {
   margin-bottom: var(--s-4);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fff;
 }
 
 .footer__col li + li { margin-top: 11px; }
 
 .footer__col a {
-  transition: color var(--dur) var(--ease);
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: 24px;
+  transition: color var(--dur) var(--ease);
 }
 
 @media (hover: hover) { .footer__col a:hover { color: #fff; } }
 
-.footer__bottom--solo { padding-top: 0; }   /* футер внутрішніх сторінок: лише нижній рядок */
+/* Умови — з маленькою зірочкою кольору бренду */
+.footer__terms li { display: flex; align-items: center; gap: 8px; }
+.footer__terms li::before { content: "✦"; content: "✦" / ""; font-size: 10px; color: var(--brand-teal); }
 
+/* ---- Нижній рядок ---- */
 .footer__bottom {
-  padding-top: var(--s-5);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--s-4);
   align-items: center;
   justify-content: space-between;
+  gap: var(--s-4);
+  padding-block: var(--s-5);
   font-size: 13.5px;
-  color: #8a9bb0;           /* сіро-синій: 6:1 на темно-синьому футері */
+  color: #8a9bb0;
 }
 
 .footer__legal { display: flex; flex-wrap: wrap; gap: var(--s-4); }
 @media (hover: hover) { .footer__legal a:hover { color: #fff; } }
 
-.footer__req {
-  margin-top: var(--s-5);
-  font-size: 13px;
-  color: #8a9bb0;
-  line-height: 1.55;
+.footer__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  font-weight: 600;
+  color: #fff;
+}
+
+@media (hover: hover) { .footer__top:hover { border-color: rgba(255, 255, 255, 0.35); } }
+
+/* ---- Велика назва внизу: градієнт зірки, що розчиняється донизу ---- */
+.footer__wordmark {
+  margin: var(--s-4) 0 -0.16em;
+  /* На всю ширину футера: розмір підібрано вимірюванням країв самих літер
+     (з урахуванням бокових полів «S» і «x» у шрифті) — ~99% ширини.
+     cqw — ширина самого футера (без смуги прокрутки, на відміну від vw) */
+  font-size: 39vw;
+  font-size: 39.5cqw;
+  padding-right: 0.083em;          /* компенсує трекінг після «x» і поле літери — слово рівно по центру */
+  /* flex центрує й тоді, коли слово трохи ширше за блок (text-align у такому разі притискає вліво) */
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.07em;
+  text-align: center;
+  white-space: nowrap;
+  background: var(--brand-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.28;
+  -webkit-mask-image: linear-gradient(180deg, #000 25%, transparent 92%);
+  mask-image: linear-gradient(180deg, #000 25%, transparent 92%);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* На вузьких екранах шрифт рендериться трохи ширше — на пів відсотка менше, щоб «S» не торкалась краю */
+@media (max-width: 600px) {
+  .footer__wordmark { font-size: 38.5vw; font-size: 39cqw; }
 }
 
 /* ==========================================================================
@@ -1823,10 +2083,9 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
    ========================================================================== */
 .pack__sub {
   margin-top: var(--s-5);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: var(--ink-2);
 }
 
@@ -2417,37 +2676,147 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   gap: var(--s-6);
 }
 
-.contacts__list {
+/* Ліва колонка — три блоки, які разом врівноважують форму праворуч */
+.contacts__aside {
   display: grid;
   gap: var(--s-4);
+  align-content: start;
+}
+
+/* Телефон — головний спосіб зв'язку, тому найпомітніший */
+.callcard {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: var(--s-6) var(--s-5);
+  border-radius: var(--r-xl);
+  background:
+    radial-gradient(70% 90% at 100% 0%, rgba(74, 139, 208, 0.22), transparent 70%),
+    radial-gradient(40% 60% at 0% 100%, rgba(79, 179, 191, 0.14), transparent 70%),
+    var(--accent-soft);
+}
+
+.callcard__label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.callcard__phone {
+  display: inline-block;
+  margin-top: var(--s-2);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.callcard__place {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.callcard__place svg { flex: none; color: var(--accent-text); }
+
+@media (hover: hover) {
+  .callcard__phone:hover { color: var(--accent-text); }
+}
+
+/* Що буде після заявки: кроки, з'єднані лінією */
+.nextsteps {
+  padding: var(--s-6) var(--s-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--bg);
+}
+
+.nextsteps__title {
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.nextsteps__list {
+  display: grid;
+  gap: var(--s-5);
+  margin-top: var(--s-5);
+  padding: 0;
+  list-style: none;
+  counter-reset: next;
+}
+
+.nextsteps__list li {
+  position: relative;
+  padding-left: 46px;
+  counter-increment: next;
+  line-height: 1.45;
+}
+
+/* Номер кроку в колі (номер для скрінрідера дає сам <ol>) */
+.nextsteps__list li::before {
+  content: counter(next);
+  content: counter(next) / "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-ink);
+}
+
+/* Лінія від кружечка до наступного кроку */
+.nextsteps__list li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 32px;
+  bottom: calc(var(--s-5) * -1 + 2px);
+  left: 14px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--line);
+}
+
+.nextsteps__list b { display: block; font-weight: 600; }
+.nextsteps__list span { display: block; margin-top: 2px; font-size: 15px; color: var(--ink-2); }
+
+/* Три факти в ряд */
+.contacts__facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-3);
   padding: 0;
   list-style: none;
 }
 
-.contacts__list li {
-  padding-bottom: var(--s-4);
-  border-bottom: 1px solid var(--line);
-  line-height: 1.5;
-}
-
-.contacts__label {
-  display: block;
-  margin-bottom: var(--s-1);
+.contacts__facts li {
+  padding: var(--s-4) var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--bg);
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  line-height: 1.35;
   color: var(--ink-2);
 }
 
-.contacts__list a {
-  font-size: 18px;
-  font-weight: 600;
+.contacts__facts strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 17px;
+  letter-spacing: -0.02em;
   color: var(--ink);
-}
-
-@media (hover: hover) {
-  .contacts__list a:hover { color: var(--accent-ink); }
 }
 
 /* Форма на світлому фоні: м'яка тінь замість темної */
@@ -2459,8 +2828,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* Десктоп: контакти зліва, форма справа */
 @media (min-width: 1024px) {
   .contacts__grid {
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: var(--s-8);
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: var(--s-6);
     align-items: start;
   }
 }
@@ -2493,12 +2862,14 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 .pack--featured {
   position: relative;
   border-color: var(--accent);
+  background: linear-gradient(180deg, var(--accent-soft), var(--bg) 42%);
   box-shadow: var(--e-accent);
 }
 
 .pack--featured::before {
   content: "Рекомендуємо";
   position: absolute;
+  z-index: 2;                  /* над «променем», що біжить по рамці */
   top: -12px;
   left: var(--s-5);
   padding: 4px 12px;
@@ -2542,9 +2913,13 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 /* ==========================================================================
    КАСТОМНИЙ SELECT (mobile-first)
    ========================================================================== */
-/* Оригінальний <select> лишається у формі, але його не видно */
-.cselect__native {
+/* Оригінальний <select> лишається у формі, але його не видно.
+   select. у селекторі — щоб перебити .field select { width: 100% }:
+   інакше прихований список на всю ширину вилазив за правий край сторінки */
+select.cselect__native {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 1px;
   height: 1px;
   margin: -1px;
@@ -2662,53 +3037,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 }
 
 /* ==========================================================================
-   ПЕРЕМИКАЧ ТЕМИ
-   ========================================================================== */
-.theme-toggle {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 46px;               /* як бургер — дві кнопки поруч однакові */
-  height: 46px;
-  flex: none;
-  border-radius: 15px;
-  background: var(--bg-soft);
-  color: var(--ink);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.theme-toggle svg {
-  grid-area: 1 / 1;          /* обидві іконки в одній клітинці, одна над одною */
-  width: 20px;
-  height: 20px;
-}
-
-/* Світла тема — показуємо місяць (клік увімкне темну), темна — сонце */
-.theme-toggle__sun { opacity: 0; transform: rotate(-90deg) scale(0.6); }
-[data-theme="dark"] .theme-toggle__sun  { opacity: 1; transform: none; }
-[data-theme="dark"] .theme-toggle__moon { opacity: 0; transform: rotate(90deg) scale(0.6); }
-
-@media (hover: hover) {
-  .theme-toggle:hover { background: var(--burger-hover); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .theme-toggle svg { transition: opacity 300ms var(--ease-out), transform 400ms var(--ease-out); }
-
-  /* Плавна зміна кольорів — лише на 300 мс під час перемикання (клас ставить theme.js),
-     щоб не заважати швидким hover-переходам у звичайному режимі */
-  .theme-anim,
-  .theme-anim *,
-  .theme-anim *::before,
-  .theme-anim *::after {
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease,
-      border-color 0.3s ease !important;
-  }
-}
-
-/* ==========================================================================
    ФІНАЛЬНА ПОЛІРОВКА (mobile-first)
    ========================================================================== */
 /* Посилання «Перейти до вмісту»: з'являється тільки при фокусі з клавіатури */
@@ -2762,30 +3090,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
 
 @media (min-width: 600px) {
   .not-found__links { flex-direction: row; flex-wrap: wrap; }
-}
-
-/* ---------- Фінальний заклик на головній ---------- */
-.final-cta__box {
-  padding: var(--s-6) var(--s-5);
-  border-radius: var(--r-xl);
-  background: var(--accent-soft);
-}
-
-.final-cta__box .lead { margin-top: var(--s-3); max-width: 52ch; }
-
-.final-cta__actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-3);
-  margin-top: var(--s-6);
-}
-
-@media (min-width: 600px) {
-  .final-cta__actions { flex-direction: row; flex-wrap: wrap; }
-}
-
-@media (min-width: 1024px) {
-  .final-cta__box { padding: var(--s-8); }
 }
 
 /* ==========================================================================
@@ -2846,10 +3150,8 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .btn:hover svg { transform: translateX(4px); }
   .btn:active { transform: translateY(-1px) scale(0.98); }   /* після hover — натискання перемагає */
 
-  /* Сині й білі кнопки поза хедером «підстрибують» і зависають на -3px —
-     там само, де звичайний підйом, тож після анімації нічого не смикається */
-  .btn--primary:not(.header .btn):hover,
-  .btn--ghost:not(.header .btn):hover { animation: btnJump 560ms var(--ease-out); }
+  /* Сині й білі кнопки поза хедером: по кнопці один раз пробігає відблиск */
+  .btn:hover .btn__shine::before { animation: btnShine 900ms cubic-bezier(0.4, 0, 0.2, 1); }   /* рівномірно — щоб смугу встигало помітити око */
 
   /* «Залишити заявку»: швидкий підйом при наведенні; поява знизу лишається повільною */
   .callback.is-visible:hover {
@@ -2862,12 +3164,33 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .step:hover { transform: translateY(-6px); }
 }
 
-@keyframes btnJump {
-  0%   { transform: translateY(0); }
-  35%  { transform: translateY(-8px); }
-  60%  { transform: translateY(-1px); }
-  80%  { transform: translateY(-5px); }
-  100% { transform: translateY(-3px); }
+/* Відблиск на кнопці: шар вставляє fx.js, обрізається по формі кнопки
+   (окремо від ::after із тінню, тож тінь не обрізається) */
+.btn__shine {
+  position: absolute;
+  inset: 0;
+  z-index: -1;                     /* над фоном кнопки, під текстом */
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.btn__shine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: translateX(-130%) skewX(-20deg);
+}
+
+.btn--ghost .btn__shine::before { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); }
+
+@keyframes btnShine {
+  from { transform: translateX(-130%) skewX(-20deg); }
+  to   { transform: translateX(330%) skewX(-20deg); }
 }
 
 @keyframes heroIn {
@@ -2886,6 +3209,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   :root { --container: 100%; }
 
   .footer__grid { grid-template-columns: 1fr 1fr; }
+  .footer__brand { grid-column: 1 / -1; }   /* бренд — окремим рядком над колонками */
 
   .nav__link { --nav-x: 10px; font-size: 15px; }
 }
@@ -2911,8 +3235,6 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .header__aside > .btn { display: none; }
   .burger { display: flex; }
 
-  .faq-layout { grid-template-columns: 1fr; }
-  .faq-aside { position: static; margin-top: var(--s-5); }
 
   /* Три колонки ніш на планшеті занадто тісні — переходимо на дві */
 
@@ -2954,7 +3276,7 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .btn--lg { min-height: 56px; font-size: 16px; }
 
   .field-row { grid-template-columns: 1fr; }
-  .footer__grid { grid-template-columns: 1fr; gap: var(--s-6); }
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: var(--s-6) var(--s-4); }   /* колонки посилань — по дві в ряд */
 
   .formcard { padding: var(--s-5) var(--s-4); }
 }
@@ -2992,4 +3314,724 @@ button { cursor: pointer; background: none; border: none; padding: 0; }
   .header, .callback, .mobile-bar { display: none; }
   body { font-size: 12pt; }
   .section { padding-block: 16pt; }
+}
+
+/* ==========================================================================
+   «ЯК ПРАЦЮЄМО» НА ДЕСКТОПІ — ЧАСОВА ШКАЛА
+   Замість чотирьох однакових карток: лінія з градієнтом зірки і точки-етапи.
+   Стоїть у кінці файлу, щоб перекрити підйом карток із блоку «Рух»:
+   піднята картка відірвала б точку від лінії.
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .steps {
+    position: relative;
+    gap: var(--s-7);
+  }
+
+  /* Лінія етапів — через центри точок (точка 20px, лінія 2px) */
+  .steps::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    right: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--brand-blue), var(--brand-teal) 60%, var(--brand-gold) 90%, transparent);
+    opacity: 0.6;
+  }
+
+  .step {
+    --dot: var(--brand-blue);
+    padding: var(--s-7) 0 0;
+    border: 0;
+    border-radius: 0;
+    /* Точка на лінії: кільце кольору етапу з «дірочкою» кольору фону */
+    background: radial-gradient(circle at 10px 10px, var(--bg-dark) 0 4px, var(--dot) 5px 9px, transparent 10px) no-repeat;
+  }
+
+  .step:nth-child(2) { --dot: #4d9ec8; }
+  .step:nth-child(3) { --dot: var(--brand-teal); }
+  .step:nth-child(4) { --dot: var(--brand-gold); }
+
+  .step::after { display: none; }        /* рамка-підсвітка потрібна лише карткам */
+  .step__text { max-width: 30ch; }
+}
+
+@media (min-width: 1024px) and (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .step:hover { transform: none; }
+}
+
+/* ==========================================================================
+   ТЕМНИЙ ПРЕМІУМ — ПОВЕРХНІ
+   Скляні картки, світло зірки, градієнтний текст.
+   ========================================================================== */
+/* Сторінка в темній темі: м'яке світло згори, як від логотипу */
+[data-theme="dark"] body {
+  background:
+    radial-gradient(110% 55% at 50% -8%, rgba(42, 109, 191, 0.2), transparent 62%) no-repeat,
+    var(--page);
+}
+
+[data-theme="dark"] .about { background: transparent; }
+
+/* Скло: напівпрозорий шар + тонка світла рамка + розмиття того, що позаду */
+[data-theme="dark"] :is(.pain, .pack, .work, .term, .support-plan, .support__base, .about__toast, .about__audience li, .nextsteps, .contacts__facts li) {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Рекомендований тариф: синє світіння зсередини */
+[data-theme="dark"] .pack--featured {
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(42, 109, 191, 0.22), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+}
+
+
+/* Ключова фраза заголовка — градієнтом зірки */
+.text-grad {
+  font-style: normal;
+  color: var(--accent-text);         /* запасний колір без background-clip */
+  background: var(--text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about__toast-title { display: inline-flex; align-items: center; gap: 6px; }
+.about__toast-bell { flex: none; color: var(--accent-text); }
+
+/* ---------- «Аврора» за першим екраном ---------- */
+.aurora {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora span {
+  position: absolute;
+  width: min(620px, 70vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: var(--aurora-opacity);
+}
+
+.aurora span:nth-child(1) { top: -22%; right: -8%;  background: #2f6fbf; }
+.aurora span:nth-child(2) { top: 30%;  right: 22%;  width: min(440px, 55vw); background: #2a9aa6; }
+.aurora span:nth-child(3) { bottom: -30%; left: -12%; width: min(480px, 60vw); background: #b88a3e; opacity: calc(var(--aurora-opacity) * 0.6); }
+
+/* ---------- Біжучий рядок ніш ---------- */
+.marquee {
+  overflow: hidden;
+  padding-block: var(--s-4);
+  border-block: 1px solid var(--line);
+  /* краї рядка розчиняються, а не обрізаються */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee__track { display: flex; width: max-content; }
+
+.marquee__list {
+  display: flex;
+  flex: none;
+  gap: var(--s-6);
+  padding: 0 var(--s-6) 0 0;
+  list-style: none;
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+
+.marquee__list li { display: flex; align-items: center; gap: var(--s-6); }
+.marquee__list li::after { content: "✦"; content: "✦" / ""; font-size: 0.7em; color: var(--brand-teal); }
+
+/* ---------- Підсвітка картки під курсором (шар вставляє fx.js) ---------- */
+.has-spot { position: relative; isolation: isolate; }
+
+.spot {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.spot::before {
+  content: "";
+  position: absolute;
+  top: -210px;
+  left: -210px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--spot-color), transparent 62%);
+  transform: translate(var(--mx, -999px), var(--my, -999px));
+  opacity: 0;
+}
+
+@media (hover: hover) {
+  .has-spot:hover .spot::before { opacity: 1; }
+}
+
+/* ---------- Промінь по рамці рекомендованого тарифу ---------- */
+.beam {
+  position: absolute;
+  inset: -1px;
+  z-index: 1;
+  padding: 1.5px;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  /* лишаємо видимим лише кільце завтовшки з padding */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+.beam::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 350%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  background: conic-gradient(from 0deg, transparent 0 68%, var(--brand-blue) 80%, var(--brand-teal) 88%, var(--brand-gold) 95%, transparent);
+}
+
+/* ---------- Смужка прогресу читання (працює лише там, де є scroll-timeline) ---------- */
+.progress { display: none; }
+
+/* ==========================================================================
+   ТЕМНИЙ ПРЕМІУМ — РУХ
+   Лише transform і opacity; лише коли анімації не вимкнені в системі.
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  /* Аврора повільно дрейфує — кожна пляма своїм шляхом */
+  .aurora span:nth-child(1) { animation: drift1 18s ease-in-out infinite alternate; }
+  .aurora span:nth-child(2) { animation: drift2 22s ease-in-out infinite alternate; }
+  .aurora span:nth-child(3) { animation: drift3 26s ease-in-out infinite alternate; }
+
+  /* Заголовок першого екрана: слова виринають знизу по черзі (розбиває fx.js) */
+  .about__title.is-split { animation: none; }
+  .w {
+    display: inline-block;
+    overflow: clip;
+    overflow-clip-margin: 0.12em;      /* не обрізати хвостики літер «у», «р», «д» */
+    vertical-align: top;
+  }
+  .w > span {
+    display: inline-block;
+    animation: wordUp 900ms var(--ease-out) backwards;
+    animation-delay: calc(120ms + var(--i) * 70ms);
+  }
+
+  /* Сповіщення на скріншоті злегка «пливе» після появи */
+  .about__toast { animation: toastIn 600ms 1100ms var(--ease-out) backwards, floaty 5s 1.8s ease-in-out infinite; }
+
+  /* Нахил скріншота за курсором (кут задає fx.js) */
+  .about__frame { transition: transform 600ms var(--ease-out); will-change: transform; }
+
+  /* Біжучий рядок */
+  .marquee__track { animation: marquee 42s linear infinite; }
+
+  /* Підсвітка й промінь */
+  .spot::before { transition: opacity 350ms var(--ease); }
+  .beam::before { animation: beamSpin 5.5s linear infinite; }
+
+  /* Лінія етапів «малюється», коли блок доїхав до екрана */
+  .fx-on .steps:not(.is-inview)::before { transform: scaleX(0); }
+  .steps::before { transform-origin: left; transition: transform 1400ms var(--ease-out) 200ms; }
+
+  /* Логотип: зірка трохи повертається при наведенні */
+  .logo__mark { transition: transform 500ms var(--ease-out); }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .logo:hover .logo__mark { transform: rotate(-10deg) scale(1.06); }
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+}
+
+/* Прогрес читання — анімація прив'язана до прокрутки сторінки */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .progress {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: calc(var(--z-header) + 1);
+      height: 2px;
+      background: var(--brand-grad);
+      transform-origin: left;
+      animation: progressGrow linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@keyframes drift1 { to { transform: translate(-14%, 18%) scale(1.15); } }
+@keyframes drift2 { to { transform: translate(18%, -12%) scale(0.85); } }
+@keyframes drift3 { to { transform: translate(22%, -16%) scale(1.2); } }
+@keyframes wordUp { from { opacity: 0; transform: translateY(105%); } }
+@keyframes floaty { 50% { transform: translateY(-6px); } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes beamSpin { to { transform: rotate(1turn); } }
+@keyframes progressGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Смужка браузера на картках робіт у темній темі — трохи світліша за скло */
+[data-theme="dark"] .work__browser { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.07); }
+[data-theme="dark"] .work__url { background: rgba(255, 255, 255, 0.06); }
+[data-theme="dark"] .work__window { border-color: rgba(255, 255, 255, 0.07); }
+
+/* Картка з телефоном у темній темі: світло зірки поверх скла */
+[data-theme="dark"] .callcard {
+  background:
+    radial-gradient(70% 90% at 100% 0%, rgba(74, 139, 208, 0.3), transparent 70%),
+    radial-gradient(40% 60% at 0% 100%, rgba(79, 179, 191, 0.16), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Рух у футері: назва виринає знизу, стрілка «Нагору» підстрибує при наведенні */
+@media (prefers-reduced-motion: no-preference) {
+  .fx-on .footer__wordmark:not(.is-inview) { opacity: 0; transform: translateY(35%); }
+  /* Анімація лише на появу: ховається напис миттєво, ще до того, як його можна побачити */
+  .footer__wordmark.is-inview { transition: opacity 1200ms var(--ease-out), transform 1200ms var(--ease-out); }
+  .footer__top svg { transition: transform 300ms var(--ease-out); }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .footer__top:hover svg { transform: translateY(-3px); }
+}
+
+/* Смуга FAQ у темній темі: світло зірки поверх скла */
+[data-theme="dark"] .faq-cta {
+  background:
+    radial-gradient(60% 120% at 100% 0%, rgba(74, 139, 208, 0.28), transparent 70%),
+    radial-gradient(35% 80% at 0% 100%, rgba(230, 192, 126, 0.12), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   ЗОРЯНЕ НЕБО НА ПЕРШОМУ ЕКРАНІ (у тему «Starix»)
+   Три шари зірок мерехтять у різному ритмі, час від часу падає зоря,
+   позаду повільно обертається контур зірки з логотипу. Усе — декор:
+   лише transform/opacity, при вимкнених анімаціях небо просто статичне.
+   ========================================================================== */
+.sky {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Кожен шар — одна крихітна точка, а зірки — її тіні (без сотень елементів) */
+.sky__stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.sky__stars--a {
+  box-shadow:
+    32.38vw 308px rgba(255,255,255,0.61),
+    7.24vw 1097px rgba(255,255,255,0.41),
+    90.97vw 439px rgba(233,206,150,0.37),
+    41.82vw 492px rgba(233,206,150,0.41),
+    5.91vw 1158px rgba(255,255,255,0.43),
+    63.06vw 1193px rgba(233,206,150,0.97),
+    4.96vw 452px rgba(255,255,255,0.38),
+    28.96vw 295px rgba(180,214,245,0.7),
+    56.03vw 1396px rgba(255,255,255,0.47),
+    37.24vw 1121px rgba(255,255,255,0.81),
+    61.9vw 1016px rgba(233,206,150,0.79),
+    77.72vw 953px rgba(233,206,150,0.73),
+    36.16vw 508px rgba(255,255,255,0.87),
+    8.19vw 614px rgba(180,214,245,0.69),
+    72.94vw 589px rgba(255,255,255,0.75),
+    11.81vw 856px rgba(180,214,245,0.46),
+    15.2vw 1001px rgba(255,255,255,0.62),
+    76.46vw 1173px rgba(180,214,245,0.86),
+    34.01vw 717px rgba(233,206,150,0.74),
+    6.88vw 191px rgba(233,206,150,0.96),
+    69.7vw 133px rgba(180,214,245,0.39),
+    64.71vw 1395px rgba(180,214,245,0.88),
+    71.66vw 1369px rgba(233,206,150,0.58),
+    35.55vw 1251px rgba(255,255,255,0.43),
+    21.82vw 588px rgba(255,255,255,0.43),
+    39.79vw 1016px rgba(233,206,150,0.4),
+    40.16vw 569px rgba(233,206,150,0.92),
+    86.4vw 570px rgba(180,214,245,0.81),
+    68.27vw 779px rgba(255,255,255,0.97),
+    8.3vw 309px rgba(255,255,255,0.5),
+    1.21vw 1206px rgba(180,214,245,0.47),
+    0.41vw 858px rgba(180,214,245,0.7),
+    95.31vw 1055px rgba(255,255,255,0.97),
+    45.66vw 1393px rgba(233,206,150,0.87),
+    39.81vw 807px rgba(233,206,150,0.42),
+    6.22vw 137px rgba(233,206,150,0.99),
+    16.23vw 696px rgba(255,255,255,0.74),
+    0.02vw 309px rgba(180,214,245,0.7),
+    61.37vw 144px rgba(233,206,150,0.92),
+    14.86vw 516px rgba(180,214,245,0.97),
+    47.42vw 236px rgba(233,206,150,0.9),
+    48.04vw 638px rgba(255,255,255,0.41),
+    74.97vw 542px rgba(255,255,255,0.66),
+    51.63vw 420px rgba(180,214,245,0.97),
+    14.66vw 1112px rgba(180,214,245,0.94),
+    97.85vw 186px rgba(180,214,245,0.8),
+    51.84vw 342px rgba(255,255,255,0.58),
+    53.26vw 1029px rgba(255,255,255,0.56),
+    61.32vw 399px rgba(233,206,150,0.87),
+    73.99vw 464px rgba(233,206,150,0.48),
+    35.56vw 59px rgba(180,214,245,0.99),
+    47.22vw 396px rgba(180,214,245,0.8),
+    44.72vw 715px rgba(180,214,245,0.97),
+    8.05vw 209px rgba(255,255,255,0.5),
+    33.77vw 988px rgba(255,255,255,0.76),
+    47.95vw 1337px rgba(255,255,255,0.57),
+    83.46vw 245px rgba(255,255,255,0.94),
+    47.8vw 365px rgba(180,214,245,0.63),
+    8.67vw 810px rgba(255,255,255,0.65),
+    72.48vw 348px rgba(255,255,255,1.0),
+    15.12vw 953px rgba(255,255,255,0.87),
+    61.16vw 1220px rgba(180,214,245,0.99),
+    15.59vw 1122px rgba(255,255,255,0.44),
+    79.94vw 1330px rgba(255,255,255,0.42),
+    43.38vw 398px rgba(255,255,255,0.89),
+    2.8vw 435px rgba(255,255,255,0.54),
+    76.37vw 667px rgba(233,206,150,0.52),
+    83.42vw 124px rgba(180,214,245,0.94),
+    89.77vw 1356px rgba(233,206,150,0.73),
+    82.71vw 1027px rgba(255,255,255,0.43);
+  opacity: 0.7;
+}
+
+.sky__stars--b {
+  width: 2px;
+  height: 2px;
+  box-shadow:
+    52.35vw 38px rgba(255,255,255,0.92),
+    60.86vw 306px rgba(233,206,150,0.46),
+    61.91vw 246px rgba(180,214,245,0.71),
+    68.23vw 1086px rgba(255,255,255,0.71),
+    88.32vw 116px rgba(180,214,245,0.51),
+    4.22vw 200px rgba(255,255,255,0.68),
+    76.0vw 129px rgba(255,255,255,0.64),
+    69.27vw 926px rgba(233,206,150,0.68),
+    50.78vw 507px rgba(180,214,245,0.8),
+    92.28vw 414px rgba(255,255,255,0.9),
+    41.66vw 803px rgba(255,255,255,0.64),
+    67.12vw 877px rgba(180,214,245,0.4),
+    78.39vw 316px rgba(180,214,245,0.96),
+    14.3vw 281px rgba(255,255,255,0.98),
+    74.67vw 192px rgba(233,206,150,0.61),
+    16.28vw 1367px rgba(255,255,255,0.89),
+    70.63vw 1055px rgba(233,206,150,0.61),
+    19.57vw 652px rgba(180,214,245,0.41),
+    1.95vw 1134px rgba(255,255,255,0.65),
+    38.43vw 1059px rgba(255,255,255,0.76),
+    11.28vw 468px rgba(255,255,255,0.98),
+    8.41vw 556px rgba(255,255,255,0.38),
+    27.04vw 265px rgba(180,214,245,0.88),
+    40.59vw 1098px rgba(233,206,150,0.95),
+    70.04vw 183px rgba(255,255,255,0.53),
+    42.53vw 148px rgba(255,255,255,0.52),
+    63.44vw 533px rgba(255,255,255,0.4),
+    6.66vw 249px rgba(180,214,245,0.64),
+    99.43vw 855px rgba(180,214,245,0.95),
+    62.17vw 88px rgba(255,255,255,0.69),
+    93.81vw 330px rgba(255,255,255,0.52),
+    20.18vw 638px rgba(255,255,255,0.76),
+    29.0vw 1024px rgba(180,214,245,0.79),
+    34.7vw 37px rgba(255,255,255,1.0),
+    1.53vw 1035px rgba(255,255,255,0.71),
+    51.42vw 503px rgba(255,255,255,0.96),
+    65.83vw 1331px rgba(233,206,150,0.63),
+    54.59vw 805px rgba(180,214,245,0.98),
+    68.77vw 470px rgba(255,255,255,0.57),
+    40.47vw 711px rgba(255,255,255,0.99);
+  opacity: 0.6;
+}
+
+.sky__stars--c {
+  width: 2px;
+  height: 2px;
+  box-shadow:
+    1.43vw 1280px 0 1px rgba(180,214,245,0.83),
+    43.07vw 113px 0 1px rgba(233,206,150,0.4),
+    87.05vw 1373px 0 1px rgba(255,255,255,0.98),
+    69.27vw 92px 0 1px rgba(255,255,255,0.65),
+    26.9vw 7px 0 1px rgba(180,214,245,0.52),
+    97.26vw 1120px 0 1px rgba(255,255,255,0.56),
+    96.57vw 633px 0 1px rgba(255,255,255,0.49),
+    0.11vw 781px 0 1px rgba(180,214,245,0.4),
+    50.28vw 411px 0 1px rgba(255,255,255,0.51),
+    9.09vw 183px 0 1px rgba(255,255,255,0.44),
+    39.4vw 613px 0 1px rgba(255,255,255,0.55),
+    8.45vw 1083px 0 1px rgba(255,255,255,0.9),
+    65.75vw 1221px 0 1px rgba(180,214,245,0.6),
+    72.07vw 1012px 0 1px rgba(255,255,255,0.45),
+    4.38vw 1050px 0 1px rgba(255,255,255,0.76),
+    90.99vw 1032px 0 1px rgba(255,255,255,0.72);
+  opacity: 0.8;
+}
+
+/* Падаюча зоря: тонкий світлий хвіст під кутом */
+.sky__shoot {
+  position: absolute;
+  width: 140px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(180, 214, 245, 0.9));
+  opacity: 0;
+  rotate: -28deg;
+}
+
+.sky__shoot--1 { top: 14%; left: 58%; }
+.sky__shoot--2 { top: 6%;  left: 22%; width: 100px; }
+.sky__shoot--3 { top: 34%; left: 80%; width: 120px; }
+
+/* Контур зірки з логотипу — великий, ледь видимий */
+.sky__star {
+  position: absolute;
+  top: 50%;
+  right: -8%;
+  width: min(720px, 80vw);
+  height: auto;
+  translate: 0 -50%;
+  opacity: 0.07;
+  color: var(--brand-teal);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sky__stars--a { animation: twinkle 4.5s ease-in-out infinite alternate; }
+  .sky__stars--b { animation: twinkle 6s ease-in-out -2s infinite alternate; }
+  .sky__stars--c { animation: twinkle 3.2s ease-in-out -1s infinite alternate; }
+
+  .sky__shoot--1 { animation: shoot 9s ease-out 1.5s infinite; }
+  .sky__shoot--2 { animation: shoot 13s ease-out 6s infinite; }
+  .sky__shoot--3 { animation: shoot 11s ease-out 10s infinite; }
+
+  .sky__star { animation: starSpin 90s linear infinite; }
+}
+
+/* Мерехтіння: шар то тьмяніє, то яскравішає */
+@keyframes twinkle {
+  from { opacity: 0.25; }
+  to   { opacity: 0.95; }
+}
+
+/* Падіння триває перші ~12% циклу, решту часу зоря невидима — так виходять «паузи» */
+@keyframes shoot {
+  0%   { opacity: 0; transform: translateX(0); }
+  2%   { opacity: 1; }
+  12%  { opacity: 0; transform: translateX(-420px); }
+  100% { opacity: 0; transform: translateX(-420px); }
+}
+
+@keyframes starSpin { to { transform: rotate(1turn); } }
+
+/* На телефоні контур зірки менший і ще тихіший — не заважає тексту */
+@media (max-width: 767px) {
+  .sky__star { top: 30%; right: -30%; opacity: 0.05; }
+}
+
+/* ==========================================================================
+   ФОНИ БЛОКІВ — у кожного свій, жоден не повторюється
+   Декор живе в ::after (у «сигналу» — ::before і ::after), нижче за вміст.
+   Рух — лише transform/opacity і лише без «зменшення руху» в системі.
+   ========================================================================== */
+.bg { position: relative; isolation: isolate; }
+
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* На «Роботах» і «Записі» блоки стоять у .container — фон виходить
+   на всю ширину екрана, а зайве обрізає сам <main> (без горизонтального скролу) */
+.page { overflow-x: clip; }
+.page .bg::after { left: 50%; right: auto; width: 100vw; translate: -50% 0; }
+/* Фон не перетікає в сусідній блок: обрізаємо по висоті (по ширині — на весь екран) */
+.page .bg { overflow-y: clip; }
+/* Секції головної — на всю ширину, їм обрізаємо фон з усіх боків */
+.section.bg { overflow: clip; }
+
+/* Біжучий рядок: світлова хвиля пробігає вздовж стрічки */
+.bg-sweep::after {
+  right: auto;
+  width: 40%;
+  left: -40%;
+  background: linear-gradient(90deg, transparent, rgba(79, 179, 191, 0.16), rgba(230, 192, 126, 0.12), transparent);
+}
+
+/* «Знайомо?»: точкова сітка, що згасає від лівого верхнього кута */
+.bg-dots::after {
+  background-image: radial-gradient(rgba(140, 192, 238, 0.4) 1px, transparent 1.6px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(60% 60% at 12% 18%, #000, transparent 75%);
+  mask-image: radial-gradient(60% 60% at 12% 18%, #000, transparent 75%);
+  opacity: 0.55;
+}
+
+/* «Як працюємо»: креслярська сітка — процес, як на кресленні */
+.bg-blueprint::after {
+  top: -56px;                      /* запас на одну клітинку для безшовного руху */
+  background-image:
+    linear-gradient(rgba(140, 192, 238, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 192, 238, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: linear-gradient(180deg, #000 20%, transparent 90%);
+  mask-image: linear-gradient(180deg, #000 20%, transparent 90%);
+}
+
+/* FAQ: широка розмита хвиля кольорів зірки */
+.bg-wave::after {
+  inset: 28% -15% auto;
+  height: 300px;
+  background: linear-gradient(90deg, rgba(42, 109, 191, 0), rgba(42, 109, 191, 0.22), rgba(79, 179, 191, 0.16), rgba(230, 192, 126, 0.12), rgba(42, 109, 191, 0));
+  filter: blur(70px);
+  transform: skewY(-6deg);
+}
+
+/* «Роботи»: ретро-«підлога» в перспективі — сітка йде до горизонту */
+.bg-floor::after {
+  top: auto;
+  bottom: 0;
+  height: 70%;
+  background-image:
+    linear-gradient(rgba(79, 179, 191, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 179, 191, 0.3) 1px, transparent 1px);
+  background-size: 64px 64px;
+  /* Площина «лягає» від нижнього краю блоку й тікає до горизонту */
+  transform: perspective(500px) rotateX(62deg);
+  transform-origin: 50% 100%;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 80%, transparent);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 80%, transparent);
+  opacity: 0.6;
+}
+
+/* «Ціни»: промені прожектора зверху — «у світлі» тарифи */
+.bg-beams::after {
+  top: -30%;                       /* вершина конуса — вище за блок: видно вже розкриті промені */
+  bottom: 20%;
+  /* Кут відлічується від напрямку «from»: 150° + 30° = промінь рівно донизу */
+  background: conic-gradient(from 150deg at 50% 0%,
+    transparent 0deg 10deg,
+    rgba(74, 139, 208, 0.2) 17deg, transparent 24deg,
+    rgba(79, 179, 191, 0.16) 30deg, transparent 36deg,
+    rgba(230, 192, 126, 0.13) 43deg, transparent 50deg 360deg);
+  transform-origin: 50% 0;
+  /* Промені проступають плавно, без різкого краю на межі блоку, і гаснуть донизу */
+  /* Межа блоку — на 27% висоти елемента (30% над блоком із 110%): до неї повна прозорість */
+  -webkit-mask-image: linear-gradient(180deg, transparent 28%, #000 48%, #000 62%, transparent);
+  mask-image: linear-gradient(180deg, transparent 28%, #000 48%, #000 62%, transparent);
+}
+
+/* «Підтримка»: тонке діагональне штрихування й бірюзове світло справа */
+.bg-hatch::after {
+  background:
+    radial-gradient(40% 60% at 88% 40%, rgba(79, 179, 191, 0.1), transparent 70%),
+    repeating-linear-gradient(135deg, rgba(140, 192, 238, 0.07) 0 1px, transparent 1px 14px);
+  -webkit-mask-image: radial-gradient(55% 75% at 85% 45%, #000, transparent 80%);
+  mask-image: radial-gradient(55% 75% at 85% 45%, #000, transparent 80%);
+}
+
+/* «Умови»: візерунок із плюсиків — як позначки на кресленні договору */
+.bg-plus::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 15v10M15 20h10' stroke='%238cc0ee' stroke-opacity='.4'/%3E%3C/svg%3E");
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 25%, #000 60%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 25%, #000 60%, transparent);
+  opacity: 0.6;
+}
+
+/* Демо запису: дві світлові кулі — синя й золота */
+.bg-orbs::after {
+  inset: -10% 0;
+  background:
+    radial-gradient(28% 40% at 18% 30%, rgba(42, 109, 191, 0.22), transparent 70%),
+    radial-gradient(24% 34% at 82% 72%, rgba(230, 192, 126, 0.12), transparent 70%);
+}
+
+/* Контакти: хвилі «сигналу», що розходяться від картки з телефоном */
+.bg-signal { position: relative; isolation: isolate; }
+
+.bg-signal::before,
+.bg-signal::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 140px;
+  left: -160px;
+  width: 560px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(140, 192, 238, 0.18);
+  border-radius: 50%;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.bg-signal::after { transform: scale(0.6); }
+
+/* Оферта й політика: лінійки, як на аркуші, вгорі сторінки */
+.bg-paper { position: relative; isolation: isolate; }
+
+.bg-paper::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: 460px;
+  background:
+    radial-gradient(50% 80% at 80% 0%, rgba(42, 109, 191, 0.14), transparent 70%),
+    repeating-linear-gradient(180deg, rgba(140, 192, 238, 0.06) 0 1px, transparent 1px 32px);
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent);
+  mask-image: linear-gradient(180deg, #000, transparent);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bg-sweep::after   { animation: bgSweep 7s linear infinite; }
+  .bg-blueprint::after { animation: bgGridDrift 6s linear infinite; }
+  .bg-wave::after    { animation: bgWave 14s ease-in-out infinite alternate; }
+  .bg-floor::after   { animation: bgFloor 3s linear infinite; }
+  .bg-beams::after   { animation: bgBeams 10s ease-in-out infinite alternate; }
+  .bg-orbs::after    { animation: bgOrbs 16s ease-in-out infinite alternate; }
+  .bg-signal::before,
+  .bg-signal::after  { animation: bgSignal 6s ease-out infinite; }
+  .bg-signal::after  { animation-delay: -3s; }
+}
+
+@keyframes bgSweep     { from { transform: translateX(0); } to { transform: translateX(350%); } }
+@keyframes bgGridDrift { to { transform: translateY(56px); } }
+@keyframes bgWave      { from { transform: skewY(-6deg) translateX(-6%); } to { transform: skewY(-3deg) translateX(6%); } }
+@keyframes bgFloor     { from { transform: perspective(500px) rotateX(62deg) translateY(0); } to { transform: perspective(500px) rotateX(62deg) translateY(64px); } }
+@keyframes bgBeams     { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+@keyframes bgOrbs      { from { transform: translate(-2%, 2%) scale(1); } to { transform: translate(3%, -3%) scale(1.06); } }
+@keyframes bgSignal    { from { transform: scale(0.25); opacity: 0.7; } to { transform: scale(1.5); opacity: 0; } }
+
+/* На телефоні «сигнал» менший і ближче до картки */
+@media (max-width: 767px) {
+  .bg-signal::before,
+  .bg-signal::after { top: 120px; left: -120px; width: 380px; }
 }

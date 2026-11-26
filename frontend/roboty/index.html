@@ -1,20 +1,11 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Роботи та ціни — сайти з онлайн-записом | Starix</title>
 <meta name="description" content="Живі сайти для барбершопу, салону краси, спа і кафе та три пакети: 15 000, 25 000 і 40 000 ₴. Запуск від 5 днів.">
-<meta name="theme-color" content="#ffffff">
-<script>
-  /* Тема — до першого малювання, щоб темна не «блимала» білим */
-  (function () {
-    var t = null;
-    try { t = localStorage.getItem('theme'); } catch (e) {}
-    if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t);
-  })();
-</script>
+<meta name="theme-color" content="#070d18">
 <link rel="icon" href="../favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -30,8 +21,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap"></noscript>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -53,11 +45,7 @@
     </nav>
 
     <div class="header__aside">
-      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Увімкнути темну тему" title="Увімкнути темну тему">
-        <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 1011 11z"/></svg>
-        <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>
-      </button>
-      <a href="../zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
+            <a href="../zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
       <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" id="burger">
         <span></span><span></span><span></span>
       </button>
@@ -89,74 +77,124 @@
     </div>
 
     <!-- ===== Роботи: тільки скріншоти через <img>, без iframe ===== -->
-    <section class="page-block" id="roboty" aria-labelledby="works-title">
+    <section class="page-block bg bg-floor" id="roboty" aria-labelledby="works-title">
       <h2 class="h2" id="works-title">Наші роботи</h2>
       <p class="lead page-block__lead">Відкрийте будь-який сайт і пройдіть запис як клієнт.</p>
 
-      <!-- Фільтр прихований, поки не завантажився JS: без скрипта кнопки
-           нічого б не робили, а роботи й так видно всі -->
-      <div class="filters" id="worksFilters" role="group" aria-label="Фільтр робіт за нішею" hidden>
-        <button type="button" class="filters__btn" data-filter="all" aria-pressed="true">Усі</button>
-        <button type="button" class="filters__btn" data-filter="barber" aria-pressed="false">Барбершопи</button>
-        <button type="button" class="filters__btn" data-filter="salon" aria-pressed="false">Салони краси</button>
-        <button type="button" class="filters__btn" data-filter="spa" aria-pressed="false">Спа</button>
-        <button type="button" class="filters__btn" data-filter="cafe" aria-pressed="false">Кав'ярні</button>
-      </div>
-      <p class="filters__count" id="worksCount" aria-live="polite"></p>
-
-      <!-- Тільки скріншоти через <img>, жодних iframe -->
-      <ul class="works" id="worksList">
-        <li class="work" data-niche="barber">
-          <img class="work__img" src="../img/works/barber-shop.webp" width="1280" height="800"
-               loading="lazy" decoding="async"
-               alt="Головна сторінка сайту барбершопу BRUTAL CUT">
+      <!-- Тільки скріншоти через <img>, жодних iframe.
+           Знімки — на всю довжину сторінки: при наведенні сайт «гортається» у вікні -->
+      <ul class="works">
+        <li class="work">
+          <div class="work__browser" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span class="work__url">nazar-web-hash.github.io/barber-shop/frontend</span>
+          </div>
+          <div class="work__window">
+            <img class="work__img" src="../img/works/full/barber-shop.webp" width="720" height="2138"
+                 loading="lazy" decoding="async" alt="Сайт барбершопу BRUTAL CUT: головний екран, майстри, прайс і галерея">
+            <span class="work__hint" aria-hidden="true">Наведіть — і сайт прогорнеться</span>
+          </div>
           <div class="work__body">
-            <p class="work__niche">Барбершоп</p>
+            <div class="work__meta">
+              <p class="work__niche">Барбершоп</p>
+            </div>
             <h3 class="work__title">BRUTAL CUT</h3>
             <p class="work__text">Прайс, майстри, галерея робіт і онлайн-запис з найближчим вільним вікном.</p>
+            <ul class="work__features" aria-label="Що є на сайті"><li>Онлайн-запис</li><li>Майстри</li><li>Прайс-лист</li></ul>
             <a class="work__link" href="https://nazar-web-hash.github.io/barber-shop/frontend/" target="_blank" rel="noopener">
               Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
             </a>
           </div>
         </li>
 
-        <li class="work" data-niche="salon">
-          <img class="work__img" src="../img/works/lumiere.webp" width="1280" height="800"
-               loading="lazy" decoding="async"
-               alt="Головна сторінка сайту салону краси Lumière">
+        <li class="work">
+          <div class="work__browser" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span class="work__url">kopchuk-creator.github.io/Lumiere</span>
+          </div>
+          <div class="work__window">
+            <img class="work__img" src="../img/works/full/lumiere.webp" width="720" height="2138"
+                 loading="lazy" decoding="async" alt="Сайт салону краси Lumière: послуги, крамниця косметики, майстри й відгуки">
+            <span class="work__hint" aria-hidden="true">Наведіть — і сайт прогорнеться</span>
+          </div>
           <div class="work__body">
-            <p class="work__niche">Салон краси</p>
+            <div class="work__meta">
+              <p class="work__niche">Салон краси</p>
+            </div>
             <h3 class="work__title">Lumière</h3>
             <p class="work__text">Послуги, майстри, крамниця косметики та онлайн-запис за 2 хвилини.</p>
+            <ul class="work__features" aria-label="Що є на сайті"><li>Онлайн-запис</li><li>Крамниця</li><li>Відгуки</li></ul>
             <a class="work__link" href="https://kopchuk-creator.github.io/Lumiere/" target="_blank" rel="noopener">
               Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
             </a>
           </div>
         </li>
 
-        <li class="work" data-niche="spa">
-          <img class="work__img" src="../img/works/massage-center.webp" width="1280" height="800"
-               loading="lazy" decoding="async"
-               alt="Головна сторінка сайту мережі салонів масажу Aura SPA">
+        <li class="work">
+          <div class="work__browser" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span class="work__url">nazar-web-hash.github.io/massage-center/frontend</span>
+          </div>
+          <div class="work__window">
+            <img class="work__img" src="../img/works/full/massage-center.webp" width="720" height="2138"
+                 loading="lazy" decoding="async" alt="Сайт мережі салонів масажу Aura SPA: послуги, підбір процедури й бронювання">
+            <span class="work__hint" aria-hidden="true">Наведіть — і сайт прогорнеться</span>
+          </div>
           <div class="work__body">
-            <p class="work__niche">Масаж і спа</p>
+            <div class="work__meta">
+              <p class="work__niche">Масаж і спа</p>
+            </div>
             <h3 class="work__title">Aura SPA</h3>
             <p class="work__text">Програми масажу, підбір процедури, майстри та онлайн-бронювання.</p>
+            <ul class="work__features" aria-label="Що є на сайті"><li>Підбір процедури</li><li>Бронювання</li><li>Питання й відповіді</li></ul>
             <a class="work__link" href="https://nazar-web-hash.github.io/massage-center/frontend/" target="_blank" rel="noopener">
               Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
             </a>
           </div>
         </li>
 
-        <li class="work" data-niche="cafe">
-          <img class="work__img" src="../img/works/food-vibe.webp" width="1280" height="800"
-               loading="lazy" decoding="async"
-               alt="Головна сторінка сайту кафе Food&amp;Vibe">
+        <li class="work">
+          <div class="work__browser" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span class="work__url">kopchuk-creator.github.io/Food-Vibe</span>
+          </div>
+          <div class="work__window">
+            <img class="work__img" src="../img/works/full/food-vibe.webp" width="720" height="2138"
+                 loading="lazy" decoding="async" alt="Сайт кафе Food&amp;Vibe: фірмові страви, акція, історія закладу й відгуки">
+            <span class="work__hint" aria-hidden="true">Наведіть — і сайт прогорнеться</span>
+          </div>
           <div class="work__body">
-            <p class="work__niche">Кав'ярня</p>
+            <div class="work__meta">
+              <p class="work__niche">Кав&#x27;ярня</p>
+            </div>
             <h3 class="work__title">Food&amp;Vibe</h3>
             <p class="work__text">Меню з фото, кошик і доставка, українська та англійська версії.</p>
+            <ul class="work__features" aria-label="Що є на сайті"><li>Кошик</li><li>Доставка</li><li>UA / EN</li></ul>
             <a class="work__link" href="https://kopchuk-creator.github.io/Food-Vibe/" target="_blank" rel="noopener">
+              Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
+            </a>
+          </div>
+        </li>
+
+        <li class="work">
+          <div class="work__browser" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span class="work__url">kopchuk-creator.github.io/proof</span>
+          </div>
+          <div class="work__window">
+            <img class="work__img" src="../img/works/full/proof.webp" width="720" height="2138"
+                 loading="lazy" decoding="async" alt="Концепт сайту пекарні Proof: головний екран, розклад печі й меню кави">
+            <span class="work__hint" aria-hidden="true">Наведіть — і сайт прогорнеться</span>
+          </div>
+          <div class="work__body">
+            <div class="work__meta">
+              <p class="work__niche">Пекарня й кав&#x27;ярня</p>
+              <span class="work__tag">Концепт</span>
+            </div>
+            <h3 class="work__title">Proof</h3>
+            <p class="work__text">Розклад печі, що підсвічує вже готову випічку, меню з вкладками й алергенами, галерея атмосфери.</p>
+            <ul class="work__features" aria-label="Що є на сайті"><li>Розклад печі</li><li>Меню з алергенами</li><li>Галерея</li></ul>
+            <a class="work__link" href="https://kopchuk-creator.github.io/proof/" target="_blank" rel="noopener">
               Відкрити сайт <span aria-hidden="true">↗</span><span class="visually-hidden">(відкриється в новій вкладці)</span>
             </a>
           </div>
@@ -165,7 +203,7 @@
     </section>
 
     <!-- ===== Ціни ===== -->
-    <section class="page-block" id="tsiny" aria-labelledby="prices-title">
+    <section class="page-block bg bg-beams" id="tsiny" aria-labelledby="prices-title">
       <h2 class="h2" id="prices-title">Ціни</h2>
       <p class="lead page-block__lead">Три пакети під розмір закладу. Це разова оплата за розробку сайту — ціна і строк фіксуються в договорі.</p>
 
@@ -241,7 +279,7 @@
     </section>
 
     <!-- ===== Щомісячна підтримка: окремо від розробки ===== -->
-    <section class="page-block support" id="pidtrymka" aria-labelledby="support-title">
+    <section class="page-block support bg bg-hatch" id="pidtrymka" aria-labelledby="support-title">
       <h2 class="h2" id="support-title">Щомісячна підтримка</h2>
       <p class="lead page-block__lead">Окрема послуга після запуску — не входить у вартість розробки і підключається лише за вашим бажанням. Відмовитися можна будь-коли, попередивши нас письмово.</p>
 
@@ -291,7 +329,7 @@
     </section>
 
     <!-- ===== Умови співпраці та гарантія ===== -->
-    <section class="terms" id="umovy" aria-labelledby="terms-title">
+    <section class="terms bg bg-plus" id="umovy" aria-labelledby="terms-title">
       <h2 class="h2" id="terms-title">Умови співпраці та гарантія</h2>
 
       <div class="terms__grid">
@@ -335,18 +373,75 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="footer__bottom footer__bottom--solo">
+    <!-- Останній заклик сторінки -->
+    <div class="footer__cta">
+      <h2 class="footer__title">Зробимо сайт, через який клієнти <em class="text-grad">записуються самі</em></h2>
+      <div class="footer__actions">
+        <a href="../zapys/#kontakty" class="btn btn--primary btn--lg">Обговорити проєкт</a>
+        <a href="tel:+380676892088" class="footer__phone">
+          <span class="footer__phone-label">або зателефонуйте</span>
+          +380&nbsp;67&nbsp;689&nbsp;20&nbsp;88
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="../" class="logo">
+          <img class="logo__mark" src="../img/logo-mark.png" width="32" height="32" alt="">
+          Starix
+        </a>
+        <p class="footer__about">
+          Робимо сайти з онлайн-записом для барбершопів, салонів краси, спа і кав'ярень.
+        </p>
+        <p class="footer__req">Івано-Франківськ, Україна · працюємо за договором, надаємо закривні документи</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Сторінки сайту">
+        <h4>Сторінки</h4>
+        <ul>
+          <li><a href="../">Про нас</a></li>
+          <li><a href="../roboty/">Роботи та ціни</a></li>
+          <li><a href="../zapys/">Запис і контакти</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h4>Ніші</h4>
+        <ul>
+          <li><a href="../roboty/#tsiny">Барбершопи</a></li>
+          <li><a href="../roboty/#tsiny">Салони краси</a></li>
+          <li><a href="../roboty/#tsiny">Масаж і спа</a></li>
+          <li><a href="../roboty/#tsiny">Кав'ярні й ресторани</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Умови</h4>
+        <ul class="footer__terms">
+          <li>Від 15&nbsp;000&nbsp;₴</li>
+          <li>Запуск від 5 днів</li>
+          <li>Оплата 50/50</li>
+          <li>Гарантія 1 місяць</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
       <span>© <span id="year">2026</span> Starix. Усі права захищені.</span>
       <nav class="footer__legal" aria-label="Правова інформація">
         <a href="../polityka-konfidentsiynosti/">Політика конфіденційності</a>
         <a href="../publichna-oferta/">Публічна оферта</a>
       </nav>
+      <a href="#" class="footer__top" data-to-top>Нагору <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
     </div>
   </div>
+
+  <!-- Велика назва внизу — декор, тому прихована від скрінрідерів -->
+  <p class="footer__wordmark" aria-hidden="true">Starix</p>
 </footer>
 
 <script src="../main.js" defer></script>
-<script src="roboty.js" defer></script>
-<script src="../theme.js" defer></script>
+<script src="../fx.js" defer></script>
 </body>
 </html>

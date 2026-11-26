@@ -1,28 +1,20 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Публічна оферта — Starix</title>
 <meta name="description" content="Умови розробки сайтів з онлайн-записом: три пакети (15 000, 25 000, 40 000 ₴), оплата 50/50, гарантія 1 місяць, щомісячна підтримка.">
 <meta name="robots" content="noindex, follow">
-<meta name="theme-color" content="#ffffff">
-<script>
-  /* Тема — до першого малювання, щоб темна не «блимала» білим */
-  (function () {
-    var t = null;
-    try { t = localStorage.getItem('theme'); } catch (e) {}
-    if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t);
-  })();
-</script>
+<meta name="theme-color" content="#070d18">
 <link rel="icon" href="../favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap"></noscript>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -37,16 +29,12 @@
       Starix
     </a>
     <div class="header__aside">
-      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Увімкнути темну тему" title="Увімкнути темну тему">
-        <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 1011 11z"/></svg>
-        <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>
-      </button>
-      <a href="../zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
+            <a href="../zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
     </div>
   </div>
 </header>
 
-<main id="main" class="page">
+<main id="main" class="page bg-paper">
   <div class="container">
 
     <nav class="crumbs" aria-label="Навігація">
@@ -233,17 +221,75 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="footer__bottom footer__bottom--solo">
+    <!-- Останній заклик сторінки -->
+    <div class="footer__cta">
+      <h2 class="footer__title">Зробимо сайт, через який клієнти <em class="text-grad">записуються самі</em></h2>
+      <div class="footer__actions">
+        <a href="../zapys/#kontakty" class="btn btn--primary btn--lg">Обговорити проєкт</a>
+        <a href="tel:+380676892088" class="footer__phone">
+          <span class="footer__phone-label">або зателефонуйте</span>
+          +380&nbsp;67&nbsp;689&nbsp;20&nbsp;88
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="../" class="logo">
+          <img class="logo__mark" src="../img/logo-mark.png" width="32" height="32" alt="">
+          Starix
+        </a>
+        <p class="footer__about">
+          Робимо сайти з онлайн-записом для барбершопів, салонів краси, спа і кав'ярень.
+        </p>
+        <p class="footer__req">Івано-Франківськ, Україна · працюємо за договором, надаємо закривні документи</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Сторінки сайту">
+        <h4>Сторінки</h4>
+        <ul>
+          <li><a href="../">Про нас</a></li>
+          <li><a href="../roboty/">Роботи та ціни</a></li>
+          <li><a href="../zapys/">Запис і контакти</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h4>Ніші</h4>
+        <ul>
+          <li><a href="../roboty/#tsiny">Барбершопи</a></li>
+          <li><a href="../roboty/#tsiny">Салони краси</a></li>
+          <li><a href="../roboty/#tsiny">Масаж і спа</a></li>
+          <li><a href="../roboty/#tsiny">Кав'ярні й ресторани</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Умови</h4>
+        <ul class="footer__terms">
+          <li>Від 15&nbsp;000&nbsp;₴</li>
+          <li>Запуск від 5 днів</li>
+          <li>Оплата 50/50</li>
+          <li>Гарантія 1 місяць</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
       <span>© <span id="year">2026</span> Starix. Усі права захищені.</span>
       <nav class="footer__legal" aria-label="Правова інформація">
         <a href="../polityka-konfidentsiynosti/">Політика конфіденційності</a>
         <a href="../publichna-oferta/">Публічна оферта</a>
       </nav>
+      <a href="#" class="footer__top" data-to-top>Нагору <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
     </div>
   </div>
+
+  <!-- Велика назва внизу — декор, тому прихована від скрінрідерів -->
+  <p class="footer__wordmark" aria-hidden="true">Starix</p>
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="../theme.js" defer></script>
+<script src="../fx.js" defer></script>
 </body>
 </html>

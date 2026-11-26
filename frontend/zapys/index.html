@@ -1,20 +1,11 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Запис і контакти — демо онлайн-запису | Starix</title>
 <meta name="description" content="Спробуйте онлайн-запис очима клієнта і залиште заявку: підберемо пакет для вашого барбершопу, салону, спа чи кафе.">
-<meta name="theme-color" content="#ffffff">
-<script>
-  /* Тема — до першого малювання, щоб темна не «блимала» білим */
-  (function () {
-    var t = null;
-    try { t = localStorage.getItem('theme'); } catch (e) {}
-    if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t);
-  })();
-</script>
+<meta name="theme-color" content="#070d18">
 <link rel="icon" href="../favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -30,8 +21,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap"></noscript>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -53,11 +45,7 @@
     </nav>
 
     <div class="header__aside">
-      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Увімкнути темну тему" title="Увімкнути темну тему">
-        <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 1011 11z"/></svg>
-        <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>
-      </button>
-      <a href="../zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
+            <a href="../zapys/#kontakty" class="btn btn--primary btn--sm">Обговорити проєкт</a>
       <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" id="burger">
         <span></span><span></span><span></span>
       </button>
@@ -89,7 +77,7 @@
     </div>
 
     <!-- ===================== 1. ДЕМО ОНЛАЙН-ЗАПИСУ ===================== -->
-    <section class="demo" id="demo" aria-labelledby="demo-title">
+    <section class="demo bg bg-orbs" id="demo" aria-labelledby="demo-title">
       <h2 class="visually-hidden" id="demo-title">Демо онлайн-запису</h2>
 
       <!-- ----- Віджет: тільки HTML + JS, без iframe ----- -->
@@ -204,23 +192,39 @@
     </section>
 
     <!-- ===================== 2. КОНТАКТИ ТА ЗАЯВКА ===================== -->
-    <section class="contacts" id="kontakty" aria-labelledby="contacts-title">
+    <section class="contacts bg-signal" id="kontakty" aria-labelledby="contacts-title">
       <div class="section__head">
         <h2 class="h2" id="contacts-title">Контакти</h2>
         <p class="lead">Сподобався запис? Зробимо такий самий для вашого закладу.</p>
       </div>
 
       <div class="contacts__grid">
-        <ul class="contacts__list">
-          <li>
-            <span class="contacts__label">Телефон</span>
-            <a href="tel:+380676892088">+380&nbsp;67&nbsp;689&nbsp;20&nbsp;88</a>
-          </li>
-          <li>
-            <span class="contacts__label">Де працюємо</span>
-            <span class="contacts__text">Івано-Франківськ, працюємо по всій Україні</span>
-          </li>
-        </ul>
+        <!-- Ліва колонка: зв'язок напряму, що буде після заявки, коротко про умови -->
+        <div class="contacts__aside">
+          <div class="callcard">
+            <p class="callcard__label">Швидше — зателефонувати</p>
+            <a class="callcard__phone" href="tel:+380676892088">+380&nbsp;67&nbsp;689&nbsp;20&nbsp;88</a>
+            <p class="callcard__place">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0119 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              Івано-Франківськ, працюємо по всій Україні
+            </p>
+          </div>
+
+          <div class="nextsteps">
+            <h3 class="nextsteps__title">Що буде після заявки</h3>
+            <ol class="nextsteps__list">
+              <li><b>Передзвонимо</b><span>Уточнимо, що у вас за заклад і які послуги приймати онлайн.</span></li>
+              <li><b>Підберемо пакет</b><span>Покажемо схожий сайт із наших робіт і назвемо ціну та строк.</span></li>
+              <li><b>Зафіксуємо в договорі</b><span>Ціна й строк — у договорі, оплата 50/50: половина на старті, половина після здачі.</span></li>
+            </ol>
+          </div>
+
+          <ul class="contacts__facts">
+            <li><strong>від 5 днів</strong> до запуску</li>
+            <li><strong>1 місяць</strong> гарантії</li>
+            <li><strong>50/50</strong> оплата</li>
+          </ul>
+        </div>
 
         <!-- Форма: та сама логіка з Cloudflare Worker (main.js, #contactForm) -->
         <div class="formcard formcard--light">
@@ -286,19 +290,77 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="footer__bottom footer__bottom--solo">
+    <!-- Останній заклик сторінки -->
+    <div class="footer__cta">
+      <h2 class="footer__title">Зробимо сайт, через який клієнти <em class="text-grad">записуються самі</em></h2>
+      <div class="footer__actions">
+        <a href="../zapys/#kontakty" class="btn btn--primary btn--lg">Обговорити проєкт</a>
+        <a href="tel:+380676892088" class="footer__phone">
+          <span class="footer__phone-label">або зателефонуйте</span>
+          +380&nbsp;67&nbsp;689&nbsp;20&nbsp;88
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="../" class="logo">
+          <img class="logo__mark" src="../img/logo-mark.png" width="32" height="32" alt="">
+          Starix
+        </a>
+        <p class="footer__about">
+          Робимо сайти з онлайн-записом для барбершопів, салонів краси, спа і кав'ярень.
+        </p>
+        <p class="footer__req">Івано-Франківськ, Україна · працюємо за договором, надаємо закривні документи</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Сторінки сайту">
+        <h4>Сторінки</h4>
+        <ul>
+          <li><a href="../">Про нас</a></li>
+          <li><a href="../roboty/">Роботи та ціни</a></li>
+          <li><a href="../zapys/">Запис і контакти</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h4>Ніші</h4>
+        <ul>
+          <li><a href="../roboty/#tsiny">Барбершопи</a></li>
+          <li><a href="../roboty/#tsiny">Салони краси</a></li>
+          <li><a href="../roboty/#tsiny">Масаж і спа</a></li>
+          <li><a href="../roboty/#tsiny">Кав'ярні й ресторани</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Умови</h4>
+        <ul class="footer__terms">
+          <li>Від 15&nbsp;000&nbsp;₴</li>
+          <li>Запуск від 5 днів</li>
+          <li>Оплата 50/50</li>
+          <li>Гарантія 1 місяць</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
       <span>© <span id="year">2026</span> Starix. Усі права захищені.</span>
       <nav class="footer__legal" aria-label="Правова інформація">
         <a href="../polityka-konfidentsiynosti/">Політика конфіденційності</a>
         <a href="../publichna-oferta/">Публічна оферта</a>
       </nav>
+      <a href="#" class="footer__top" data-to-top>Нагору <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
     </div>
   </div>
+
+  <!-- Велика назва внизу — декор, тому прихована від скрінрідерів -->
+  <p class="footer__wordmark" aria-hidden="true">Starix</p>
 </footer>
 
 <script src="../main.js" defer></script>
 <script src="demo.js" defer></script>
 <script src="cselect.js" defer></script>
-<script src="../theme.js" defer></script>
+<script src="../fx.js" defer></script>
 </body>
 </html>

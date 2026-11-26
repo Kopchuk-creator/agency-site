@@ -89,7 +89,10 @@
     for (var i = 0; i < DAYS_AHEAD; i++) {
       daysEl.appendChild(makeChip('day', String(i), dayLabel(i), false));
     }
-    daysEl.querySelector('input').checked = true; // за замовчуванням — сьогодні
+    // За замовчуванням — сьогодні, а після останнього слоту — завтра,
+    // щоб увечері відвідувач не бачив першим порожній день
+    var dayOver = new Date().getHours() >= HOURS[HOURS.length - 1];
+    daysEl.querySelectorAll('input')[dayOver ? 1 : 0].checked = true;
   }
 
   function renderSlots() {
